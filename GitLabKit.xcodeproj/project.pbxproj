@@ -1,0 +1,636 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0E10861B1A71887E007830D2 /* GitLabResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E10861A1A71887E007830D2 /* GitLabResponse.swift */; };
+		0E10861C1A71887E007830D2 /* GitLabResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E10861A1A71887E007830D2 /* GitLabResponse.swift */; };
+		0E1086221A71931B007830D2 /* GitLabModelUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1086211A71931B007830D2 /* GitLabModelUtils.swift */; };
+		0E1086231A71931B007830D2 /* GitLabModelUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1086211A71931B007830D2 /* GitLabModelUtils.swift */; };
+		0E12CAA21A7187830060BFF8 /* GitLabApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E12CAA11A7187830060BFF8 /* GitLabApiClient.swift */; };
+		0E12CAA31A7187830060BFF8 /* GitLabApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E12CAA11A7187830060BFF8 /* GitLabApiClient.swift */; };
+		0E12CAA51A7187E10060BFF8 /* GitLabApiEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E12CAA41A7187E10060BFF8 /* GitLabApiEndpoint.swift */; };
+		0E12CAA61A7187E10060BFF8 /* GitLabApiEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E12CAA41A7187E10060BFF8 /* GitLabApiEndpoint.swift */; };
+		0E236F0C1A71851600623DE6 /* GitLabKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E236F0B1A71851600623DE6 /* GitLabKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0E236F121A71851600623DE6 /* GitLabKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E236F061A71851600623DE6 /* GitLabKit.framework */; };
+		0E236F191A71851600623DE6 /* GitLabKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E236F181A71851600623DE6 /* GitLabKitTests.swift */; };
+		0E2AA8D81A72657700281234 /* GitLabUserFull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2AA8D71A72657700281234 /* GitLabUserFull.swift */; };
+		0E2AA8D91A72657700281234 /* GitLabUserFull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2AA8D71A72657700281234 /* GitLabUserFull.swift */; };
+		0E7729EA1A72767A0032E13F /* GitLabProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7729E91A72767A0032E13F /* GitLabProject.swift */; };
+		0E7729EB1A72767A0032E13F /* GitLabProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7729E91A72767A0032E13F /* GitLabProject.swift */; };
+		0E7729ED1A7279E80032E13F /* GitLabUserBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7729EC1A7279E80032E13F /* GitLabUserBasic.swift */; };
+		0E7729EE1A7279E80032E13F /* GitLabUserBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7729EC1A7279E80032E13F /* GitLabUserBasic.swift */; };
+		0E7729F01A727EF50032E13F /* GitLabNamespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7729EF1A727EF50032E13F /* GitLabNamespace.swift */; };
+		0E7729F11A727EF50032E13F /* GitLabNamespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7729EF1A727EF50032E13F /* GitLabNamespace.swift */; };
+		0E7729F31A7293B10032E13F /* GitLabProjectMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7729F21A7293B10032E13F /* GitLabProjectMember.swift */; };
+		0E7729F41A7293B10032E13F /* GitLabProjectMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7729F21A7293B10032E13F /* GitLabProjectMember.swift */; };
+		0E8647911A72985C0043AEA0 /* GitLabIssue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8647901A72985C0043AEA0 /* GitLabIssue.swift */; };
+		0E8647921A72985C0043AEA0 /* GitLabIssue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8647901A72985C0043AEA0 /* GitLabIssue.swift */; };
+		0E8647941A72995C0043AEA0 /* GitLabMilestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8647931A72995C0043AEA0 /* GitLabMilestone.swift */; };
+		0E8647951A72995C0043AEA0 /* GitLabMilestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8647931A72995C0043AEA0 /* GitLabMilestone.swift */; };
+		0EE77CC71A724E9000E43907 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE77CC61A724E9000E43907 /* Logger.swift */; };
+		0EE77CC81A724E9000E43907 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE77CC61A724E9000E43907 /* Logger.swift */; };
+		2592DAA4E32FC21E369E0EB2 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF5B794356C704EA906CCA95 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		7639999A3814E3DC19414D28 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF5B794356C704EA906CCA95 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0E236F131A71851600623DE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0E236EFD1A71851600623DE6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0E236F051A71851600623DE6;
+			remoteInfo = GitLabKit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0E10861A1A71887E007830D2 /* GitLabResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitLabResponse.swift; sourceTree = "<group>"; };
+		0E1086211A71931B007830D2 /* GitLabModelUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitLabModelUtils.swift; sourceTree = "<group>"; };
+		0E12CAA11A7187830060BFF8 /* GitLabApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitLabApiClient.swift; sourceTree = "<group>"; };
+		0E12CAA41A7187E10060BFF8 /* GitLabApiEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitLabApiEndpoint.swift; sourceTree = "<group>"; };
+		0E236F061A71851600623DE6 /* GitLabKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GitLabKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E236F0A1A71851600623DE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0E236F0B1A71851600623DE6 /* GitLabKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitLabKit.h; sourceTree = "<group>"; };
+		0E236F111A71851600623DE6 /* GitLabKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GitLabKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E236F171A71851600623DE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0E236F181A71851600623DE6 /* GitLabKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitLabKitTests.swift; sourceTree = "<group>"; };
+		0E2AA8D71A72657700281234 /* GitLabUserFull.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitLabUserFull.swift; sourceTree = "<group>"; };
+		0E7729E91A72767A0032E13F /* GitLabProject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitLabProject.swift; sourceTree = "<group>"; };
+		0E7729EC1A7279E80032E13F /* GitLabUserBasic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitLabUserBasic.swift; sourceTree = "<group>"; };
+		0E7729EF1A727EF50032E13F /* GitLabNamespace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitLabNamespace.swift; sourceTree = "<group>"; };
+		0E7729F21A7293B10032E13F /* GitLabProjectMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitLabProjectMember.swift; sourceTree = "<group>"; };
+		0E8647901A72985C0043AEA0 /* GitLabIssue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitLabIssue.swift; sourceTree = "<group>"; };
+		0E8647931A72995C0043AEA0 /* GitLabMilestone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitLabMilestone.swift; sourceTree = "<group>"; };
+		0EE77CC61A724E9000E43907 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		A8D6FC3A55BDBEE8A4420362 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		EFF336760A8B5749BA222AE3 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		FF5B794356C704EA906CCA95 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0E236F021A71851600623DE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2592DAA4E32FC21E369E0EB2 /* Pods.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E236F0E1A71851600623DE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E236F121A71851600623DE6 /* GitLabKit.framework in Frameworks */,
+				7639999A3814E3DC19414D28 /* Pods.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0E10861D1A7192AC007830D2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0E1086211A71931B007830D2 /* GitLabModelUtils.swift */,
+				0E7729EC1A7279E80032E13F /* GitLabUserBasic.swift */,
+				0E2AA8D71A72657700281234 /* GitLabUserFull.swift */,
+				0E7729E91A72767A0032E13F /* GitLabProject.swift */,
+				0E7729EF1A727EF50032E13F /* GitLabNamespace.swift */,
+				0E7729F21A7293B10032E13F /* GitLabProjectMember.swift */,
+				0E8647931A72995C0043AEA0 /* GitLabMilestone.swift */,
+				0E8647901A72985C0043AEA0 /* GitLabIssue.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		0E236EFC1A71851600623DE6 = {
+			isa = PBXGroup;
+			children = (
+				0E236F081A71851600623DE6 /* GitLabKit */,
+				0E236F151A71851600623DE6 /* GitLabKitTests */,
+				0E236F071A71851600623DE6 /* Products */,
+				27540A82B82638B4C74E5644 /* Frameworks */,
+				DE23F2D76FC7F443195E99E6 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		0E236F071A71851600623DE6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0E236F061A71851600623DE6 /* GitLabKit.framework */,
+				0E236F111A71851600623DE6 /* GitLabKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0E236F081A71851600623DE6 /* GitLabKit */ = {
+			isa = PBXGroup;
+			children = (
+				0E236F0B1A71851600623DE6 /* GitLabKit.h */,
+				0E12CAA11A7187830060BFF8 /* GitLabApiClient.swift */,
+				0E12CAA41A7187E10060BFF8 /* GitLabApiEndpoint.swift */,
+				0E10861A1A71887E007830D2 /* GitLabResponse.swift */,
+				0E10861D1A7192AC007830D2 /* Models */,
+				0EE77CC51A724E8100E43907 /* Utils */,
+				0E236F091A71851600623DE6 /* Supporting Files */,
+			);
+			path = GitLabKit;
+			sourceTree = "<group>";
+		};
+		0E236F091A71851600623DE6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0E236F0A1A71851600623DE6 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0E236F151A71851600623DE6 /* GitLabKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				0E236F181A71851600623DE6 /* GitLabKitTests.swift */,
+				0E236F161A71851600623DE6 /* Supporting Files */,
+			);
+			path = GitLabKitTests;
+			sourceTree = "<group>";
+		};
+		0E236F161A71851600623DE6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0E236F171A71851600623DE6 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0EE77CC51A724E8100E43907 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				0EE77CC61A724E9000E43907 /* Logger.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		27540A82B82638B4C74E5644 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FF5B794356C704EA906CCA95 /* Pods.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DE23F2D76FC7F443195E99E6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EFF336760A8B5749BA222AE3 /* Pods.debug.xcconfig */,
+				A8D6FC3A55BDBEE8A4420362 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		0E236F031A71851600623DE6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E236F0C1A71851600623DE6 /* GitLabKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		0E236F051A71851600623DE6 /* GitLabKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0E236F1C1A71851600623DE6 /* Build configuration list for PBXNativeTarget "GitLabKit" */;
+			buildPhases = (
+				D69E61F007935F20BEE1B371 /* Check Pods Manifest.lock */,
+				0E236F011A71851600623DE6 /* Sources */,
+				0E236F021A71851600623DE6 /* Frameworks */,
+				0E236F031A71851600623DE6 /* Headers */,
+				0E236F041A71851600623DE6 /* Resources */,
+				EAB8EC9D1E804C345FA59DA5 /* Embed Pods Frameworks */,
+				B3599655B8F64BA8364047ED /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GitLabKit;
+			productName = GitLabKit;
+			productReference = 0E236F061A71851600623DE6 /* GitLabKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		0E236F101A71851600623DE6 /* GitLabKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0E236F1F1A71851600623DE6 /* Build configuration list for PBXNativeTarget "GitLabKitTests" */;
+			buildPhases = (
+				971FAD5C6008B15A9AFDA77B /* Check Pods Manifest.lock */,
+				0E236F0D1A71851600623DE6 /* Sources */,
+				0E236F0E1A71851600623DE6 /* Frameworks */,
+				0E236F0F1A71851600623DE6 /* Resources */,
+				EBE655AF12BD58A16C029BCD /* Embed Pods Frameworks */,
+				1F9B0B7D6EF586EAF2FDC9C4 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0E236F141A71851600623DE6 /* PBXTargetDependency */,
+			);
+			name = GitLabKitTests;
+			productName = GitLabKitTests;
+			productReference = 0E236F111A71851600623DE6 /* GitLabKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0E236EFD1A71851600623DE6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "";
+				TargetAttributes = {
+					0E236F051A71851600623DE6 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					0E236F101A71851600623DE6 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
+			};
+			buildConfigurationList = 0E236F001A71851600623DE6 /* Build configuration list for PBXProject "GitLabKit" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0E236EFC1A71851600623DE6;
+			productRefGroup = 0E236F071A71851600623DE6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0E236F051A71851600623DE6 /* GitLabKit */,
+				0E236F101A71851600623DE6 /* GitLabKitTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0E236F041A71851600623DE6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E236F0F1A71851600623DE6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1F9B0B7D6EF586EAF2FDC9C4 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		971FAD5C6008B15A9AFDA77B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B3599655B8F64BA8364047ED /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D69E61F007935F20BEE1B371 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EAB8EC9D1E804C345FA59DA5 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EBE655AF12BD58A16C029BCD /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0E236F011A71851600623DE6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E7729ED1A7279E80032E13F /* GitLabUserBasic.swift in Sources */,
+				0E7729F01A727EF50032E13F /* GitLabNamespace.swift in Sources */,
+				0E7729EA1A72767A0032E13F /* GitLabProject.swift in Sources */,
+				0E8647941A72995C0043AEA0 /* GitLabMilestone.swift in Sources */,
+				0E2AA8D81A72657700281234 /* GitLabUserFull.swift in Sources */,
+				0E7729F31A7293B10032E13F /* GitLabProjectMember.swift in Sources */,
+				0EE77CC71A724E9000E43907 /* Logger.swift in Sources */,
+				0E10861B1A71887E007830D2 /* GitLabResponse.swift in Sources */,
+				0E12CAA21A7187830060BFF8 /* GitLabApiClient.swift in Sources */,
+				0E8647911A72985C0043AEA0 /* GitLabIssue.swift in Sources */,
+				0E12CAA51A7187E10060BFF8 /* GitLabApiEndpoint.swift in Sources */,
+				0E1086221A71931B007830D2 /* GitLabModelUtils.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E236F0D1A71851600623DE6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E7729EE1A7279E80032E13F /* GitLabUserBasic.swift in Sources */,
+				0E7729EB1A72767A0032E13F /* GitLabProject.swift in Sources */,
+				0E7729F41A7293B10032E13F /* GitLabProjectMember.swift in Sources */,
+				0E12CAA61A7187E10060BFF8 /* GitLabApiEndpoint.swift in Sources */,
+				0E8647921A72985C0043AEA0 /* GitLabIssue.swift in Sources */,
+				0E8647951A72995C0043AEA0 /* GitLabMilestone.swift in Sources */,
+				0E1086231A71931B007830D2 /* GitLabModelUtils.swift in Sources */,
+				0E10861C1A71887E007830D2 /* GitLabResponse.swift in Sources */,
+				0E2AA8D91A72657700281234 /* GitLabUserFull.swift in Sources */,
+				0EE77CC81A724E9000E43907 /* Logger.swift in Sources */,
+				0E12CAA31A7187830060BFF8 /* GitLabApiClient.swift in Sources */,
+				0E7729F11A727EF50032E13F /* GitLabNamespace.swift in Sources */,
+				0E236F191A71851600623DE6 /* GitLabKitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0E236F141A71851600623DE6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0E236F051A71851600623DE6 /* GitLabKit */;
+			targetProxy = 0E236F131A71851600623DE6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0E236F1A1A71851600623DE6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		0E236F1B1A71851600623DE6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		0E236F1D1A71851600623DE6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EFF336760A8B5749BA222AE3 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = GitLabKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/Pods/Mantle/Mantle/**";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		0E236F1E1A71851600623DE6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A8D6FC3A55BDBEE8A4420362 /* Pods.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = GitLabKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		0E236F201A71851600623DE6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EFF336760A8B5749BA222AE3 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = GitLabKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		0E236F211A71851600623DE6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A8D6FC3A55BDBEE8A4420362 /* Pods.release.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = GitLabKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0E236F001A71851600623DE6 /* Build configuration list for PBXProject "GitLabKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E236F1A1A71851600623DE6 /* Debug */,
+				0E236F1B1A71851600623DE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0E236F1C1A71851600623DE6 /* Build configuration list for PBXNativeTarget "GitLabKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E236F1D1A71851600623DE6 /* Debug */,
+				0E236F1E1A71851600623DE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0E236F1F1A71851600623DE6 /* Build configuration list for PBXNativeTarget "GitLabKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E236F201A71851600623DE6 /* Debug */,
+				0E236F211A71851600623DE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0E236EFD1A71851600623DE6 /* Project object */;
+}
