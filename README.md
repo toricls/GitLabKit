@@ -45,7 +45,7 @@ I tested this library on OS X 10.10.1 (14B25) with Xcode 6.1.1 (6A2008a), self h
 GitLabKit is using libraries listed above.
 All dependencies are resolved by [CocoaPods](http://cocoapods.org/).
 
-**CocoaPods is supporting Swift project from its version [0.36](https://github.com/CocoaPods/CocoaPods/milestones/0.36.0).**  
+**CocoaPods is supporting Swift project from its version [0.36](https://github.com/CocoaPods/CocoaPods/milestones/0.36.0).**
 
 Make sure your cocoapods installation is qualified that
 ```bash
@@ -69,6 +69,12 @@ client.getUsers({ (users: [GitLabUserBasic]?, error: NSError?) -> Void in
     println(users?.count)
 })
 ```
+
+## TODO
+
+- Implement more apis
+- Support [pagination](https://gitlab.com/help/api/README.md#pagination)
+- Decide on how to deal with 404 response. Just treats as a normal response and returns an empty array for [now](https://github.com/orih/GitLabKit/blob/master/GitLabKit/GitLabApiClient.swift#L47).
 
 ## Contribution
 
