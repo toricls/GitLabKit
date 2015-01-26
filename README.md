@@ -1,13 +1,13 @@
 GitLabKit
 ====
 
-GitLabKit is an API client library for [GitLab API](https://gitlab.com/help/api/README.md), wrriten in Swift.
+GitLabKit is an API client library for [GitLab API](https://gitlab.com/help/api/README.md), written in Swift.
 
 Based on [this interesting idea](http://developer.hatenastaff.com/entry/smart-api-client-with-swift-using-enum-and-generics).
 
 ## Description
 
-Followings are currently implemented.
+Followings currently implemented.
 
 ### GET
 
@@ -35,7 +35,7 @@ Nothing yet.
 
 ## Requirement
 
-GitLabKit is wrriten as a Cocoa Framework (for OS X) for now.
+GitLabKit is written as a Cocoa Framework (for OS X) for now.
 I tested this library on OS X 10.10.1 (14B25) with Xcode 6.1.1 (6A2008a), self hosted GitLab CE 7.5.3 b656b85.
 
 
@@ -74,7 +74,8 @@ client.getUsers({ (users: [GitLabUserBasic]?, error: NSError?) -> Void in
 
 - Implement more apis
 - Support [pagination](https://gitlab.com/help/api/README.md#pagination)
-- Decide on how to deal with 404 response. Just treats as a normal response and returns an empty array for [now](https://github.com/orih/GitLabKit/blob/master/GitLabKit/GitLabApiClient.swift#L47).
+- Decide on how to deal with 404 responses. I'm just treating them as normal responses and returning an empty array for [now](https://github.com/orih/GitLabKit/blob/master/GitLabKit/GitLabApiClient.swift#L47).
+- More effective and efficient testing with stub or something like that
 
 ## Contribution
 
