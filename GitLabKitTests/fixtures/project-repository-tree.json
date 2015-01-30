@@ -1,0 +1,38 @@
+[
+  {
+    "id": "5d7634ae0587cec9724e9ff33c0b5acbb8ae174d",
+    "name": "Project.xcodeproj",
+    "type": "tree",
+    "mode": "040000"
+  },
+  {
+    "id": "6cd254081e499a8a9ac41c47c021dd18948b082c",
+    "name": "Project",
+    "type": "tree",
+    "mode": "040000"
+  },
+  {
+    "id": "1c7b6fd26182e5e91cf18b1ba79b6f7ac1658790",
+    "name": "ProjectTests",
+    "type": "tree",
+    "mode": "040000"
+  },
+  {
+    "id": "b56579eba3e366143799ecb09ffaa1435fe01636",
+    "name": ".gitignore",
+    "type": "blob",
+    "mode": "100644"
+  },
+  {
+    "id": "d4360029e14e6390025081a52d7068114b9fb054",
+    "name": "Podfile",
+    "type": "blob",
+    "mode": "100644"
+  },
+  {
+    "id": "c7077400d36d98c2cefcce882e3a1f41d13d2b96",
+    "name": "README.md",
+    "type": "blob",
+    "mode": "100644"
+  }
+]

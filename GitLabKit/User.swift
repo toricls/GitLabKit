@@ -1,5 +1,5 @@
 //
-//  GitLabResponse.swift
+//  User.swift
 //  GitLabKit
 //
 //  Copyright (c) 2015 orih. All rights reserved.
@@ -23,23 +23,24 @@
 //  THE SOFTWARE.
 
 import Foundation
+import Mantle
 
-public class GitLabResponse<T: GitLabModel> {
+public class User: GitLabModel, Fetchable {
+    public var id: NSNumber?
+    public var avatarUrl: String?
+    public var username: String?
+    public var name: String?
+    public var state: String?
     
-    var result: [T]?
-    //var ページング関連
-    // pagingAvailable: Bool
-    // getNextPageParamBuilder -> GitLabParamBuildable (次のページの設定にして返してくれる)
-    // getPreviousPageBuilder
-    // getFirstPageBuilder
-    // getLastPageBuilder
-    
-}
-
-public class GitLabCreateResponse<T: GitLabModel> {
-    var result: T?
-}
-
-public class GitLabUpdateResponse<T: GitLabModel> {
-    var result: T?
+    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
+        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
+        var newKeys: [NSObject : AnyObject] = [
+            "id"        : "id",
+            "avatarUrl" : "avatar_url",
+            "username"  : "username",
+            "name"      : "name",
+            "state"     : "state",
+        ]
+        return baseKeys + newKeys
+    }
 }

@@ -1,0 +1,23 @@
+[
+  {
+    "name": "User 1",
+    "username": "user1",
+    "id": 1,
+    "state": "active",
+    "avatar_url": "http://localhost/uploads/user/avatar/1/dummy.png"
+  },
+  {
+    "name": "User 2",
+    "username": "user2",
+    "id": 2,
+    "state": "active",
+    "avatar_url": null
+  },
+  {
+    "name": "User 3",
+    "username": "user3",
+    "id": 3,
+    "state": "active",
+    "avatar_url": "http://localhost/uploads/user/avatar/3/dummy.png"
+  }
+]

@@ -1,0 +1,31 @@
+{
+  "id": 24,
+  "email": "testuser@dummy.com",
+  "created_at": "2015-01-27T00:46:16.000+09:00",
+  "updated_at": "2015-01-27T00:55:18.000+09:00",
+  "name": "Test Robot",
+  "admin": false,
+  "projects_limit": 10,
+  "skype": "",
+  "linkedin": "",
+  "twitter": "",
+  "authentication_token": "xS32QjMxBn4F5o96nsUz",
+  "theme_id": 3,
+  "bio": null,
+  "extern_uid": null,
+  "provider": null,
+  "username": "testuser",
+  "can_create_group": false,
+  "can_create_team": false,
+  "state": "active",
+  "color_scheme_id": 1,
+  "notification_level": 1,
+  "password_expires_at": null,
+  "created_by_id": null,
+  "last_credential_check_at": null,
+  "avatar": {
+    "url": null
+  },
+  "hide_no_ssh_key": false,
+  "website_url": ""
+}

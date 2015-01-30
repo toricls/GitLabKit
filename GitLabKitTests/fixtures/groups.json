@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Group1",
+    "path": "group1",
+    "owner_id": null
+  },
+  {
+    "id": 2,
+    "name": "Group2",
+    "path": "group2",
+    "owner_id": null
+  },
+  {
+    "id": 3,
+    "name": "Group3",
+    "path": "group3",
+    "owner_id": null
+  }
+]

@@ -1,5 +1,5 @@
 //
-//  GitLabResponse.swift
+//  CommentForIssue.swift
 //  GitLabKit
 //
 //  Copyright (c) 2015 orih. All rights reserved.
@@ -24,22 +24,26 @@
 
 import Foundation
 
-public class GitLabResponse<T: GitLabModel> {
+public class CommentForIssue: GitLabModel, Fetchable {
+    public var id: NSNumber?
+    public var body: String?
+    public var attachment: String?
+    public var author: User?
+    public var createdAt: NSDate?
     
-    var result: [T]?
-    //var ページング関連
-    // pagingAvailable: Bool
-    // getNextPageParamBuilder -> GitLabParamBuildable (次のページの設定にして返してくれる)
-    // getPreviousPageBuilder
-    // getFirstPageBuilder
-    // getLastPageBuilder
+    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
+        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
+        var newKeys: [NSObject : AnyObject] = [
+            "id"         : "id",
+            "body"       : "body",
+            "attachment" : "attachment",
+            "author"     : "author",
+            "createdAt"  : "created_at",
+        ]
+        return baseKeys + newKeys
+    }
     
-}
-
-public class GitLabCreateResponse<T: GitLabModel> {
-    var result: T?
-}
-
-public class GitLabUpdateResponse<T: GitLabModel> {
-    var result: T?
+    class func authorJSONTransformer() -> NSValueTransformer {
+        return ModelUtil<User>.transformer()
+    }
 }

@@ -1,0 +1,74 @@
+{
+  "id": 1,
+  "name": "Group1",
+  "path": "group1",
+  "owner_id": null,
+  "projects": [
+    {
+      "id": 1,
+      "description": "Description of Project 1. http://localhost/group1/project1",
+      "default_branch": "master",
+      "public": false,
+      "archived": false,
+      "visibility_level": 0,
+      "ssh_url_to_repo": "git@localhost:group1/project1.git",
+      "http_url_to_repo": "http://localhost/group1/project1.git",
+      "web_url": "http://localhost/group1/project1",
+      "name": "project1",
+      "name_with_namespace": "Group1 / project1",
+      "path": "project1",
+      "path_with_namespace": "group1/project1",
+      "issues_enabled": true,
+      "merge_requests_enabled": true,
+      "wiki_enabled": true,
+      "snippets_enabled": false,
+      "created_at": "2014-06-15T19:56:53.000+09:00",
+      "last_activity_at": "2015-01-27T02:34:34.000+09:00",
+      "namespace": {
+        "id": 1,
+        "name": "Group1",
+        "path": "group1",
+        "owner_id": null,
+        "created_at": "2014-04-29T03:25:56.000+09:00",
+        "updated_at": "2014-08-13T18:29:09.000+09:00",
+        "description": "Group1 Description",
+        "avatar": {
+          "url": "/uploads/group/avatar/1/dummy.png"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "description": "Desctiprion of Project 2",
+      "default_branch": "master",
+      "public": false,
+      "archived": false,
+      "visibility_level": 0,
+      "ssh_url_to_repo": "git@localhost:group1/project2.git",
+      "http_url_to_repo": "http://localhost/group1/project2.git",
+      "web_url": "http://localhost/group1/project2",
+      "name": "project31",
+      "name_with_namespace": "Group1 / project2",
+      "path": "project31",
+      "path_with_namespace": "group1/project2",
+      "issues_enabled": false,
+      "merge_requests_enabled": false,
+      "wiki_enabled": false,
+      "snippets_enabled": false,
+      "created_at": "2014-06-16T01:11:56.000+09:00",
+      "last_activity_at": "2015-01-26T14:44:13.000+09:00",
+      "namespace": {
+        "id": 1,
+        "name": "Group1",
+        "path": "group1",
+        "owner_id": null,
+        "created_at": "2014-04-29T03:25:56.000+09:00",
+        "updated_at": "2014-08-13T18:29:09.000+09:00",
+        "description": "Group1 Description",
+        "avatar": {
+          "url": "/uploads/group/avatar/1/dummy.png"
+        }
+      }
+    }
+  ]
+}

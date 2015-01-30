@@ -5,31 +5,22 @@ GitLabKit is an API client library for [GitLab API](https://gitlab.com/help/api/
 
 Based on [this interesting idea](http://developer.hatenastaff.com/entry/smart-api-client-with-swift-using-enum-and-generics).
 
+Notice: Public interfaces may be changed until the project version reaches into v1.0.
+
 ## Description
 
 Followings currently implemented.
 
 ### GET
 
-#### [Users](https://gitlab.com/help/api/users.md)
-
-- /users (For normal users)
-- /users/:id
-- /user
-
-#### [Projects](https://gitlab.com/help/api/projects.md)
-
-- /projects
-- /projects/:id
-- /projects/:namewithnamespace
-- /projects/:id/members
-- /projects/:id/issues
-
-#### [Issues](https://gitlab.com/help/api/issues.md)
-
-- /issues
+Almost all without Labels, Notes, Deploy Keys, System Hooks, Groups.
+Testing is not enough.
 
 ### POST
+
+Nothing yet.
+
+### DELETE
 
 Nothing yet.
 
@@ -50,7 +41,7 @@ All dependencies are resolved by [CocoaPods](http://cocoapods.org/).
 Make sure your cocoapods installation is qualified that
 ```bash
 $ pod --version
-0.36.0.beta.1
+0.36.0.beta.2
 ```
 
 and if not, install pre version.
@@ -65,10 +56,18 @@ $ (sudo) gem install cocoapods --pre
 let client: GitLabApiClient = GitLabApiClient(host: "https://git.example.com", privateToken: "YOUR-PRIVATE-TOKEN")
 
 // Get users
-client.getUsers({ (users: [GitLabUserBasic]?, error: NSError?) -> Void in
-    println(users?.count)
+client.get({ (users: [User]?, error: NSError?) -> Void in
+	println(users?.count)
+})
+
+// Get user by Id
+let params = UserQueryParamBuilder().id(1)
+client.get(params, { (user: [User]?, error: NSError?) -> Void in
+	println(user[0]!.name!)
 })
 ```
+
+see [test sources](https://github.com/orih/GitLabKit/tree/master/GitLabKitTests) to get more usage.
 
 ## TODO
 

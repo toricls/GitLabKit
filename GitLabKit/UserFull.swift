@@ -1,5 +1,5 @@
 //
-//  GitLabUserFull.swift
+//  UserFull.swift
 //  GitLabKit
 //
 //  Copyright (c) 2015 orih. All rights reserved.
@@ -24,7 +24,7 @@
 
 import Foundation
 
-public class GitLabUserFull: GitLabUserBasic {
+public class UserFull: User {
     public var createdAt: NSDate?
     public var _isAdmin: NSNumber?
     public var bio: String?
@@ -58,23 +58,25 @@ public class GitLabUserFull: GitLabUserBasic {
     
     public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
         var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
-        baseKeys["createdAt"]        = "created_at"
-        baseKeys["_isAdmin"]          = "is_admin"
-        baseKeys["bio"]              = "bio"
-        baseKeys["skype"]            = "skype"
-        baseKeys["linkedin"]         = "linkedin"
-        baseKeys["twitter"]          = "twitter"
-        baseKeys["websiteUrl"]       = "website_url"
-        baseKeys["email"]            = "email"
-        baseKeys["themeId"]          = "theme_id"
-        baseKeys["colorSchemeId"]    = "color_scheme_id"
-        baseKeys["externUid"]        = "extern_uid"
-        baseKeys["provider"]         = "provider"
-        baseKeys["projectsLimit"]    = "projects_limit"
-        baseKeys["_canCreateGroup"]   = "can_create_group"
-        baseKeys["_canCreateProject"] = "can_create_project"
-        baseKeys["privateToken"]     = "private_token"
-        return baseKeys
+        var newKeys: [NSObject : AnyObject] = [
+            "createdAt"         : "created_at",
+            "_isAdmin"          : "is_admin",
+            "bio"               : "bio",
+            "skype"             : "skype",
+            "linkedin"          : "linkedin",
+            "twitter"           : "twitter",
+            "websiteUrl"        : "website_url",
+            "email"             : "email",
+            "themeId"           : "theme_id",
+            "colorSchemeId"     : "color_scheme_id",
+            "externUid"         : "extern_uid",
+            "provider"          : "provider",
+            "projectsLimit"     : "projects_limit",
+            "_canCreateGroup"   : "can_create_group",
+            "_canCreateProject" : "can_create_project",
+            "privateToken"      : "private_token"
+        ]
+        return baseKeys + newKeys
     }
     
     class func createdAtJSONTransformer() -> NSValueTransformer {

@@ -1,0 +1,80 @@
+[
+  {
+    "id": 731,
+    "iid": 147,
+    "project_id": 90,
+    "title": "Closed issue, enhancement and support labels",
+    "description": "",
+    "state": "closed",
+    "created_at": "2015-01-19T20:18:37.000+09:00",
+    "updated_at": "2015-01-19T20:31:47.000+09:00",
+    "labels": [
+      "enhancement",
+      "support"
+    ],
+    "milestone": {
+      "id": 41,
+      "iid": 7,
+      "project_id": 90,
+      "title": "v1.0.0",
+      "description": "",
+      "state": "active",
+      "created_at": "2014-10-21T17:59:01.000+09:00",
+      "updated_at": "2014-11-04T20:56:09.000+09:00",
+      "due_date": "2015-01-29"
+    },
+    "assignee": {
+      "name": "User 2",
+      "username": "user2",
+      "id": 2,
+      "state": "active",
+      "avatar_url": "http://localhost/uploads/user/avatar/2/dummy.png"
+    },
+    "author": {
+      "name": "User 2",
+      "username": "user2",
+      "id": 2,
+      "state": "active",
+      "avatar_url": "http://localhost/uploads/user/avatar/2/dummy.png"
+    }
+  },
+  {
+    "id": 442,
+    "iid": 159,
+    "project_id": 31,
+    "title": "Closed issue, feature and bug labels",
+    "description": "",
+    "state": "closed",
+    "created_at": "2014-10-25T22:11:01.000+09:00",
+    "updated_at": "2015-01-08T00:03:23.000+09:00",
+    "labels": [
+      "feature",
+      "bug"
+    ],
+    "milestone": {
+      "id": 39,
+      "iid": 8,
+      "project_id": 31,
+      "title": "v1.0",
+      "description": "",
+      "state": "active",
+      "created_at": "2014-10-21T17:58:04.000+09:00",
+      "updated_at": "2015-01-06T18:31:27.000+09:00",
+      "due_date": "2015-01-08"
+    },
+    "assignee": {
+      "name": "User 2",
+      "username": "user2",
+      "id": 2,
+      "state": "active",
+      "avatar_url": "http://localhost/uploads/user/avatar/2/dummy.png"
+    },
+    "author": {
+      "name": "User 2",
+      "username": "user2",
+      "id": 2,
+      "state": "active",
+      "avatar_url": "http://localhost/uploads/user/avatar/2/dummy.png"
+    }
+  }
+]

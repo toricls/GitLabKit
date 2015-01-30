@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "description": "Description of archived project",
+    "default_branch": "master",
+    "public": false,
+    "archived": true,
+    "visibility_level": 0,
+    "ssh_url_to_repo": "git@localhost:automation/archived.git",
+    "http_url_to_repo": "http://localhost/automation/archived.git",
+    "web_url": "http://localhost/automation/archived",
+    "name": "archived",
+    "name_with_namespace": "Automation / archived",
+    "path": "archived",
+    "path_with_namespace": "automation/archived",
+    "issues_enabled": true,
+    "merge_requests_enabled": true,
+    "wiki_enabled": true,
+    "snippets_enabled": false,
+    "created_at": "2014-06-24T02:17:43.000+09:00",
+    "last_activity_at": "2015-01-19T19:06:34.000+09:00",
+    "namespace": {
+      "id": 1,
+      "name": "Automation",
+      "path": "automation",
+      "owner_id": null,
+      "created_at": "2014-06-24T02:16:51.000+09:00",
+      "updated_at": "2014-10-29T16:30:55.000+09:00",
+      "description": "automated projects namespace",
+      "avatar": {
+        "url": "/uploads/group/avatar/1/dummy.png"
+      }
+    }
+  }
+]

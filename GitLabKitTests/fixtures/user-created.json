@@ -1,0 +1,22 @@
+{
+  "name": "Not a Human",
+  "username": "testuser",
+  "id": 24,
+  "state": "active",
+  "avatar_url": null,
+  "created_at": "2015-01-27T00:46:16.322+09:00",
+  "is_admin": false,
+  "bio": null,
+  "skype": "",
+  "linkedin": "",
+  "twitter": "",
+  "website_url": "",
+  "email": "testuser@dummy.com",
+  "theme_id": 3,
+  "color_scheme_id": 1,
+  "extern_uid": null,
+  "provider": null,
+  "projects_limit": 10,
+  "can_create_group": false,
+  "can_create_project": true
+}

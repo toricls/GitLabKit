@@ -1,5 +1,5 @@
 //
-//  GitLabUserBasic.swift
+//  CommentForCommit.swift
 //  GitLabKit
 //
 //  Copyright (c) 2015 orih. All rights reserved.
@@ -23,22 +23,21 @@
 //  THE SOFTWARE.
 
 import Foundation
-import Mantle
 
-public class GitLabUserBasic: MTLModel, MTLJSONSerializing {
-    public var id: NSNumber?
-    public var avatarUrl: String?
-    public var username: String?
-    public var name: String?
-    public var state: String?
+public class CommentForCommit: GitLabModel, Fetchable {
+    public var note: String?
+    public var author: User?
     
-    public class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        return [
-            "id"        : "id",
-            "avatarUrl" : "avatar_url",
-            "username"  : "username",
-            "name"      : "name",
-            "state"     : "state",
+    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
+        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
+        var newKeys: [NSObject : AnyObject] = [
+            "note"   : "note",
+            "author" : "author",
         ]
+        return baseKeys + newKeys
+    }
+    
+    class func authorJSONTransformer() -> NSValueTransformer {
+        return ModelUtil<User>.transformer()
     }
 }

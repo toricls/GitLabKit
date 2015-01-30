@@ -1,5 +1,5 @@
 //
-//  GitLabIssue.swift
+//  File.swift
 //  GitLabKit
 //
 //  Copyright (c) 2015 orih. All rights reserved.
@@ -23,36 +23,29 @@
 //  THE SOFTWARE.
 
 import Foundation
-import Mantle
 
-public class GitLabIssue: MTLModel, MTLJSONSerializing {
-    public var id: NSNumber?
-    public var issueId: NSNumber?
-    public var projectId: NSNumber?
-    public var title: String?
-    public var descriptionText: String?
-    public var state: String?
-    public var createdAt: NSDate?
-    public var updatedAt: NSDate?
-    public var labels: [String]?
-    public var milestone: GitLabMilestone?
-    public var assignee: GitLabUserBasic?
-    public var author: GitLabUserBasic?
+public class File: GitLabModel, Fetchable {
+    public var fileName: String?
+    public var filePath: String?
+    public var size: NSNumber?
+    public var encoding: String?
+    public var content: String?
+    public var ref: String?
+    public var blobId: NSDate?
+    public var commitId: String?
     
-    public class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        return [
-            "id"              : "id",
-            "issueId"         : "iid",
-            "projectId"       : "project_id",
-            "title"           : "title",
-            "descriptionText" : "description",
-            "state"           : "state",
-            "createdAt"       : "created_at",
-            "updatedAt"       : "updated_at",
-            "labels"          : "labels",
-            "milestone"       : "milestone",
-            "assignee"        : "assignee",
-            "author"          : "author",
+    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
+        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
+        var newKeys: [NSObject : AnyObject] = [
+            "fileName" : "file_name",
+            "filePath" : "file_path",
+            "size"     : "size",
+            "encoding" : "encoding",
+            "content"  : "content",
+            "ref"      : "ref",
+            "blobId"   : "blod_id",
+            "commitId" : "commit_id",
         ]
+        return baseKeys + newKeys
     }
 }

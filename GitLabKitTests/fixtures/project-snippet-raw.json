@@ -1,0 +1,14 @@
+package com.hoge.hogehoge;
+
+import java.util.logger;
+
+class HogeClass {
+    
+    private int privateIntVar;
+    
+    public HogeClass() {
+        super();
+        privateIntVar = 0;
+    }
+    
+}

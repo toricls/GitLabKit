@@ -1,0 +1,18 @@
+{
+  "name": "master",
+  "commit": {
+    "id": "17a738cf8c41af9c01ce28b1e859a7416be6a5f1",
+    "message": "Last commit message",
+    "parent_ids": [
+      "2a0b40ed19435d47c8109588e644d509b842db85",
+      "c19e6ba50ab9617f9fae5bc7df6c4576fa02f548"
+    ],
+    "authored_date": "2015-01-15T07:46:38.000+00:00",
+    "author_name": "User 100",
+    "author_email": "user100@dummy.com",
+    "committed_date": "2015-01-15T07:46:38.000+00:00",
+    "committer_name": "User 100",
+    "committer_email": "user100@dummy.com"
+  },
+  "protected": false
+}

@@ -1,5 +1,5 @@
 //
-//  GitLabResponse.swift
+//  Tag.swift
 //  GitLabKit
 //
 //  Copyright (c) 2015 orih. All rights reserved.
@@ -24,22 +24,5 @@
 
 import Foundation
 
-public class GitLabResponse<T: GitLabModel> {
-    
-    var result: [T]?
-    //var ページング関連
-    // pagingAvailable: Bool
-    // getNextPageParamBuilder -> GitLabParamBuildable (次のページの設定にして返してくれる)
-    // getPreviousPageBuilder
-    // getFirstPageBuilder
-    // getLastPageBuilder
-    
-}
-
-public class GitLabCreateResponse<T: GitLabModel> {
-    var result: T?
-}
-
-public class GitLabUpdateResponse<T: GitLabModel> {
-    var result: T?
+public class Tag: Branch {
 }

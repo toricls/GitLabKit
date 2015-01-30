@@ -1,5 +1,5 @@
 //
-//  GitLabNamespace.swift
+//  Namespace.swift
 //  GitLabKit
 //
 //  Copyright (c) 2015 orih. All rights reserved.
@@ -25,7 +25,7 @@
 import Foundation
 import Mantle
 
-public class GitLabNamespace: MTLModel, MTLJSONSerializing {
+public class Namespace: GitLabModel {
     public var id: NSNumber?
     public var name: String?
     public var path: String?
@@ -33,10 +33,11 @@ public class GitLabNamespace: MTLModel, MTLJSONSerializing {
     public var createdAt: NSDate?
     public var updatedAt: NSDate?
     public var descriptionText: String? // "description" as a property name is not allowed by compiler
-    public var avatar: GitLabAvatar?
+    public var avatar: Avatar?
     
-    public class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        return [
+    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
+        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
+        var newKeys: [NSObject : AnyObject] = [
             "id"              : "id",
             "name"            : "name",
             "path"            : "path",
@@ -46,6 +47,7 @@ public class GitLabNamespace: MTLModel, MTLJSONSerializing {
             "descriptionText" : "description",
             "avatar"          : "avatar",
         ]
+        return baseKeys + newKeys
     }
     
     class func createdAtJSONTransformer() -> NSValueTransformer {
@@ -54,13 +56,18 @@ public class GitLabNamespace: MTLModel, MTLJSONSerializing {
     class func updatedAtJSONTransformer() -> NSValueTransformer {
         return dateTimeTransformer
     }
+    class func avatarJSONTransformer() -> NSValueTransformer {
+        return ModelUtil<Avatar>.transformer()
+    }
 }
 
-public class GitLabAvatar: MTLModel, MTLJSONSerializing {
+public class Avatar: GitLabModel {
     public var url: String?
-    public class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        return [
+    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
+        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
+        var newKeys: [NSObject : AnyObject] = [
             "url" : "url",
         ]
+        return baseKeys + newKeys
     }
 }

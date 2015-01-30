@@ -25,7 +25,7 @@
 import Foundation
 
 class Logger{
-    class func log(message: AnyObject,
+    class func log(message: AnyObject?,
         function: String = __FUNCTION__,
         file: String = __FILE__,
         line: Int = __LINE__) {

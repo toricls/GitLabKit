@@ -1,0 +1,72 @@
+[
+  {
+    "name": "User 100",
+    "email": "user100@dummy.com",
+    "commits": 669,
+    "additions": 0,
+    "deletions": 0
+  },
+  {
+    "name": "User 2",
+    "email": "user2@dummy.com",
+    "commits": 825,
+    "additions": 0,
+    "deletions": 0
+  },
+  {
+    "name": "User 80",
+    "email": "user80@dummy99.com",
+    "commits": 20,
+    "additions": 0,
+    "deletions": 0
+  },
+  {
+    "name": "User 50",
+    "email": "user50@dummy.com",
+    "commits": 82,
+    "additions": 0,
+    "deletions": 0
+  },
+  {
+    "name": "User 4",
+    "email": "user4@dummy.com",
+    "commits": 38,
+    "additions": 0,
+    "deletions": 0
+  },
+  {
+    "name": "User 5",
+    "email": "user5@dummy.com",
+    "commits": 1,
+    "additions": 0,
+    "deletions": 0
+  },
+  {
+    "name": "User 6",
+    "email": "user6@dummy.com",
+    "commits": 1,
+    "additions": 0,
+    "deletions": 0
+  },
+  {
+    "name": "User 7",
+    "email": "user7@dummy.com",
+    "commits": 4,
+    "additions": 0,
+    "deletions": 0
+  },
+  {
+    "name": "User 8",
+    "email": "user8@dummy.com",
+    "commits": 2,
+    "additions": 0,
+    "deletions": 0
+  },
+  {
+    "name": "User 2",
+    "email": "user2@dummy.com",
+    "commits": 13,
+    "additions": 0,
+    "deletions": 0
+  }
+]

@@ -1,5 +1,5 @@
 //
-//  GitLabResponse.swift
+//  Member.swift
 //  GitLabKit
 //
 //  Copyright (c) 2015 orih. All rights reserved.
@@ -24,22 +24,14 @@
 
 import Foundation
 
-public class GitLabResponse<T: GitLabModel> {
+public class Member: User {
+    public var accessLevel: NSNumber?
     
-    var result: [T]?
-    //var ページング関連
-    // pagingAvailable: Bool
-    // getNextPageParamBuilder -> GitLabParamBuildable (次のページの設定にして返してくれる)
-    // getPreviousPageBuilder
-    // getFirstPageBuilder
-    // getLastPageBuilder
-    
-}
-
-public class GitLabCreateResponse<T: GitLabModel> {
-    var result: T?
-}
-
-public class GitLabUpdateResponse<T: GitLabModel> {
-    var result: T?
+    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
+        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
+        var newKeys: [NSObject : AnyObject] = [
+            "accessLevel" : "access_level"
+        ]
+        return baseKeys + newKeys
+    }
 }

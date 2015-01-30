@@ -1,0 +1,15 @@
+{
+  "id": "17a738cf8c41af9c01ce28b1e859a7416be6a5f1",
+  "short_id": "17a738cf",
+  "title": "Merge branch 'branch-test' into 'master'",
+  "author_name": "User 100",
+  "author_email": "user100@dummy.com",
+  "created_at": "2015-01-15T07:46:38.000+00:00",
+  "message": "",
+  "parent_ids": [
+    "2a0b40ed19435d47c8109588e644d509b842db85",
+    "c19e6ba50ab9617f9fae5bc7df6c4576fa02f548"
+  ],
+  "committed_date": "2015-01-15T07:46:38.000+00:00",
+  "authored_date": "2015-01-15T07:46:38.000+00:00"
+}

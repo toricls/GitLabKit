@@ -1,5 +1,5 @@
 //
-//  GitLabMilestone.swift
+//  CommentForSnippet.swift
 //  GitLabKit
 //
 //  Copyright (c) 2015 orih. All rights reserved.
@@ -23,40 +23,27 @@
 //  THE SOFTWARE.
 
 import Foundation
-import Mantle
 
-public class GitLabMilestone: MTLModel, MTLJSONSerializing {
+public class CommentForSnippet: GitLabModel, Fetchable {
     public var id: NSNumber?
-    public var milestoneId: NSNumber?
-    public var projectId: NSNumber?
-    public var title: String?
-    public var descriptionText: String?
-    public var state: String?
+    public var body: String?
+    public var attachment: String?
+    public var author: User?
     public var createdAt: NSDate?
-    public var updatedAt: NSDate?
-    public var dueDate: NSDate?
     
-    public class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        return [
-            "id"              : "id",
-            "milestoneId"     : "iid",
-            "projectId"       : "project_id",
-            "title"           : "title",
-            "descriptionText" : "description",
-            "state"           : "state",
-            "createdAt"       : "created_at",
-            "updatedAt"       : "updated_at",
-            "dueDate"         : "due_date",
+    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
+        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
+        var newKeys: [NSObject : AnyObject] = [
+            "id"         : "id",
+            "body"       : "body",
+            "attachment" : "attachment",
+            "author"     : "author",
+            "createdAt"  : "created_at",
         ]
+        return baseKeys + newKeys
     }
     
-    class func createdAtJSONTransformer() -> NSValueTransformer {
-        return dateTimeTransformer
-    }
-    class func updatedAtJSONTransformer() -> NSValueTransformer {
-        return dateTimeTransformer
-    }
-    class func dueDateJSONTransformer() -> NSValueTransformer {
-        return dateTransformer
+    class func authorJSONTransformer() -> NSValueTransformer {
+        return ModelUtil<User>.transformer()
     }
 }

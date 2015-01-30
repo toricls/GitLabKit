@@ -1,0 +1,40 @@
+{
+  "id": 10,
+  "description": "Single project",
+  "default_branch": "master",
+  "public": false,
+  "archived": false,
+  "visibility_level": 0,
+  "ssh_url_to_repo": "git@localhost:single/project.git",
+  "http_url_to_repo": "http://localhost/single/project.git",
+  "web_url": "http://localhost/single/project",
+  "name": "project",
+  "name_with_namespace": "Single / project",
+  "path": "project",
+  "path_with_namespace": "single/project",
+  "issues_enabled": true,
+  "merge_requests_enabled": true,
+  "wiki_enabled": true,
+  "snippets_enabled": false,
+  "created_at": "2014-06-16T01:11:56.000+09:00",
+  "last_activity_at": "2015-01-26T14:44:13.000+09:00",
+  "namespace": {
+    "id": 4,
+    "name": "Single",
+    "path": "single",
+    "owner_id": null,
+    "created_at": "2014-04-29T03:25:56.000+09:00",
+    "updated_at": "2014-08-13T18:29:09.000+09:00",
+    "description": "",
+    "avatar": {
+      "url": "/uploads/group/avatar/4/dummy.png"
+    }
+  },
+  "permissions": {
+    "project_access": null,
+    "group_access": {
+      "access_level": 50,
+      "notification_level": 3
+    }
+  }
+}

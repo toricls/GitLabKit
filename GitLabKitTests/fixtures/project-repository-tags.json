@@ -1,0 +1,141 @@
+[
+  {
+    "name": "v0.9.0",
+    "message": null,
+    "commit": {
+      "id": "5067009a3415f4939697592985b4922e3e7ab62b",
+      "message": "Bump version to 0.9.0",
+      "parent_ids": [
+        "f82a466f92916d2b07d4d7acdeb2b6fb9f95a67a",
+        "d86f95838f91cd4933d92cd109bc388458ac5cf1"
+      ],
+      "authored_date": "2014-11-18T04:34:21.000+00:00",
+      "author_name": "User 100",
+      "author_email": "user100@dummy.com",
+      "committed_date": "2014-11-18T04:34:21.000+00:00",
+      "committer_name": "User 100",
+      "committer_email": "user100@dummy.com"
+    }
+  },
+  {
+    "name": "v0.8.0",
+    "message": null,
+    "commit": {
+      "id": "7383ce13d73eba9fa8f1ffeedd58036be84555e8",
+      "message": "Bump version to 0.8.0",
+      "parent_ids": [
+        "a8d8c95df12563a074f7a31c0b54c6b5aa74c5d4"
+      ],
+      "authored_date": "2014-10-22T17:34:21.000+09:00",
+      "author_name": "User 2",
+      "author_email": "user2@dummy.com",
+      "committed_date": "2014-10-22T17:34:21.000+09:00",
+      "committer_name": "User 2",
+      "committer_email": "user2@dummy.com"
+    }
+  },
+  {
+    "name": "v0.7.0",
+    "message": null,
+    "commit": {
+      "id": "994f3f930b6a041be905c623fa2ce88943fe64ae",
+      "message": "Bump version to 0.7.0",
+      "parent_ids": [
+        "828ff684e96bc0272460e1554855de6653bdb853",
+        "af52d9852f043fcc93f1169759a72ad3a3792e17"
+      ],
+      "authored_date": "2014-09-17T10:58:16.000+00:00",
+      "author_name": "User 2",
+      "author_email": "user2@dummy.com",
+      "committed_date": "2014-09-17T10:58:16.000+00:00",
+      "committer_name": "User 2",
+      "committer_email": "user2@dummy.com"
+    }
+  },
+  {
+    "name": "v0.6.0",
+    "message": null,
+    "commit": {
+      "id": "3d74a81d5781803abb93deb63ded180d9b4f2744",
+      "message": "Bump version to 0.6.0",
+      "parent_ids": [
+        "8fbe73af8e0099c27a229c990bc73a21791d726f"
+      ],
+      "authored_date": "2014-09-12T15:43:38.000+09:00",
+      "author_name": "User 2",
+      "author_email": "user2@dummy.com",
+      "committed_date": "2014-09-12T15:43:38.000+09:00",
+      "committer_name": "User 2",
+      "committer_email": "user2@dummy.com"
+    }
+  },
+  {
+    "name": "v0.5.0",
+    "message": null,
+    "commit": {
+      "id": "9f51e0de6a2f941ae264c8f2be5854e4267112e1",
+      "message": "Bump version to 0.5.0",
+      "parent_ids": [
+        "eb4af95c95f8930759fbe51165abe921c1f692e4",
+        "a1442b79ee61f7316bf59c532b964f17a1bf16d4"
+      ],
+      "authored_date": "2014-08-25T15:33:14.000+09:00",
+      "author_name": "User 2",
+      "author_email": "user2@dummy.com",
+      "committed_date": "2014-08-25T15:33:14.000+09:00",
+      "committer_name": "User 2",
+      "committer_email": "user2@dummy.com"
+    }
+  },
+  {
+    "name": "v0.4.0",
+    "message": null,
+    "commit": {
+      "id": "77b3fc228039fe23d59b226330dc546e3795b824",
+      "message": "Bump version to 0.4.0",
+      "parent_ids": [
+        "500d51bb8e2353d04da497e1e32c68bf977c2169"
+      ],
+      "authored_date": "2014-07-18T16:16:04.000+09:00",
+      "author_name": "User 2",
+      "author_email": "user2@dummy.com",
+      "committed_date": "2014-07-18T16:19:40.000+09:00",
+      "committer_name": "User 2",
+      "committer_email": "user2@dummy.com"
+    }
+  },
+  {
+    "name": "v0.3.0",
+    "message": null,
+    "commit": {
+      "id": "cb6b7b3c38b8a0421ac0ce4ca8e420598ba30e47",
+      "message": "Bump version to 0.3.0",
+      "parent_ids": [
+        "7c668cb4c13fc0c154587eaf23b4f3bb025d5632"
+      ],
+      "authored_date": "2014-06-17T13:21:43.000+00:00",
+      "author_name": "User 2",
+      "author_email": "user2@dummy.com",
+      "committed_date": "2014-06-18T19:34:18.000+09:00",
+      "committer_name": "User 2",
+      "committer_email": "user2@gmail.com"
+    }
+  },
+  {
+    "name": "v0.2.0",
+    "message": null,
+    "commit": {
+      "id": "911598c2afd3ab88ba8e0bc4b3ce2fe7a6fb8b16",
+      "message": "Bump version to 0.2.0",
+      "parent_ids": [
+        "5c0d1f74415264e768cd0ba7db48812b4619e2af"
+      ],
+      "authored_date": "2014-05-07T10:42:49.000+00:00",
+      "author_name": "User 2",
+      "author_email": "user2@dummy.com",
+      "committed_date": "2014-05-07T10:42:49.000+00:00",
+      "committer_name": "User 2",
+      "committer_email": "user2@dummy.com"
+    }
+  }
+]

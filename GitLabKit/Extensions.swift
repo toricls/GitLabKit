@@ -1,5 +1,5 @@
 //
-//  GitLabResponse.swift
+//  Extensions.swift
 //  GitLabKit
 //
 //  Copyright (c) 2015 orih. All rights reserved.
@@ -24,22 +24,45 @@
 
 import Foundation
 
-public class GitLabResponse<T: GitLabModel> {
-    
-    var result: [T]?
-    //var ページング関連
-    // pagingAvailable: Bool
-    // getNextPageParamBuilder -> GitLabParamBuildable (次のページの設定にして返してくれる)
-    // getPreviousPageBuilder
-    // getFirstPageBuilder
-    // getLastPageBuilder
-    
+// MARK: Dictionary
+
+/**
+Enable + operator for Dictionary
+
+:param: left  Dictionary
+:param: right Dictionary
+
+:returns: Merged dictionary
+*/
+func + <K,V>(left: Dictionary<K,V>, right: Dictionary<K,V>)
+    -> Dictionary<K,V>
+{
+    var map = Dictionary<K,V>()
+    for (k, v) in left {
+        map[k] = v
+    }
+    for (k, v) in right {
+        map[k] = v
+    }
+    return map
 }
 
-public class GitLabCreateResponse<T: GitLabModel> {
-    var result: T?
-}
+// MARK: String
 
-public class GitLabUpdateResponse<T: GitLabModel> {
-    var result: T?
+extension String {
+    func trim() -> String {
+        return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+    }
+    
+    subscript (i: Int) -> Character {
+        return self[advance(self.startIndex, i)]
+    }
+    
+    subscript (i: Int) -> String {
+        return String(self[i] as Character)
+    }
+    
+    subscript (r: Range<Int>) -> String {
+        return substringWithRange(Range(start: advance(startIndex, r.startIndex), end: advance(startIndex, r.endIndex)))
+    }
 }

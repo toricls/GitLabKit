@@ -1,0 +1,26 @@
+[
+  {
+    "name": "User 50",
+    "username": "user50",
+    "id": 16,
+    "state": "active",
+    "avatar_url": null,
+    "access_level": 30
+  },
+  {
+    "name": "User 80",
+    "username": "user80",
+    "id": 18,
+    "state": "active",
+    "avatar_url": null,
+    "access_level": 30
+  },
+  {
+    "name": "User 110",
+    "username": "user110",
+    "id": 21,
+    "state": "active",
+    "avatar_url": null,
+    "access_level": 30
+  }
+]

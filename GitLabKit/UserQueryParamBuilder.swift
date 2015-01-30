@@ -1,5 +1,5 @@
 //
-//  GitLabResponse.swift
+//  UserQueryParamBuilder.swift
 //  GitLabKit
 //
 //  Copyright (c) 2015 orih. All rights reserved.
@@ -24,22 +24,26 @@
 
 import Foundation
 
-public class GitLabResponse<T: GitLabModel> {
+public class UserQueryParamBuilder : GeneralQueryParamBuilder, GitLabParamBuildable {
     
-    var result: [T]?
-    //var ページング関連
-    // pagingAvailable: Bool
-    // getNextPageParamBuilder -> GitLabParamBuildable (次のページの設定にして返してくれる)
-    // getPreviousPageBuilder
-    // getFirstPageBuilder
-    // getLastPageBuilder
+    public func id(userId: UInt) -> Self {
+        if params["id"]? != nil {
+            return self
+        }
+        params["id"] = userId
+        return self
+    }
     
-}
-
-public class GitLabCreateResponse<T: GitLabModel> {
-    var result: T?
-}
-
-public class GitLabUpdateResponse<T: GitLabModel> {
-    var result: T?
+    /**
+    Other parameters in UserQueryParamBuilder will be ignored if this parameter is true.
+    */
+    public func mine(mine: Bool) -> Self {
+        params["mine"] = mine ? true : nil
+        return self
+    }
+    
+    public func build() -> [String:AnyObject]? {
+        return params
+    }
+    
 }

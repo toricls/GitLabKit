@@ -1,5 +1,5 @@
 //
-//  GitLabProject.swift
+//  Project.swift
 //  GitLabKit
 //
 //  Copyright (c) 2015 orih. All rights reserved.
@@ -25,7 +25,7 @@
 import Foundation
 import Mantle
 
-public class GitLabProject: MTLModel, MTLJSONSerializing {
+public class Project: GitLabModel, Fetchable, Creatable, Editable, Deletable {
     
     public var id: NSNumber?
     public var descriptionText: String? // "description" as a property name is not allowed by compiler
@@ -39,7 +39,7 @@ public class GitLabProject: MTLModel, MTLJSONSerializing {
     public var sshUrlToRepo: String?
     public var httpUrlToRepo: String?
     public var webUrl: String?
-    public var owner: GitLabUserBasic?
+    public var owner: User?
     public var name: String?
     public var nameWithNamespace: String?
     public var path: String?
@@ -66,15 +66,16 @@ public class GitLabProject: MTLModel, MTLJSONSerializing {
     }
     public var createdAt: NSDate?
     public var lastActivityAt: NSDate?
-    public var namespace: GitLabNamespace?
+    public var namespace: Namespace?
     public var _archived: NSNumber?
     public var archived: Bool {
         get { return _archived? != nil ? _archived!.boolValue : false }
         set { _archived = NSNumber(bool: newValue)}
     }
     
-    public class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        return [
+    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
+        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
+        var newKeys: [NSObject : AnyObject] = [
             "id"                    : "id",
             "descriptionText"       : "description",
             "defaultBranch"         : "default_branch",
@@ -97,8 +98,15 @@ public class GitLabProject: MTLModel, MTLJSONSerializing {
             "namespace"             : "namespace",
             "_archived"             : "archived"
         ]
+        return baseKeys + newKeys
     }
     
+    class func ownerJSONTransformer() -> NSValueTransformer {
+        return ModelUtil<User>.transformer()
+    }
+    class func namespaceJSONTransformer() -> NSValueTransformer {
+        return ModelUtil<Namespace>.transformer()
+    }
     class func createdAtJSONTransformer() -> NSValueTransformer {
         return dateTimeTransformer
     }

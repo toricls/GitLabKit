@@ -1,6 +1,6 @@
 //
-//  GitLabResponse.swift
-//  GitLabKit
+//  ApiClientTests.swift
+//  GitLabKitTests
 //
 //  Copyright (c) 2015 orih. All rights reserved.
 //
@@ -22,24 +22,14 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-import Foundation
+import Cocoa
+import XCTest
 
-public class GitLabResponse<T: GitLabModel> {
+class ApiClientTests: GitLabKitTests {
     
-    var result: [T]?
-    //var ページング関連
-    // pagingAvailable: Bool
-    // getNextPageParamBuilder -> GitLabParamBuildable (次のページの設定にして返してくれる)
-    // getPreviousPageBuilder
-    // getFirstPageBuilder
-    // getLastPageBuilder
+    func testHostUriShouldBeNormalized() {
+        var testClient = GitLabApiClient(host: "https://hostvalue.endswith.slash/", privateToken: "TOKEN")
+        XCTAssertEqual(testClient.host, "https://hostvalue.endswith.slash", "Slash character should be eliminated from end of the host uri value.")
+    }
     
-}
-
-public class GitLabCreateResponse<T: GitLabModel> {
-    var result: T?
-}
-
-public class GitLabUpdateResponse<T: GitLabModel> {
-    var result: T?
 }

@@ -1,0 +1,38 @@
+[
+  {
+    "name": "feature",
+    "color": "#5CB85C"
+  },
+  {
+    "name": "enhancement",
+    "color": "#5CB85C"
+  },
+  {
+    "name": "bug",
+    "color": "#D9534F"
+  },
+  {
+    "name": "confirmed",
+    "color": "#D9534F"
+  },
+  {
+    "name": "critical",
+    "color": "#D9534F"
+  },
+  {
+    "name": "discussion",
+    "color": "#428BCA"
+  },
+  {
+    "name": "documentation",
+    "color": "#F0AD4E"
+  },
+  {
+    "name": "suggestion",
+    "color": "#428BCA"
+  },
+  {
+    "name": "support",
+    "color": "#F0AD4E"
+  }
+]

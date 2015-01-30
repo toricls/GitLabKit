@@ -1,5 +1,5 @@
 //
-//  GitLabProjectMember.swift
+//  Tree.swift
 //  GitLabKit
 //
 //  Copyright (c) 2015 orih. All rights reserved.
@@ -24,12 +24,20 @@
 
 import Foundation
 
-public class GitLabProjectMember: GitLabUserBasic {
-    public var accessLevel: NSNumber?
+public class Tree: GitLabModel, Fetchable {
+    public var name: String?
+    public var type: String?
+    public var mode: String?
+    public var id: String?
     
     public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
         var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
-        baseKeys["accessLevel"] = "access_level"
-        return baseKeys
+        var newKeys: [NSObject : AnyObject] = [
+            "name" : "name",
+            "type" : "type",
+            "mode" : "mode",
+            "id"   : "id",
+        ]
+        return baseKeys + newKeys
     }
 }

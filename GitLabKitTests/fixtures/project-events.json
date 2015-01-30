@@ -1,0 +1,638 @@
+[
+  {
+    "title": null,
+    "project_id": 31,
+    "action_name": "opened",
+    "target_id": 758,
+    "target_type": "Issue",
+    "author_id": 2,
+    "data": null,
+    "target_title": "Issue event",
+    "created_at": "2015-01-26T14:44:13.000+09:00",
+    "author_username": "user2"
+  },
+  {
+    "title": null,
+    "project_id": 31,
+    "action_name": "opened",
+    "target_id": 757,
+    "target_type": "Issue",
+    "author_id": 2,
+    "data": null,
+    "target_title": "Issue event",
+    "created_at": "2015-01-26T14:43:57.000+09:00",
+    "author_username": "user2"
+  },
+  {
+    "title": null,
+    "project_id": 31,
+    "action_name": "opened",
+    "target_id": null,
+    "target_type": null,
+    "author_id": 18,
+    "data": {
+      "before": "9ab3693f0848e19be9ee0f50439a03023e1d912e",
+      "after": "0000000000000000000000000000000000000000",
+      "ref": "refs/heads/branch-a",
+      "user_id": 18,
+      "user_name": "User 80",
+      "project_id": 31,
+      "repository": {
+        "name": "project1",
+        "url": "git@localhost:group1/project1.git",
+        "description": "Project 1",
+        "homepage": "http://localhost/group1/project1"
+      },
+      "commits": [],
+      "total_commits_count": 0
+    },
+    "target_title": null,
+    "created_at": "2015-01-16T11:03:17.000+09:00",
+    "author_username": "user80"
+  },
+  {
+    "title": null,
+    "project_id": 31,
+    "action_name": "accepted",
+    "target_id": 653,
+    "target_type": "MergeRequest",
+    "author_id": 18,
+    "data": null,
+    "target_title": "Merege Request event",
+    "created_at": "2015-01-16T11:03:17.000+09:00",
+    "author_username": "user80"
+  },
+  {
+    "title": null,
+    "project_id": 31,
+    "action_name": "opened",
+    "target_id": null,
+    "target_type": null,
+    "author_id": 18,
+    "data": {
+      "before": "242c26ce417401e3e5767501a58cc7711cd01ea1",
+      "after": "c5cf4b35857bb520ff2dc097990c41e086d9c6a7",
+      "ref": "refs/heads/release",
+      "user_id": 18,
+      "user_name": "User 80",
+      "project_id": 31,
+      "repository": {
+        "name": "project1",
+        "url": "git@localhost:group1/project1.git",
+        "description": "Project 1",
+        "homepage": "http://localhost/group1/project1"
+      },
+      "commits": [
+        {
+          "id": "9ab3693f0848e19be9ee0f50439a03023e1d912e",
+          "message": "Commit message",
+          "timestamp": "2015-01-16T10:41:24+09:00",
+          "url": "http://localhost/group1/project1/commit/9ab3693f0848e19be9ee0f50439a03023e1d912e",
+          "author": {
+            "name": "User 50",
+            "email": "user50@dummy.com"
+          }
+        },
+        {
+          "id": "c5cf4b35857bb520ff2dc097990c41e086d9c6a7",
+          "message": "Merge branch 'branch-test-1' into 'release'\n\nMessage of merge request",
+          "timestamp": "2015-01-16T02:03:14+00:00",
+          "url": "http://localhost/group1/project1/commit/c5cf4b35857bb520ff2dc097990c41e086d9c6a7",
+          "author": {
+            "name": "User 80",
+            "email": "user80@dummy99.com"
+          }
+        }
+      ],
+      "total_commits_count": 2
+    },
+    "target_title": null,
+    "created_at": "2015-01-16T11:03:16.000+09:00",
+    "author_username": "user80"
+  },
+  {
+    "title": null,
+    "project_id": 31,
+    "action_name": "opened",
+    "target_id": 653,
+    "target_type": "MergeRequest",
+    "author_id": 16,
+    "data": null,
+    "target_title": "Merege request event",
+    "created_at": "2015-01-16T10:43:20.000+09:00",
+    "author_username": "user50"
+  },
+  {
+    "title": null,
+    "project_id": 31,
+    "action_name": "opened",
+    "target_id": null,
+    "target_type": null,
+    "author_id": 16,
+    "data": {
+      "before": "0000000000000000000000000000000000000000",
+      "after": "9ab3693f0848e19be9ee0f50439a03023e1d912e",
+      "ref": "refs/heads/branch-test-1",
+      "user_id": 16,
+      "user_name": "User 50",
+      "project_id": 31,
+      "repository": {
+        "name": "project1",
+        "url": "git@localhost:group1/project1.git",
+        "description": "Project 1",
+        "homepage": "http://localhost/group1/project1"
+      },
+      "commits": [
+        {
+          "id": "4487d69a372c329b2fd3a8d61b5c4fc726281b56",
+          "message": "Commit message",
+          "timestamp": "2015-01-15T17:56:16+09:00",
+          "url": "http://localhost/group1/project1/commit/4487d69a372c329b2fd3a8d61b5c4fc726281b56",
+          "author": {
+            "name": "User 2",
+            "email": "user2@dummy.com"
+          }
+        },
+        {
+          "id": "f82df7fbe653e51a9abdff1e461cb2c62207fcba",
+          "message": "Commit message 2",
+          "timestamp": "2015-01-15T22:10:07+09:00",
+          "url": "http://localhost/group1/project1/commit/f82df7fbe653e51a9abdff1e461cb2c62207fcba",
+          "author": {
+            "name": "User 50",
+            "email": "user50@dummy.com"
+          }
+        },
+        {
+          "id": "aa1c07037746fbfd9a99a67c0c01e2afe0143dca",
+          "message": "Commit message 3",
+          "timestamp": "2015-01-15T13:13:53+00:00",
+          "url": "http://localhost/group1/project1/commit/aa1c07037746fbfd9a99a67c0c01e2afe0143dca",
+          "author": {
+            "name": "User 80",
+            "email": "user80@dummy99.com"
+          }
+        },
+        {
+          "id": "32f5abdec31a98e339c52332efc427c008c4dabc",
+          "message": "Commit message 4",
+          "timestamp": "2015-01-15T23:27:39+09:00",
+          "url": "http://localhost/group1/project1/commit/32f5abdec31a98e339c52332efc427c008c4dabc",
+          "author": {
+            "name": "User 50",
+            "email": "user50@dummy.com"
+          }
+        },
+        {
+          "id": "2f2d60048dc2209278900103d95a0788eb8960fe",
+          "message": "Commit message 5",
+          "timestamp": "2015-01-15T14:28:58+00:00",
+          "url": "http://localhost/group1/project1/commit/2f2d60048dc2209278900103d95a0788eb8960fe",
+          "author": {
+            "name": "User 80",
+            "email": "user80@dummy99.com"
+          }
+        },
+        {
+          "id": "0afbe5475468d4bc09c6ace31b0656a7d6d6bca9",
+          "message": "Commit message 6",
+          "timestamp": "2015-01-16T02:09:59+09:00",
+          "url": "http://localhost/group1/project1/commit/0afbe5475468d4bc09c6ace31b0656a7d6d6bca9",
+          "author": {
+            "name": "User 100",
+            "email": "user100@dummy.com"
+          }
+        },
+        {
+          "id": "242c26ce417401e3e5767501a58cc7711cd01ea1",
+          "message": "Commit message 7",
+          "timestamp": "2015-01-15T17:19:35+00:00",
+          "url": "http://localhost/group1/project1/commit/242c26ce417401e3e5767501a58cc7711cd01ea1",
+          "author": {
+            "name": "User 2",
+            "email": "user2@dummy.com"
+          }
+        },
+        {
+          "id": "9ab3693f0848e19be9ee0f50439a03023e1d912e",
+          "message": "Commit message 8",
+          "timestamp": "2015-01-16T10:41:24+09:00",
+          "url": "http://localhost/group1/project1/commit/9ab3693f0848e19be9ee0f50439a03023e1d912e",
+          "author": {
+            "name": "User 50",
+            "email": "user50@dummy.com"
+          }
+        }
+      ],
+      "total_commits_count": 8
+    },
+    "target_title": null,
+    "created_at": "2015-01-16T10:41:50.000+09:00",
+    "author_username": "user50"
+  },
+  {
+    "title": null,
+    "project_id": 31,
+    "action_name": "opened",
+    "target_id": null,
+    "target_type": null,
+    "author_id": 2,
+    "data": {
+      "before": "0afbe5475468d4bc09c6ace31b0656a7d6d6bca9",
+      "after": "0000000000000000000000000000000000000000",
+      "ref": "refs/heads/branch-test-2",
+      "user_id": 2,
+      "user_name": "User 2",
+      "project_id": 31,
+      "repository": {
+        "name": "project1",
+        "url": "git@localhost:group1/project1.git",
+        "description": "Project 1",
+        "homepage": "http://localhost/group1/project1"
+      },
+      "commits": [],
+      "total_commits_count": 0
+    },
+    "target_title": null,
+    "created_at": "2015-01-16T02:19:38.000+09:00",
+    "author_username": "user2"
+  },
+  {
+    "title": null,
+    "project_id": 31,
+    "action_name": "accepted",
+    "target_id": 651,
+    "target_type": "MergeRequest",
+    "author_id": 2,
+    "data": null,
+    "target_title": "Merege request event",
+    "created_at": "2015-01-16T02:19:38.000+09:00",
+    "author_username": "user2"
+  },
+  {
+    "title": null,
+    "project_id": 31,
+    "action_name": "opened",
+    "target_id": null,
+    "target_type": null,
+    "author_id": 2,
+    "data": {
+      "before": "2f2d60048dc2209278900103d95a0788eb8960fe",
+      "after": "242c26ce417401e3e5767501a58cc7711cd01ea1",
+      "ref": "refs/heads/release",
+      "user_id": 2,
+      "user_name": "User 2",
+      "project_id": 31,
+      "repository": {
+        "name": "project1",
+        "url": "git@localhost:group1/project1.git",
+        "description": "Project 1",
+        "homepage": "http://localhost/group1/project1"
+      },
+      "commits": [
+        {
+          "id": "0afbe5475468d4bc09c6ace31b0656a7d6d6bca9",
+          "message": "Commit 1",
+          "timestamp": "2015-01-16T02:09:59+09:00",
+          "url": "http://localhost/group1/project1/commit/0afbe5475468d4bc09c6ace31b0656a7d6d6bca9",
+          "author": {
+            "name": "User 100",
+            "email": "user100@dummy.com"
+          }
+        },
+        {
+          "id": "242c26ce417401e3e5767501a58cc7711cd01ea1",
+          "message": "Commit 2",
+          "timestamp": "2015-01-15T17:19:35+00:00",
+          "url": "http://localhost/group1/project1/commit/242c26ce417401e3e5767501a58cc7711cd01ea1",
+          "author": {
+            "name": "User 2",
+            "email": "user2@dummy.com"
+          }
+        }
+      ],
+      "total_commits_count": 2
+    },
+    "target_title": null,
+    "created_at": "2015-01-16T02:19:37.000+09:00",
+    "author_username": "user2"
+  },
+  {
+    "title": null,
+    "project_id": 31,
+    "action_name": "opened",
+    "target_id": 3846,
+    "target_type": "Note",
+    "author_id": 2,
+    "data": null,
+    "target_title": null,
+    "created_at": "2015-01-16T02:19:29.000+09:00",
+    "author_username": "user2"
+  },
+  {
+    "title": null,
+    "project_id": 31,
+    "action_name": "opened",
+    "target_id": 651,
+    "target_type": "MergeRequest",
+    "author_id": 8,
+    "data": null,
+    "target_title": "Merge request title",
+    "created_at": "2015-01-16T02:13:59.000+09:00",
+    "author_username": "user100"
+  },
+  {
+    "title": null,
+    "project_id": 31,
+    "action_name": "opened",
+    "target_id": null,
+    "target_type": null,
+    "author_id": 8,
+    "data": {
+      "before": "0000000000000000000000000000000000000000",
+      "after": "0afbe5475468d4bc09c6ace31b0656a7d6d6bca9",
+      "ref": "refs/heads/branch-test-3",
+      "user_id": 8,
+      "user_name": "User 100",
+      "project_id": 31,
+      "repository": {
+        "name": "project1",
+        "url": "git@localhost:group1/project1.git",
+        "description": "Project 1",
+        "homepage": "http://localhost/group1/project1"
+      },
+      "commits": [
+        {
+          "id": "4487d69a372c329b2fd3a8d61b5c4fc726281b56",
+          "message": "Commit message 1",
+          "timestamp": "2015-01-15T17:56:16+09:00",
+          "url": "http://localhost/group1/project1/commit/4487d69a372c329b2fd3a8d61b5c4fc726281b56",
+          "author": {
+            "name": "User 2",
+            "email": "user2@dummy.com"
+          }
+        },
+        {
+          "id": "f82df7fbe653e51a9abdff1e461cb2c62207fcba",
+          "message": "Commit message 2",
+          "timestamp": "2015-01-15T22:10:07+09:00",
+          "url": "http://localhost/group1/project1/commit/f82df7fbe653e51a9abdff1e461cb2c62207fcba",
+          "author": {
+            "name": "User 50",
+            "email": "user50@dummy.com"
+          }
+        },
+        {
+          "id": "aa1c07037746fbfd9a99a67c0c01e2afe0143dca",
+          "message": "Commit message 3",
+          "timestamp": "2015-01-15T13:13:53+00:00",
+          "url": "http://localhost/group1/project1/commit/aa1c07037746fbfd9a99a67c0c01e2afe0143dca",
+          "author": {
+            "name": "User 80",
+            "email": "user80@dummy99.com"
+          }
+        },
+        {
+          "id": "32f5abdec31a98e339c52332efc427c008c4dabc",
+          "message": "Commit message 4",
+          "timestamp": "2015-01-15T23:27:39+09:00",
+          "url": "http://localhost/group1/project1/commit/32f5abdec31a98e339c52332efc427c008c4dabc",
+          "author": {
+            "name": "User 50",
+            "email": "user50@dummy.com"
+          }
+        },
+        {
+          "id": "2f2d60048dc2209278900103d95a0788eb8960fe",
+          "message": "Commit message 5",
+          "timestamp": "2015-01-15T14:28:58+00:00",
+          "url": "http://localhost/group1/project1/commit/2f2d60048dc2209278900103d95a0788eb8960fe",
+          "author": {
+            "name": "User 80",
+            "email": "user80@dummy99.com"
+          }
+        },
+        {
+          "id": "0afbe5475468d4bc09c6ace31b0656a7d6d6bca9",
+          "message": "Commit message 6",
+          "timestamp": "2015-01-16T02:09:59+09:00",
+          "url": "http://localhost/group1/project1/commit/0afbe5475468d4bc09c6ace31b0656a7d6d6bca9",
+          "author": {
+            "name": "User 100",
+            "email": "user100@dummy.com"
+          }
+        }
+      ],
+      "total_commits_count": 6
+    },
+    "target_title": null,
+    "created_at": "2015-01-16T02:10:25.000+09:00",
+    "author_username": "user100"
+  },
+  {
+    "title": null,
+    "project_id": 31,
+    "action_name": "opened",
+    "target_id": 714,
+    "target_type": "Issue",
+    "author_id": 8,
+    "data": null,
+    "target_title": "Issue title",
+    "created_at": "2015-01-16T02:09:32.000+09:00",
+    "author_username": "user100"
+  },
+  {
+    "title": null,
+    "project_id": 31,
+    "action_name": "opened",
+    "target_id": null,
+    "target_type": null,
+    "author_id": 18,
+    "data": {
+      "before": "32f5abdec31a98e339c52332efc427c008c4dabc",
+      "after": "0000000000000000000000000000000000000000",
+      "ref": "refs/heads/branch-test-4",
+      "user_id": 18,
+      "user_name": "User 80",
+      "project_id": 31,
+      "repository": {
+        "name": "project1",
+        "url": "git@localhost:group1/project1.git",
+        "description": "Project 1",
+        "homepage": "http://localhost/group1/project1"
+      },
+      "commits": [],
+      "total_commits_count": 0
+    },
+    "target_title": null,
+    "created_at": "2015-01-15T23:29:01.000+09:00",
+    "author_username": "user80"
+  },
+  {
+    "title": null,
+    "project_id": 31,
+    "action_name": "accepted",
+    "target_id": 650,
+    "target_type": "MergeRequest",
+    "author_id": 18,
+    "data": null,
+    "target_title": "Merge request title",
+    "created_at": "2015-01-15T23:29:01.000+09:00",
+    "author_username": "user80"
+  },
+  {
+    "title": null,
+    "project_id": 31,
+    "action_name": "opened",
+    "target_id": null,
+    "target_type": null,
+    "author_id": 18,
+    "data": {
+      "before": "aa1c07037746fbfd9a99a67c0c01e2afe0143dca",
+      "after": "2f2d60048dc2209278900103d95a0788eb8960fe",
+      "ref": "refs/heads/release",
+      "user_id": 18,
+      "user_name": "User 80",
+      "project_id": 31,
+      "repository": {
+        "name": "project1",
+        "url": "git@localhost:group1/project1.git",
+        "description": "Project 1",
+        "homepage": "http://localhost/group1/project1"
+      },
+      "commits": [
+        {
+          "id": "32f5abdec31a98e339c52332efc427c008c4dabc",
+          "message": "Commit message 1",
+          "timestamp": "2015-01-15T23:27:39+09:00",
+          "url": "http://localhost/group1/project1/commit/32f5abdec31a98e339c52332efc427c008c4dabc",
+          "author": {
+            "name": "User 50",
+            "email": "user50@dummy.com"
+          }
+        },
+        {
+          "id": "2f2d60048dc2209278900103d95a0788eb8960fe",
+          "message": "Commit message 2",
+          "timestamp": "2015-01-15T14:28:58+00:00",
+          "url": "http://localhost/group1/project1/commit/2f2d60048dc2209278900103d95a0788eb8960fe",
+          "author": {
+            "name": "User 80",
+            "email": "user80@dummy99.com"
+          }
+        }
+      ],
+      "total_commits_count": 2
+    },
+    "target_title": null,
+    "created_at": "2015-01-15T23:29:00.000+09:00",
+    "author_username": "user80"
+  },
+  {
+    "title": null,
+    "project_id": 31,
+    "action_name": "opened",
+    "target_id": 650,
+    "target_type": "MergeRequest",
+    "author_id": 16,
+    "data": null,
+    "target_title": "Merge request title",
+    "created_at": "2015-01-15T23:28:33.000+09:00",
+    "author_username": "user50"
+  },
+  {
+    "title": null,
+    "project_id": 31,
+    "action_name": "opened",
+    "target_id": null,
+    "target_type": null,
+    "author_id": 16,
+    "data": {
+      "before": "0000000000000000000000000000000000000000",
+      "after": "32f5abdec31a98e339c52332efc427c008c4dabc",
+      "ref": "refs/heads/branch-test-5",
+      "user_id": 16,
+      "user_name": "User 50",
+      "project_id": 31,
+      "repository": {
+        "name": "project1",
+        "url": "git@localhost:group1/project1.git",
+        "description": "Project 1",
+        "homepage": "http://localhost/group1/project1"
+      },
+      "commits": [
+        {
+          "id": "4487d69a372c329b2fd3a8d61b5c4fc726281b56",
+          "message": "Commit message 1",
+          "timestamp": "2015-01-15T17:56:16+09:00",
+          "url": "http://localhost/group1/project1/commit/4487d69a372c329b2fd3a8d61b5c4fc726281b56",
+          "author": {
+            "name": "User 2",
+            "email": "user2@dummy.com"
+          }
+        },
+        {
+          "id": "f82df7fbe653e51a9abdff1e461cb2c62207fcba",
+          "message": "Commit message 2",
+          "timestamp": "2015-01-15T22:10:07+09:00",
+          "url": "http://localhost/group1/project1/commit/f82df7fbe653e51a9abdff1e461cb2c62207fcba",
+          "author": {
+            "name": "User 50",
+            "email": "user50@dummy.com"
+          }
+        },
+        {
+          "id": "aa1c07037746fbfd9a99a67c0c01e2afe0143dca",
+          "message": "Commit message 3",
+          "timestamp": "2015-01-15T13:13:53+00:00",
+          "url": "http://localhost/group1/project1/commit/aa1c07037746fbfd9a99a67c0c01e2afe0143dca",
+          "author": {
+            "name": "User 80",
+            "email": "user80@dummy99.com"
+          }
+        },
+        {
+          "id": "32f5abdec31a98e339c52332efc427c008c4dabc",
+          "message": "Commit message 4",
+          "timestamp": "2015-01-15T23:27:39+09:00",
+          "url": "http://localhost/group1/project1/commit/32f5abdec31a98e339c52332efc427c008c4dabc",
+          "author": {
+            "name": "User 50",
+            "email": "user50@dummy.com"
+          }
+        }
+      ],
+      "total_commits_count": 4
+    },
+    "target_title": null,
+    "created_at": "2015-01-15T23:28:05.000+09:00",
+    "author_username": "user50"
+  },
+  {
+    "title": null,
+    "project_id": 31,
+    "action_name": "opened",
+    "target_id": null,
+    "target_type": null,
+    "author_id": 18,
+    "data": {
+      "before": "f82df7fbe653e51a9abdff1e461cb2c62207fcba",
+      "after": "0000000000000000000000000000000000000000",
+      "ref": "refs/heads/branch-test-6",
+      "user_id": 18,
+      "user_name": "User 80",
+      "project_id": 31,
+      "repository": {
+        "name": "project1",
+        "url": "git@localhost:group1/project1.git",
+        "description": "Project 1",
+        "homepage": "http://localhost/group1/project1"
+      },
+      "commits": [],
+      "total_commits_count": 0
+    },
+    "target_title": null,
+    "created_at": "2015-01-15T22:13:56.000+09:00",
+    "author_username": "user80"
+  }
+]

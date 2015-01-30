@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "title": "Test Snippets 1",
+    "file_name": "this-is-file-name.java",
+    "author": {
+      "name": "User 2",
+      "username": "user2",
+      "id": 2,
+      "state": "active",
+      "avatar_url": "http://localhost/uploads/user/avatar/2/dummy.png"
+    },
+    "expires_at": null,
+    "updated_at": "2015-01-27T02:22:08.000+09:00",
+    "created_at": "2015-01-27T02:22:08.000+09:00"
+  }
+]

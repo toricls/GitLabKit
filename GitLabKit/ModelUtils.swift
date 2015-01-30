@@ -1,5 +1,5 @@
 //
-//  GitLabModelUtils.swift
+//  ModelUtils.swift
 //  GitLabKit
 //
 //  Copyright (c) 2015 orih. All rights reserved.
@@ -29,11 +29,17 @@ var dateTimeTransformer: NSValueTransformer {
     let dateFormatter = NSDateFormatter()
     dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-    
-    return MTLValueTransformer.reversibleTransformerWithForwardBlock({
-        dateFormatter.dateFromString($0 as NSString)
-        }, reverseBlock: {
-            dateFormatter.stringFromDate($0 as NSDate)
+
+    return MTLValueTransformer.reversibleTransformerWithForwardBlock({(value: AnyObject!) -> AnyObject! in
+            if let val = value as? NSString {
+                return dateFormatter.dateFromString(val)
+            }
+            return nil
+        }, reverseBlock: {(value: AnyObject!) -> AnyObject! in
+            if let val = value as? NSDate {
+                return dateFormatter.stringFromDate(val)
+            }
+            return nil
     })
 }
 
@@ -42,9 +48,24 @@ var dateTransformer: NSValueTransformer {
     dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
     dateFormatter.dateFormat = "yyyy-MM-dd"
     
-    return MTLValueTransformer.reversibleTransformerWithForwardBlock({
-        dateFormatter.dateFromString($0 as NSString)
-        }, reverseBlock: {
-            dateFormatter.stringFromDate($0 as NSDate)
+    return MTLValueTransformer.reversibleTransformerWithForwardBlock({(value: AnyObject!) -> AnyObject! in
+            if let val = value as? NSString {
+                return dateFormatter.dateFromString(val)
+            }
+            return nil
+        }, reverseBlock: {(value: AnyObject!) -> AnyObject! in
+            if let val = value as? NSDate {
+                return dateFormatter.stringFromDate(val)
+            }
+            return nil
     })
+}
+
+class ModelUtil<T: GitLabModel> {
+    class func transformer() -> NSValueTransformer {
+        return NSValueTransformer.mtl_JSONDictionaryTransformerWithModelClass(T.self)
+    }
+    class func arrayTransformer() -> NSValueTransformer {
+        return NSValueTransformer.mtl_JSONArrayTransformerWithModelClass(T.self)
+    }
 }

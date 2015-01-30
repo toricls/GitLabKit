@@ -1,0 +1,111 @@
+[
+  {
+    "id": 100,
+    "description": "project 100",
+    "default_branch": "master",
+    "public": false,
+    "archived": false,
+    "visibility_level": 0,
+    "ssh_url_to_repo": "git@dummy.com:thirdnamespace/project100.git",
+    "http_url_to_repo": "http://localhost/thirdnamespace/project100.git",
+    "web_url": "http://localhost/thirdnamespace/project100",
+    "name": "project100",
+    "name_with_namespace": "ThirdNamespace / project100",
+    "path": "project100",
+    "path_with_namespace": "thirdnamespace/project100",
+    "issues_enabled": true,
+    "merge_requests_enabled": true,
+    "wiki_enabled": true,
+    "snippets_enabled": false,
+    "created_at": "2015-01-06T15:22:46.000+09:00",
+    "last_activity_at": "2015-01-14T18:29:43.000+09:00",
+    "namespace": {
+      "id": 10,
+      "name": "ThirdNamespace",
+      "path": "thirdnamespace",
+      "owner_id": null,
+      "created_at": "2014-10-28T15:46:26.000+09:00",
+      "updated_at": "2014-10-29T16:27:35.000+09:00",
+      "description": "Third namespace",
+      "avatar": {
+        "url": "/uploads/group/avatar/10/dummy.png"
+      }
+    }
+  },
+  {
+    "id": 101,
+    "description": "Personal project",
+    "default_branch": "master",
+    "public": false,
+    "archived": false,
+    "visibility_level": 0,
+    "ssh_url_to_repo": "git@dummy.com:user2/personal-project.git",
+    "http_url_to_repo": "http://localhost/user2/personal-project.git",
+    "web_url": "http://localhost/user2/personal-project",
+    "owner": {
+      "name": "User 2",
+      "username": "user2",
+      "id": 2,
+      "state": "active",
+      "avatar_url": "http://localhost/uploads/user/avatar/2/dummy.png"
+    },
+    "name": "personal-project",
+    "name_with_namespace": "User 2 / personal-project",
+    "path": "personal-project",
+    "path_with_namespace": "user2/personal-project",
+    "issues_enabled": true,
+    "merge_requests_enabled": true,
+    "wiki_enabled": true,
+    "snippets_enabled": false,
+    "created_at": "2014-07-02T12:09:12.000+09:00",
+    "last_activity_at": "2014-07-12T18:23:19.000+09:00",
+    "namespace": {
+      "id": 5,
+      "name": "user2",
+      "path": "user2",
+      "owner_id": 2,
+      "created_at": "2014-04-29T00:02:16.000+09:00",
+      "updated_at": "2014-06-21T15:40:42.000+09:00",
+      "description": "",
+      "avatar": null
+    }
+  },
+  {
+    "id": 102,
+    "description": "Another personal project",
+    "default_branch": null,
+    "public": false,
+    "archived": false,
+    "visibility_level": 0,
+    "ssh_url_to_repo": "git@dummy.com:user2/another-personal-project.git",
+    "http_url_to_repo": "http://localhost/user2/another-personal-project.git",
+    "web_url": "http://localhost/user2/another-personal-project",
+    "owner": {
+      "name": "User 2",
+      "username": "user2",
+      "id": 2,
+      "state": "active",
+      "avatar_url": "http://localhost/uploads/user/avatar/2/dummy.png"
+    },
+    "name": "another-personal-project",
+    "name_with_namespace": "User 2 / another-personal-project",
+    "path": "another-personal-project",
+    "path_with_namespace": "user2/another-personal-project",
+    "issues_enabled": true,
+    "merge_requests_enabled": true,
+    "wiki_enabled": true,
+    "snippets_enabled": false,
+    "created_at": "2014-10-11T22:29:39.000+09:00",
+    "last_activity_at": "2014-10-11T22:29:39.000+09:00",
+    "namespace": {
+      "id": 5,
+      "name": "user2",
+      "path": "user2",
+      "owner_id": 2,
+      "created_at": "2014-04-29T00:02:16.000+09:00",
+      "updated_at": "2014-06-21T15:40:42.000+09:00",
+      "description": "",
+      "avatar": null
+    }
+  }
+]

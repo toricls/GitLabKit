@@ -1,0 +1,72 @@
+[
+  {
+    "name": "branch-a",
+    "commit": {
+      "id": "7857469deb0e5b935b8ab18cba44b4e9a7739f0d",
+      "message": "Last commit message of branch-a",
+      "parent_ids": [
+        "a2ad68e0abbd05d09b81f18e7c040583dd4befda"
+      ],
+      "authored_date": "2015-01-12T17:49:01.000+09:00",
+      "author_name": "User 50",
+      "author_email": "user50@dummy.com",
+      "committed_date": "2015-01-12T17:49:01.000+09:00",
+      "committer_name": "User 50",
+      "committer_email": "user50@dummy.com"
+    },
+    "protected": false
+  },
+  {
+    "name": "branch-b",
+    "commit": {
+      "id": "9e81510c01d6042d335512edba011c59990add7f",
+      "message": "Last commit message of branch-b",
+      "parent_ids": [
+        "dd7f00b9f0ae02dbf64aaa6fae11292afc6a3ba2"
+      ],
+      "authored_date": "2015-01-06T19:45:09.000+09:00",
+      "author_name": "User 2",
+      "author_email": "user2@dummy.com",
+      "committed_date": "2015-01-06T19:45:09.000+09:00",
+      "committer_name": "User 2",
+      "committer_email": "user2@dummy.com"
+    },
+    "protected": false
+  },
+  {
+    "name": "master",
+    "commit": {
+      "id": "17a738cf8c41af9c01ce28b1e859a7416be6a5f1",
+      "message": "Last commit message of master",
+      "parent_ids": [
+        "2a0b40ed19435d47c8109588e644d509b842db85",
+        "c19e6ba50ab9617f9fae5bc7df6c4576fa02f548"
+      ],
+      "authored_date": "2015-01-15T07:46:38.000+00:00",
+      "author_name": "User 100",
+      "author_email": "user100@dummy.com",
+      "committed_date": "2015-01-15T07:46:38.000+00:00",
+      "committer_name": "User 100",
+      "committer_email": "user100@dummy.com"
+    },
+    "protected": false
+  },
+  {
+    "name": "release",
+    "commit": {
+      "id": "c5cf4b35857bb520ff2dc097990c41e086d9c6a7",
+      "message": "Last commit message of release",
+      "parent_ids": [
+        "242c26ce417401e3e5767501a58cc7711cd01ea1",
+        "9ab3693f0848e19be9ee0f50439a03023e1d912e"
+      ],
+      "authored_date": "2015-01-16T02:03:14.000+00:00",
+      "author_name": "User 80",
+      "author_email": "user80@dummy99.com",
+      "committed_date": "2015-01-16T02:03:14.000+00:00",
+      "committer_name": "User 80",
+      "committer_email": "user80@dummy99.com"
+    },
+    "protected": false
+  }
+]

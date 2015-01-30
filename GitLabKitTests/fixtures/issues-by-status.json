@@ -1,0 +1,103 @@
+[
+  {
+    "id": 758,
+    "iid": 237,
+    "project_id": 31,
+    "title": "Opened issue, no label",
+    "description": "",
+    "state": "opened",
+    "created_at": "2015-01-26T14:44:13.000+09:00",
+    "updated_at": "2015-01-26T14:44:13.000+09:00",
+    "labels": [],
+    "milestone": {
+      "id": 56,
+      "iid": 11,
+      "project_id": 31,
+      "title": "v0.4",
+      "description": "",
+      "state": "active",
+      "created_at": "2014-12-12T16:35:55.000+09:00",
+      "updated_at": "2014-12-12T16:35:55.000+09:00",
+      "due_date": "2015-02-26"
+    },
+    "assignee": {
+      "name": "User 2",
+      "username": "user2",
+      "id": 2,
+      "state": "active",
+      "avatar_url": "http://localhost/uploads/user/avatar/2/dummy.png"
+    },
+    "author": {
+      "name": "User 2",
+      "username": "user2",
+      "id": 2,
+      "state": "active",
+      "avatar_url": "http://localhost/uploads/user/avatar/2/dummy.png"
+    }
+  },
+  {
+    "id": 757,
+    "iid": 236,
+    "project_id": 31,
+    "title": "Opened issue, no labels",
+    "description": "",
+    "state": "opened",
+    "created_at": "2015-01-26T14:43:57.000+09:00",
+    "updated_at": "2015-01-26T14:44:21.000+09:00",
+    "labels": [],
+    "milestone": {
+      "id": 56,
+      "iid": 11,
+      "project_id": 31,
+      "title": "v0.4",
+      "description": "",
+      "state": "active",
+      "created_at": "2014-12-12T16:35:55.000+09:00",
+      "updated_at": "2014-12-12T16:35:55.000+09:00",
+      "due_date": "2015-02-26"
+    },
+    "assignee": {
+      "name": "User 2",
+      "username": "user2",
+      "id": 2,
+      "state": "active",
+      "avatar_url": "http://localhost/uploads/user/avatar/2/dummy.png"
+    },
+    "author": {
+      "name": "User 2",
+      "username": "user2",
+      "id": 2,
+      "state": "active",
+      "avatar_url": "http://localhost/uploads/user/avatar/2/dummy.png"
+    }
+  },
+  {
+    "id": 728,
+    "iid": 145,
+    "project_id": 90,
+    "title": "Opened issue, discussion and suggestion labels, no milestone",
+    "description": "",
+    "state": "opened",
+    "created_at": "2015-01-18T13:59:38.000+09:00",
+    "updated_at": "2015-01-18T22:00:26.000+09:00",
+    "labels": [
+      "discussion",
+      "suggestion"
+    ],
+    "milestone": null,
+    "assignee": {
+      "name": "User 2",
+      "username": "user2",
+      "id": 2,
+      "state": "active",
+      "avatar_url": "http://localhost/uploads/user/avatar/2/dummy.png"
+    },
+    "author": {
+      "name": "User 2",
+      "username": "user2",
+      "id": 2,
+      "state": "active",
+      "avatar_url": "http://localhost/uploads/user/avatar/2/dummy.png"
+    }
+  }
+]

@@ -1,5 +1,5 @@
 //
-//  GitLabResponse.swift
+//  IssueQueryParamBuilder.swift
 //  GitLabKit
 //
 //  Copyright (c) 2015 orih. All rights reserved.
@@ -24,22 +24,22 @@
 
 import Foundation
 
-public class GitLabResponse<T: GitLabModel> {
+public class IssueQueryParamBuilder : GeneralQueryParamBuilder, GitLabParamBuildable {
     
-    var result: [T]?
-    //var ページング関連
-    // pagingAvailable: Bool
-    // getNextPageParamBuilder -> GitLabParamBuildable (次のページの設定にして返してくれる)
-    // getPreviousPageBuilder
-    // getFirstPageBuilder
-    // getLastPageBuilder
+    public func state(state: IssueState) -> Self {
+        params["state"] = state.rawValue
+        return self
+    }
     
-}
-
-public class GitLabCreateResponse<T: GitLabModel> {
-    var result: T?
-}
-
-public class GitLabUpdateResponse<T: GitLabModel> {
-    var result: T?
+    public func label(labels: [String]) -> Self {
+        if labels.count > 0 {
+            params["labels"] = ",".join(labels)
+        }
+        return self
+    }
+    
+    public func build() -> [String:AnyObject]? {
+        return params
+    }
+    
 }
