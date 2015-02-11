@@ -73,7 +73,7 @@ see [test sources](https://github.com/orih/GitLabKit/tree/master/GitLabKitTests)
 
 - Implement more apis
 - Support [pagination](https://gitlab.com/help/api/README.md#pagination)
-- Decide on how to deal with 404 responses. I'm just treating them as normal responses and returning an empty array for [now](https://github.com/orih/GitLabKit/blob/master/GitLabKit/GitLabApiClient.swift#L47).
+- Decide on how to deal with 404 responses. I'm just treating them as normal responses and returning an empty array for [now](https://github.com/orih/GitLabKit/blob/master/GitLabKit/GitLabApiClient.swift#L87).
 - More effective and efficient testing with stub or something like that
 
 ## Contribution
