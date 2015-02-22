@@ -118,8 +118,8 @@
 		0EF5A0901A7D0E7400549FFE /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF5A08E1A7D0E7400549FFE /* Event.swift */; };
 		0EF5A0951A7E102D00549FFE /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF5A0941A7E102D00549FFE /* Branch.swift */; };
 		0EF5A0961A7E102D00549FFE /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF5A0941A7E102D00549FFE /* Branch.swift */; };
-		0EF5A09B1A7E169C00549FFE /* ProjectBelongsQueryParamBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF5A09A1A7E169C00549FFE /* ProjectBelongsQueryParamBuilders.swift */; };
-		0EF5A09C1A7E169C00549FFE /* ProjectBelongsQueryParamBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF5A09A1A7E169C00549FFE /* ProjectBelongsQueryParamBuilders.swift */; };
+		0EF5A09B1A7E169C00549FFE /* ProjectOwnedQueryParamBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF5A09A1A7E169C00549FFE /* ProjectOwnedQueryParamBuilders.swift */; };
+		0EF5A09C1A7E169C00549FFE /* ProjectOwnedQueryParamBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF5A09A1A7E169C00549FFE /* ProjectOwnedQueryParamBuilders.swift */; };
 		0EF5A09E1A7E17D700549FFE /* Hook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF5A09D1A7E17D700549FFE /* Hook.swift */; };
 		0EF5A09F1A7E17D700549FFE /* Hook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF5A09D1A7E17D700549FFE /* Hook.swift */; };
 		0EF5A0A11A7E1B3200549FFE /* Snippet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF5A0A01A7E1B3200549FFE /* Snippet.swift */; };
@@ -248,7 +248,7 @@
 		0EF5A08B1A7D0B5900549FFE /* ProjectQueryParamBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectQueryParamBuilder.swift; sourceTree = "<group>"; };
 		0EF5A08E1A7D0E7400549FFE /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		0EF5A0941A7E102D00549FFE /* Branch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Branch.swift; sourceTree = "<group>"; };
-		0EF5A09A1A7E169C00549FFE /* ProjectBelongsQueryParamBuilders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectBelongsQueryParamBuilders.swift; sourceTree = "<group>"; };
+		0EF5A09A1A7E169C00549FFE /* ProjectOwnedQueryParamBuilders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectOwnedQueryParamBuilders.swift; sourceTree = "<group>"; };
 		0EF5A09D1A7E17D700549FFE /* Hook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hook.swift; sourceTree = "<group>"; };
 		0EF5A0A01A7E1B3200549FFE /* Snippet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snippet.swift; sourceTree = "<group>"; };
 		0EF5A0A31A7E22A500549FFE /* Tree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
@@ -380,7 +380,7 @@
 			isa = PBXGroup;
 			children = (
 				0E0522C61A7BD62D00954D8A /* IssueQueryParamBuilder.swift */,
-				0EF5A09A1A7E169C00549FFE /* ProjectBelongsQueryParamBuilders.swift */,
+				0EF5A09A1A7E169C00549FFE /* ProjectOwnedQueryParamBuilders.swift */,
 				0EF5A08B1A7D0B5900549FFE /* ProjectQueryParamBuilder.swift */,
 				0E193F671A77F428005F2B35 /* UserQueryParamBuilder.swift */,
 			);
@@ -753,7 +753,7 @@
 				0EF5A0A41A7E22A500549FFE /* Tree.swift in Sources */,
 				0E7729ED1A7279E80032E13F /* User.swift in Sources */,
 				0EF5A0A71A7E246A00549FFE /* Commit.swift in Sources */,
-				0EF5A09B1A7E169C00549FFE /* ProjectBelongsQueryParamBuilders.swift in Sources */,
+				0EF5A09B1A7E169C00549FFE /* ProjectOwnedQueryParamBuilders.swift in Sources */,
 				0E7729F01A727EF50032E13F /* Namespace.swift in Sources */,
 				0E3A72771A8AF3DE00F332C8 /* File.swift in Sources */,
 				0E7729EA1A72767A0032E13F /* Project.swift in Sources */,
@@ -816,7 +816,7 @@
 				0E12CAA31A7187830060BFF8 /* GitLabApiClient.swift in Sources */,
 				0E0522CD1A7BE1B400954D8A /* UserTests.swift in Sources */,
 				0EF5A0A51A7E22A500549FFE /* Tree.swift in Sources */,
-				0EF5A09C1A7E169C00549FFE /* ProjectBelongsQueryParamBuilders.swift in Sources */,
+				0EF5A09C1A7E169C00549FFE /* ProjectOwnedQueryParamBuilders.swift in Sources */,
 				0E0522D21A7BF46600954D8A /* GitLabResponse.swift in Sources */,
 				0EF5A0B71A7F35D100549FFE /* MergeRequest.swift in Sources */,
 				0E3A72751A88E52A00F332C8 /* Tag.swift in Sources */,

@@ -36,7 +36,7 @@ public class GitLabApiClient {
         assert(!host.isEmpty, "GitLabApiClient does not accept an empty host value.")
         assert(!privateToken.isEmpty, "GitLabApiClient does not accept an empty privateToken value.")
         
-        // remove last '/' from host string
+        // remove last '/' from the host string
         let length = countElements(host)
         self.host = (host[length-1] == "/" && length > 1) ? host[0...length-2] : host
         

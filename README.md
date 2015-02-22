@@ -27,7 +27,7 @@ Nothing yet.
 ## Requirement
 
 GitLabKit is written as a Cocoa Framework (for OS X) for now.
-I tested this library on OS X 10.10.1 (14B25) with Xcode 6.1.1 (6A2008a), self hosted GitLab CE 7.5.3 b656b85.
+Tested on OS X 10.10.1 (14B25) with Xcode 6.1.1 (6A2008a), self hosted GitLab CE 7.5.3 b656b85.
 
 
 - [Alamofire](https://github.com/Alamofire/Alamofire)

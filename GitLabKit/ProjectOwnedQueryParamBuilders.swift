@@ -1,5 +1,5 @@
 //
-//  ProjectBelongsQueryParamBuilders.swift
+//  ProjectOwnedQueryParamBuilders.swift
 //  GitLabKit
 //
 //  Copyright (c) 2015 orih. All rights reserved.
@@ -24,7 +24,7 @@
 
 import Foundation
 
-public class ProjectBelongsQueryParamBuilder: GeneralQueryParamBuilder, GitLabParamBuildable {
+public class ProjectOwnedQueryParamBuilder: GeneralQueryParamBuilder, GitLabParamBuildable {
     
     init(projectId: UInt) {
         super.init()
@@ -67,7 +67,7 @@ public class ProjectIssueQueryParamBuilder : IssueQueryParamBuilder {
 
 // MARK: ProjectMembers
 
-public class ProjectMemberQueryParamBuilder : ProjectBelongsQueryParamBuilder {
+public class ProjectMemberQueryParamBuilder : ProjectOwnedQueryParamBuilder {
     public func userId(userId: UInt) -> Self {
         if params["userId"]? != nil {
             return self
@@ -79,11 +79,11 @@ public class ProjectMemberQueryParamBuilder : ProjectBelongsQueryParamBuilder {
 
 // MARK: ProjectEvents
 
-public class ProjectEventQueryParamBuilder: ProjectBelongsQueryParamBuilder {}
+public class ProjectEventQueryParamBuilder: ProjectOwnedQueryParamBuilder {}
 
 // MARK: ProjectMergeRequests
 
-public class ProjectMergeRequestQueryParamBuilder: ProjectBelongsQueryParamBuilder {
+public class ProjectMergeRequestQueryParamBuilder: ProjectOwnedQueryParamBuilder {
     
     public func state(state: MergeRequestState) -> Self {
         params["state"] = state.rawValue
@@ -104,7 +104,7 @@ public class ProjectMergeRequestQueryParamBuilder: ProjectBelongsQueryParamBuild
 
 // MARK: ProjectBranches
 
-public class ProjectBranchQueryParamBuilder : ProjectBelongsQueryParamBuilder {
+public class ProjectBranchQueryParamBuilder : ProjectOwnedQueryParamBuilder {
     public func branchName(name: String) -> Self {
         if params["name"]? != nil {
             return self
@@ -116,7 +116,7 @@ public class ProjectBranchQueryParamBuilder : ProjectBelongsQueryParamBuilder {
 
 // MARK: ProjectHooks
 
-public class ProjectHookQueryParamBuilder: ProjectBelongsQueryParamBuilder {
+public class ProjectHookQueryParamBuilder: ProjectOwnedQueryParamBuilder {
     public func hookId(hookId: UInt) -> Self {
         if params["hookId"]? != nil {
             return self
@@ -128,7 +128,7 @@ public class ProjectHookQueryParamBuilder: ProjectBelongsQueryParamBuilder {
 
 // MARK: ProjectSnippets
 
-public class ProjectSnippetQueryParamBuilder: ProjectBelongsQueryParamBuilder {
+public class ProjectSnippetQueryParamBuilder: ProjectOwnedQueryParamBuilder {
     public func snippetId(snippetId: UInt) -> Self {
         if params["snippetId"]? != nil {
             return self
@@ -166,11 +166,11 @@ public class ProjectFileQueryParamBuilder: GeneralQueryParamBuilder, GitLabParam
 
 // MARK: ProjectTags
 
-public class ProjectTagQueryParamBuilder: ProjectBelongsQueryParamBuilder {}
+public class ProjectTagQueryParamBuilder: ProjectOwnedQueryParamBuilder {}
 
 // MARK: ProjectTrees
 
-public class ProjectTreeQueryParamBuilder: ProjectBelongsQueryParamBuilder {
+public class ProjectTreeQueryParamBuilder: ProjectOwnedQueryParamBuilder {
     /**
     Specify the path inside repository
     
@@ -194,7 +194,7 @@ public class ProjectTreeQueryParamBuilder: ProjectBelongsQueryParamBuilder {
 
 // MARK: ProjectCommits
 
-public class ProjectCommitQueryParamBuilder: ProjectBelongsQueryParamBuilder {
+public class ProjectCommitQueryParamBuilder: ProjectOwnedQueryParamBuilder {
     /**
     Specify the name of a repository branch or tag
     
