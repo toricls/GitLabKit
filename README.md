@@ -56,14 +56,16 @@ $ (sudo) gem install cocoapods --pre
 let client: GitLabApiClient = GitLabApiClient(host: "https://git.example.com", privateToken: "YOUR-PRIVATE-TOKEN")
 
 // Get users
-client.get({ (users: [User]?, error: NSError?) -> Void in
-	println(users?.count)
+let params = UserQueryParamBuilder()
+client.get(params, { (response: GitLabResponse<User>?, error: NSError?) -> Void in
+	println(response!.result!.count)
 })
 
 // Get user by Id
 let params = UserQueryParamBuilder().id(1)
-client.get(params, { (user: [User]?, error: NSError?) -> Void in
-	println(user[0]!.name!)
+client.get(params, { (response: GitLabResponse<User>?, error: NSError?) -> Void in
+    let user: User = response!.result![0]
+	println(user.name!)
 })
 ```
 
@@ -72,8 +74,7 @@ see [test sources](https://github.com/orih/GitLabKit/tree/master/GitLabKitTests)
 ## TODO
 
 - Implement more apis
-- Support [pagination](https://gitlab.com/help/api/README.md#pagination)
-- Decide on how to deal with 404 responses. I'm just treating them as normal responses and returning an empty array for [now](https://github.com/orih/GitLabKit/blob/master/GitLabKit/GitLabApiClient.swift#L87).
+- Decide on how to deal with 404 responses. I'm just treating them as normal responses and returning an empty array for [now](https://github.com/orih/GitLabKit/blob/master/GitLabKit/GitLabApiClient.swift#L79).
 - More effective and efficient testing with stub or something like that
 
 ## Contribution
