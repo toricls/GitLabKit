@@ -44,30 +44,22 @@ public class GitLabApiClient {
     }
     
     /**
-    Fetch from API server with no parameter
-    
-    :param: handler callback handler for fetched data or error while requesting to your API server
-    */
-    public func get<T: GitLabModel where T: Fetchable>(handler: ([T]?, NSError?) -> Void) {
-        self.get(nil, handler)
-    }
-    
-    /**
     Fetch from API server with parameter builder
     
     :param: builder a parameter builder for the data model
     :param: handler callback handler for fetched data or error while requesting to your API server
     */
-    public func get<T: GitLabModel where T: Fetchable>(builder: GitLabParamBuildable?, handler: ( [T]?, NSError?) -> Void) {
+    public func get<T: GitLabModel where T: Fetchable>(builder: GitLabParamBuildable?, handler: ( GitLabResponse<T>?, NSError?) -> Void) {
         var params: [String:AnyObject]? = builder?.build()
         if params? == nil {
             params = [:]
         }
         params![self.privateTokenKey] = self.privateToken
 
-        GitLabApiEndPoint().request(self.host, params: params!, handler: { (response: GitLabInternalResponse<T>) -> Void in
+        GitLabApiEndPoint().request(self.host, params: params!, handler: { (response: GitLabInternalResponse<T>, linkObject: GitLabLinkObject?) -> Void in
             var error: NSError?
-            let result = self.handleRawResponse(response, &error)
+            let resultArray = self.handleRawResponse(response, &error)
+            let result: GitLabResponse = GitLabResponse(resultArray: resultArray, linkObject: linkObject)
             handler(result, error)
         })
     }
@@ -126,17 +118,18 @@ let GitLabKitErrorDomain = "io.orih.GitLabKit.error"
 
 class GitLabApiEndPoint {
     
-    func request<T: GitLabModel>(host: String, params: [String : AnyObject], handler:(response: GitLabInternalResponse<T>) -> Void) -> Void {
+    func request<T: GitLabModel>(host: String, params: [String : AnyObject], handler:(response: GitLabInternalResponse<T>, linkObject: GitLabLinkObject?) -> Void) -> Void {
         
         let success: ((NSURLRequest, NSHTTPURLResponse?, AnyObject!) -> Void) = {
-            // TODO: Extract and parse "Link" HTTP header.
+            // Extract and parse "Link" HTTP header
+            var linkObj: GitLabLinkObject?
             if let link:AnyObject = $1?.allHeaderFields["Link"] {
-                Logger.log("Link Object: \(link)")
+                linkObj = GitLabLinkObject(link as? String)
             }
-            handler(response: GitLabInternalResponse<T>.parse($2))
+            handler(response: GitLabInternalResponse<T>.parse($2), linkObject: linkObj)
         }
         let failure: ((NSURLRequest, NSHTTPURLResponse?, NSError!) -> Void) = {
-            handler(response: GitLabInternalResponse.Error($2))
+            handler(response: GitLabInternalResponse.Error($2), linkObject: nil)
         }
         
         
@@ -513,21 +506,24 @@ enum GitLabInternalResponse<T: GitLabModel> {
 
 // MARK: GeneralQueryParamBuilder, GitLabParamBuildable
 
-public class GeneralQueryParamBuilder {
+public class GeneralQueryParamBuilder: GitLabParamBuildable {
     
     var params: [String:AnyObject] = ["page":"1", "per_page":"20"]
     
     func page(_ page: UInt = 1) -> Self {
-        assert(page > 0, "GitLab API only accepts not less than 1 as a page number.")
+        assert(page > 0, "GitLab API accepts a number greater than 0 as a page number.")
         params["page"] = page
         return self
     }
     func perPage(_ perPage: UInt = 20) -> Self {
-        assert(perPage > 0 && perPage <= 100, "GitLab API only accepts 1 to 100 as a per_page value.")
+        assert(perPage >= 0 && perPage <= 100, "GitLab API accepts a number 1 to 100 as a per_page value.") // 0 will be assumed as default value (20) on the API server side.
         params["per_page"] = perPage
         return self
     }
     
+    public func build() -> [String:AnyObject]? {
+        return params
+    }
 }
 
 public protocol GitLabParamBuildable {
@@ -535,4 +531,61 @@ public protocol GitLabParamBuildable {
     *  Returns a dictionary includes query parameters. It's nullable.
     */
     func build() -> [String:AnyObject]?
+}
+
+public class GitLabLinkObject {
+    
+    private var pageForType: [LinkType:UInt] = [:]
+    
+    
+    func has(type: LinkType) -> Bool {
+        return self.pageForType[type] != nil
+    }
+    
+    func getLink<T: GeneralQueryParamBuilder>(type: LinkType, prevParam: T) -> T? {
+        if !self.has(type) {
+            return nil
+        }
+        prevParam.page(self.pageForType[type]!)
+        return prevParam
+    }
+    
+    init(_ linkHeader: String?) {
+        self.pageForType = parse(linkHeader)
+    }
+    
+    enum LinkType: String {
+        case Next = "next"
+        case Prev = "prev"
+        case First = "first"
+        case Last = "last"
+    }
+    
+    func parse(linkHeader: String!) -> [LinkType:UInt] {
+        var result: [LinkType:UInt] = [:]
+        // <https://git.supinf.co/api/v3/projects/owned?page=1&per_page=0>; rel="prev", <https://git.supinf.co/api/v3/projects/owned?page=3&per_page=0>; rel="next", <https://git.supinf.co/api/v3/projects/owned?page=1&per_page=0>; rel="first", <https://git.supinf.co/api/v3/projects/owned?page=3&per_page=0>; rel="last"
+        let links: [String] = linkHeader.trim().componentsSeparatedByString(",")
+        for link in links {
+            // <https://git.supinf.co/api/v3/projects/owned?page=1&per_page=0>; rel="prev"
+            var section: [String] = link.trim().componentsSeparatedByString(";")
+            if (section.count != 2) {
+                Logger.log("invalid link string. \(section)")
+            }
+            let url: String = section[0].trim().stringByReplacingOccurrencesOfString("^<|>$", withString:"", options:NSStringCompareOptions.RegularExpressionSearch, range: nil)
+            let type: LinkType = LinkType(rawValue: section[1].trim().stringByReplacingOccurrencesOfString("^rel=\"|\"$", withString:"", options:NSStringCompareOptions.RegularExpressionSearch, range: nil))!
+            
+            if let urlObj = NSURLComponents(string: url) {
+                for (var i=0; i < urlObj.queryItems?.count; i++) {
+                    let item = urlObj.queryItems?[i] as NSURLQueryItem
+                    if let value = item.value() {
+                        if item.name == "page" {
+                            result[type] = UInt(value.toInt()!)
+                            break
+                        }
+                    }
+                }
+            }
+        }
+        return result
+    }
 }

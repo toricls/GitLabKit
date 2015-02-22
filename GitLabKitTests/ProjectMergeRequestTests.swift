@@ -59,7 +59,7 @@ class ProjectMergeRequestTests: GitLabKitTests {
     func testFetchingProjectMergeRequests() {
         let expectation = self.expectationWithDescription("testFetchingProjectMergeRequests")
         let params = ProjectMergeRequestQueryParamBuilder(projectId: 1)
-        client.get(params, { (mrs: [MergeRequest]?, error: NSError?) -> Void in
+        client.get(params, { (response: GitLabResponse<MergeRequest>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
         self.waitForExpectationsWithTimeout(5, nil)
@@ -71,7 +71,7 @@ class ProjectMergeRequestTests: GitLabKitTests {
     func testFetchingProjectClosedMergeRequests() {
         let expectation = self.expectationWithDescription("testFetchingProjectClosedMergeRequests")
         let params = ProjectMergeRequestQueryParamBuilder(projectId: 1).state(.Closed)
-        client.get(params, { (mrs: [MergeRequest]?, error: NSError?) -> Void in
+        client.get(params, { (response: GitLabResponse<MergeRequest>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
         self.waitForExpectationsWithTimeout(5, nil)
@@ -83,7 +83,7 @@ class ProjectMergeRequestTests: GitLabKitTests {
     func testFetchingProjectMergedMergeRequests() {
         let expectation = self.expectationWithDescription("testFetchingProjectMergedMergeRequests")
         let params = ProjectMergeRequestQueryParamBuilder(projectId: 1).state(.Merged)
-        client.get(params, { (mrs: [MergeRequest]?, error: NSError?) -> Void in
+        client.get(params, { (response: GitLabResponse<MergeRequest>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
         self.waitForExpectationsWithTimeout(5, nil)

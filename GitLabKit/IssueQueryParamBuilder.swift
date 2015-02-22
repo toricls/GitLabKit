@@ -38,8 +38,4 @@ public class IssueQueryParamBuilder : GeneralQueryParamBuilder, GitLabParamBuild
         return self
     }
     
-    public func build() -> [String:AnyObject]? {
-        return params
-    }
-    
 }

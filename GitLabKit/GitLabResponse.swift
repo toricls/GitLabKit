@@ -26,13 +26,13 @@ import Foundation
 
 public class GitLabResponse<T: GitLabModel> {
     
-    var result: [T]?
-    //var ページング関連
-    // pagingAvailable: Bool
-    // getNextPageParamBuilder -> GitLabParamBuildable (次のページの設定にして返してくれる)
-    // getPreviousPageBuilder
-    // getFirstPageBuilder
-    // getLastPageBuilder
+    init(resultArray: [T]?, linkObject: GitLabLinkObject?) {
+        self.result = resultArray
+        self.linkObject = linkObject
+    }
+    
+    private(set) var result: [T]?
+    private(set) var linkObject: GitLabLinkObject?
     
 }
 

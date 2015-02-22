@@ -57,7 +57,7 @@ class ProjectBranchTests: GitLabKitTests {
     func testFetchingProjectBranches() {
         let expectation = self.expectationWithDescription("testFetchingProjectBranches")
         let params = ProjectBranchQueryParamBuilder(projectId: 1)
-        client.get(params, { (branches: [Branch]?, error: NSError?) -> Void in
+        client.get(params, { (response: GitLabResponse<Branch>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
         self.waitForExpectationsWithTimeout(5, nil)
@@ -69,7 +69,7 @@ class ProjectBranchTests: GitLabKitTests {
     func testFetchingProjectBranch() {
         let expectation = self.expectationWithDescription("testFetchingProjectBranch")
         let params = ProjectBranchQueryParamBuilder(projectId: 1).branchName("master")
-        client.get(params, { (branch: [Branch]?, error: NSError?) -> Void in
+        client.get(params, { (response: GitLabResponse<Branch>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
         self.waitForExpectationsWithTimeout(5, nil)

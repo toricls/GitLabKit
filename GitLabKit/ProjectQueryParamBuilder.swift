@@ -65,12 +65,7 @@ public class ProjectQueryParamBuilder: GeneralQueryParamBuilder, GitLabParamBuil
     public func search(str: String) -> Self {
         params["search"] = str
         return self
-    }
-    
-    public func build() -> [String : AnyObject]? {
-        return params
-    }
-    
+    }    
 }
 
 public enum ProjectOrderBy: String {

@@ -57,7 +57,7 @@ class ProjectRepositoryTests: GitLabKitTests {
     func testFetchingProjectRepositoryTags() {
         let expectation = self.expectationWithDescription("testFetchingProjectRepositoryTags")
         let params = ProjectTagQueryParamBuilder(projectId: 1)
-        client.get(params, { (tags: [Tag]?, error: NSError?) -> Void in
+        client.get(params, { (response: GitLabResponse<Tag>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
         self.waitForExpectationsWithTimeout(5, nil)
@@ -71,7 +71,7 @@ class ProjectRepositoryTests: GitLabKitTests {
     func testFetchingProjectRepositoryTree() {
         let expectation = self.expectationWithDescription("testFetchingProjectRepositoryTree")
         let params = ProjectTreeQueryParamBuilder(projectId: 1)
-        client.get(params, { (tree: [Tree]?, error: NSError?) -> Void in
+        client.get(params, { (response: GitLabResponse<Tree>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
         self.waitForExpectationsWithTimeout(5, nil)

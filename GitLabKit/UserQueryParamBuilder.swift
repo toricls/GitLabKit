@@ -40,10 +40,5 @@ public class UserQueryParamBuilder : GeneralQueryParamBuilder, GitLabParamBuilda
     public func mine(mine: Bool) -> Self {
         params["mine"] = mine ? true : nil
         return self
-    }
-    
-    public func build() -> [String:AnyObject]? {
-        return params
-    }
-    
+    }    
 }

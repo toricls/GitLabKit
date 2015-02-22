@@ -57,7 +57,7 @@ class ProjectHookTests: GitLabKitTests {
     func testFetchingProjectHooks() {
         let expectation = self.expectationWithDescription("testFetchingProjectHooks")
         let params = ProjectHookQueryParamBuilder(projectId: 1)
-        client.get(params, { (hooks: [Hook]?, error: NSError?) -> Void in
+        client.get(params, { (response: GitLabResponse<Hook>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
         self.waitForExpectationsWithTimeout(5, nil)
@@ -69,7 +69,7 @@ class ProjectHookTests: GitLabKitTests {
     func testFetchingProjectHook() {
         let expectation = self.expectationWithDescription("testFetchingProjectHook")
         let params = ProjectHookQueryParamBuilder(projectId: 1).hookId(1)
-        client.get(params, { (hook: [Hook]?, error: NSError?) -> Void in
+        client.get(params, { (response: GitLabResponse<Hook>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
         self.waitForExpectationsWithTimeout(5, nil)

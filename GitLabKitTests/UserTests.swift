@@ -57,8 +57,9 @@ class UserTests: GitLabKitTests {
     */
     func testFetchingUsers() {
         let expectation = self.expectationWithDescription("testFetchingUsers")
-        client.get({ (users: [User]?, error: NSError?) -> Void in
-            XCTAssertEqual(users!.count, 3, "3 records")
+        let params = UserQueryParamBuilder()
+        client.get(params, { (response: GitLabResponse<User>?, error: NSError?) -> Void in
+            XCTAssertEqual(response!.result!.count, 3, "3 records")
             expectation.fulfill()
         })
         self.waitForExpectationsWithTimeout(5, nil)
@@ -70,9 +71,10 @@ class UserTests: GitLabKitTests {
     func testFetchingUser() {
         let expectation = self.expectationWithDescription("testFetchingUser")
         let params = UserQueryParamBuilder().id(2)
-        client.get(params, { (user: [User]?, error: NSError?) -> Void in
-            XCTAssertEqual(user!.count, 1, "1 record")
-            XCTAssertEqual(user![0].id!.longValue, 2, "UserId is 2")
+        client.get(params, { (response: GitLabResponse<User>?, error: NSError?) -> Void in
+            XCTAssertEqual(response!.result!.count, 1, "1 record")
+            let user: User = response!.result![0]
+            XCTAssertEqual(user.id!.longValue, 2, "UserId is 2")
             expectation.fulfill()
         })
         self.waitForExpectationsWithTimeout(5, nil)
@@ -84,11 +86,12 @@ class UserTests: GitLabKitTests {
     func testFetchingCurrentUser() {
         let expectation = self.expectationWithDescription("testFetchingCurrentUser")
         let params = UserQueryParamBuilder().mine(true)
-        client.get(params, { (user: [UserFull]?, error: NSError?) -> Void in
-            XCTAssertEqual(user!.count, 1, "1 record")
-            XCTAssertEqual(user![0].id!.longValue, 2, "UserId is 2")
-            XCTAssertNotNil(user![0].privateToken, "includes privateToken")
-            XCTAssert(user![0].isKindOfClass(UserFull), "Returns UserFull, not User")
+        client.get(params, { (response: GitLabResponse<UserFull>?, error: NSError?) -> Void in
+            XCTAssertEqual(response!.result!.count, 1, "1 record")
+            let user: UserFull = response!.result![0]
+            XCTAssertEqual(user.id!.longValue, 2, "UserId is 2")
+            XCTAssertNotNil(user.privateToken, "includes privateToken")
+            XCTAssert(user.isKindOfClass(UserFull), "Returns UserFull, not User")
             expectation.fulfill()
         })
         self.waitForExpectationsWithTimeout(5, nil)

@@ -61,7 +61,8 @@ class ProjectTests: GitLabKitTests {
     */
     func testFetchingProjects() {
         let expectation = self.expectationWithDescription("testFetchingProjects")
-        client.get({ (projects: [Project]?, error: NSError?) -> Void in
+        let params = ProjectQueryParamBuilder()
+        client.get(params, { (response: GitLabResponse<Project>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
         self.waitForExpectationsWithTimeout(5, nil)
@@ -73,7 +74,7 @@ class ProjectTests: GitLabKitTests {
     func testFetchingProjectsOwned() {
         let expectation = self.expectationWithDescription("testFetchingProjectsOwned")
         let params = ProjectQueryParamBuilder().owned(true)
-        client.get(params, { (projects: [Project]?, error: NSError?) -> Void in
+        client.get(params, { (response: GitLabResponse<Project>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
         self.waitForExpectationsWithTimeout(5, nil)
@@ -85,7 +86,7 @@ class ProjectTests: GitLabKitTests {
     func testFetchingProjectById() {
         let expectation = self.expectationWithDescription("testFetchingProjectById")
         let params = ProjectQueryParamBuilder().id(10)
-        client.get(params, { (project: [Project]?, error: NSError?) -> Void in
+        client.get(params, { (response: GitLabResponse<Project>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
         self.waitForExpectationsWithTimeout(5, nil)
@@ -97,7 +98,7 @@ class ProjectTests: GitLabKitTests {
     func testFetchingProjectByName() {
         let expectation = self.expectationWithDescription("testFetchingProjectByName")
         let params = ProjectQueryParamBuilder().nameAndNamespace("project", namespace: "single")
-        client.get(params, { (project: [Project]?, error: NSError?) -> Void in
+        client.get(params, { (response: GitLabResponse<Project>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
         self.waitForExpectationsWithTimeout(5, nil)

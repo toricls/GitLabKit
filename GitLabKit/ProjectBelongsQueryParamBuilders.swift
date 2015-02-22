@@ -35,9 +35,6 @@ public class ProjectBelongsQueryParamBuilder: GeneralQueryParamBuilder, GitLabPa
         params["namespaceAndName"] = "\(namespace)/\(projectName)"
     }
     
-    public func build() -> [String : AnyObject]? {
-        return params
-    }
 }
 
 // MARK: ProjectIssues
@@ -165,9 +162,6 @@ public class ProjectFileQueryParamBuilder: GeneralQueryParamBuilder, GitLabParam
         params["file_path"] = filePath
         params["ref"] = ref
     }
-    public func build() -> [String : AnyObject]? {
-        return params
-    }
 }
 
 // MARK: ProjectTags
@@ -229,9 +223,6 @@ public class ProjectCommentForCommitQueryParamBuilder: GeneralQueryParamBuilder,
         super.init()
         params["namespaceAndName"] = "\(namespace)/\(projectName)"
         params["sha"] = commitSha
-    }
-    public func build() -> [String : AnyObject]? {
-        return params
     }
 }
 

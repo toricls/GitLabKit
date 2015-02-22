@@ -59,7 +59,7 @@ class ProjectSnippetTests: GitLabKitTests {
     func testFetchingProjectSnippets() {
         let expectation = self.expectationWithDescription("testFetchingProjectSnippets")
         let params = ProjectSnippetQueryParamBuilder(projectId: 1)
-        client.get(params, { (snippets: [Snippet]?, error: NSError?) -> Void in
+        client.get(params, { (response: GitLabResponse<Snippet>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
         self.waitForExpectationsWithTimeout(5, nil)
@@ -71,7 +71,7 @@ class ProjectSnippetTests: GitLabKitTests {
     func testFetchingProjectSnippet() {
         let expectation = self.expectationWithDescription("testFetchingProjectSnippet")
         let params = ProjectSnippetQueryParamBuilder(projectId: 1).snippetId(1)
-        client.get(params, { (snippet: [Snippet]?, error: NSError?) -> Void in
+        client.get(params, { (response: GitLabResponse<Snippet>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
         self.waitForExpectationsWithTimeout(5, nil)
@@ -83,9 +83,10 @@ class ProjectSnippetTests: GitLabKitTests {
     func testFetchingProjectSnippetContent() {
         let expectation = self.expectationWithDescription("testFetchingProjectSnippetContent")
         let params = ProjectSnippetQueryParamBuilder(projectId: 1).snippetId(1)
-        client.get(params, { (snippetContent: [SnippetContent]?, error: NSError?) -> Void in
-            var obj: SnippetContent = snippetContent![0]
-            println(obj.content!)
+        client.get(params, { (response: GitLabResponse<SnippetContent>?, error: NSError?) -> Void in
+            if let snippet = response?.result![0] {
+                println(snippet.content)
+            }
             expectation.fulfill()
         })
         self.waitForExpectationsWithTimeout(5, nil)

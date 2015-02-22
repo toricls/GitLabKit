@@ -55,7 +55,7 @@ class ProjectEventTests: GitLabKitTests {
     func testFetchingProjectEvents() {
         let expectation = self.expectationWithDescription("testFetchingProjectEvents")
         let params = ProjectEventQueryParamBuilder(projectId: 31)
-        client.get(params, { (events: [Event]?, error: NSError?) -> Void in
+        client.get(params, { (response: GitLabResponse<Event>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
         self.waitForExpectationsWithTimeout(5, nil)

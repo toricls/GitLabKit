@@ -57,7 +57,7 @@ class ProjectMemberTests: GitLabKitTests {
     func testFetchingProjectMembers() {
         let expectation = self.expectationWithDescription("testFetchingProjectMembers")
         let params = ProjectMemberQueryParamBuilder(projectId: 31)
-        client.get(params, { (members: [Member]?, error: NSError?) -> Void in
+        client.get(params, { (response: GitLabResponse<Member>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
         self.waitForExpectationsWithTimeout(5, nil)
@@ -69,7 +69,7 @@ class ProjectMemberTests: GitLabKitTests {
     func testFetchingProjectMember() {
         let expectation = self.expectationWithDescription("testFetchingProjectMember")
         let params = ProjectMemberQueryParamBuilder(projectId: 31).userId(16)
-        client.get(params, { (member: [Member]?, error: NSError?) -> Void in
+        client.get(params, { (response: GitLabResponse<Member>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
         self.waitForExpectationsWithTimeout(5, nil)

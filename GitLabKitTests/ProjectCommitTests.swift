@@ -61,7 +61,7 @@ class ProjectCommitTests: GitLabKitTests {
     func testFetchingProjectCommits() {
         let expectation = self.expectationWithDescription("testFetchingProjectCommits")
         let params = ProjectCommitQueryParamBuilder(projectId: 1)
-        client.get(params, { (commits: [Commit]?, error: NSError?) -> Void in
+        client.get(params, { (response: GitLabResponse<Commit>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
         self.waitForExpectationsWithTimeout(5, nil)
@@ -73,7 +73,7 @@ class ProjectCommitTests: GitLabKitTests {
     func testFetchingProjectCommit() {
         let expectation = self.expectationWithDescription("testFetchingProjectCommit")
         let params = ProjectCommitQueryParamBuilder(projectId: 1).sha("17a738cf8c41af9c01ce28b1e859a7416be6a5f1")
-        client.get(params, { (commit: [Commit]?, error: NSError?) -> Void in
+        client.get(params, { (response: GitLabResponse<Commit>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
         self.waitForExpectationsWithTimeout(5, nil)

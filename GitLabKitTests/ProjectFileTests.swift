@@ -55,7 +55,7 @@ class ProjectFileTests: GitLabKitTests {
     func testFetchingProjectFile() {
         let expectation = self.expectationWithDescription("testFetchingProjectFile")
         let params = ProjectFileQueryParamBuilder(projectId: 1, filePath: "app/models/key.rb", ref: "master")
-        client.get(params, { (file: [File]?, error: NSError?) -> Void in
+        client.get(params, { (response: GitLabResponse<File>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
         self.waitForExpectationsWithTimeout(5, nil)
