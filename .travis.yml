@@ -1,0 +1,6 @@
+language: objective-c
+before_script:
+    - brew update && brew upgrade xctool
+xcode_project: GitLabKit.xcodeproj
+xcode_scheme: GitLabKitTests
+xcode_sdk: iphonesimulator
