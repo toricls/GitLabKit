@@ -24,46 +24,46 @@
 
 import Foundation
 
-public class ProjectQueryParamBuilder: GeneralQueryParamBuilder, GitLabParamBuildable {
+open class ProjectQueryParamBuilder: GeneralQueryParamBuilder {
     
-    public func id(id: UInt) -> Self {
-        if params["id"]? != nil || params["namespaceAndName"]? != nil {
+    open func id(_ id: UInt) -> Self {
+        if params["id"] != nil || params["namespaceAndName"] != nil {
             return self
         }
-        params["id"] = id
+        params["id"] = id as AnyObject
         return self
     }
     
-    public func nameAndNamespace(name: String, namespace: String) -> Self {
-        if params["id"]? != nil || params["namespaceAndName"]? != nil {
+    open func nameAndNamespace(_ name: String, namespace: String) -> Self {
+        if params["id"] != nil || params["namespaceAndName"] != nil {
             return self
         }
-        params["namespaceAndName"] = "\(namespace)/\(name)"
+        params["namespaceAndName"] = "\(namespace)/\(name)" as AnyObject
         return self
     }
     
-    public func owned(owned: Bool) -> Self {
-        params["owned"] = owned ? true : nil
+    open func owned(_ owned: Bool) -> Self {
+        params["owned"] = owned ? true as AnyObject? : nil as AnyObject?
         return self
     }
     
-    public func archived(archived: Bool) -> Self {
-        params["archived"] = archived ? "true" : nil
+    open func archived(_ archived: Bool) -> Self {
+        params["archived"] = archived ? "true" as AnyObject? : nil as AnyObject?
         return self
     }
     
-    public func orderBy(order: ProjectOrderBy?) -> Self {
-        params["order_by"] = order? == nil ? nil : order!.rawValue
+    open func orderBy(_ order: ProjectOrderBy?) -> Self {
+        params["order_by"] = order?.rawValue as AnyObject
         return self
     }
     
-    public func sort(sort: ProjectSort?) -> Self {
-        params["sort"] = sort? == nil ? nil : sort!.rawValue
+    open func sort(_ sort: ProjectSort?) -> Self {
+        params["sort"] = sort?.rawValue as AnyObject
         return self
     }
     
-    public func search(str: String) -> Self {
-        params["search"] = str
+    open func search(_ str: String) -> Self {
+        params["search"] = str as AnyObject
         return self
     }    
 }

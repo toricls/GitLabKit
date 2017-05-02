@@ -30,9 +30,9 @@ class ProjectMemberTests: GitLabKitTests {
     override func setUp() {
         super.setUp()
         
-        OHHTTPStubs.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
+        OHHTTPStubs.stubRequestsPassingTest({ (request: URLRequest!) -> Bool in
             return request.URL.path?.hasPrefix("/api/v3/projects/") == true
-            }, withStubResponse: ( { (request: NSURLRequest!) -> OHHTTPStubsResponse in
+            }, withStubResponse: ( { (request: URLRequest!) -> OHHTTPStubsResponse in
                 var filename: String = "test-error.json"
                 var statusCode: Int32 = 200
                 if let path = request.URL.path {
@@ -55,7 +55,7 @@ class ProjectMemberTests: GitLabKitTests {
     https://gitlab.com/help/api/projects.md#list-project-team-members
      */
     func testFetchingProjectMembers() {
-        let expectation = self.expectationWithDescription("testFetchingProjectMembers")
+        let expectation = self.expectation(description: "testFetchingProjectMembers")
         let params = ProjectMemberQueryParamBuilder(projectId: 31)
         client.get(params, { (response: GitLabResponse<Member>?, error: NSError?) -> Void in
             expectation.fulfill()
@@ -67,7 +67,7 @@ class ProjectMemberTests: GitLabKitTests {
     https://gitlab.com/help/api/projects.md#get-project-team-member
      */
     func testFetchingProjectMember() {
-        let expectation = self.expectationWithDescription("testFetchingProjectMember")
+        let expectation = self.expectation(description: "testFetchingProjectMember")
         let params = ProjectMemberQueryParamBuilder(projectId: 31).userId(16)
         client.get(params, { (response: GitLabResponse<Member>?, error: NSError?) -> Void in
             expectation.fulfill()

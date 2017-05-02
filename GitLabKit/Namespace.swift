@@ -25,19 +25,19 @@
 import Foundation
 import Mantle
 
-public class Namespace: GitLabModel {
-    public var id: NSNumber?
-    public var name: String?
-    public var path: String?
-    public var ownerId: NSNumber?
-    public var createdAt: NSDate?
-    public var updatedAt: NSDate?
-    public var descriptionText: String? // "description" as a property name is not allowed by compiler
-    public var avatar: Avatar?
+open class Namespace: GitLabModel {
+    open var id: NSNumber?
+    open var name: String?
+    open var path: String?
+    open var ownerId: NSNumber?
+    open var createdAt: Date?
+    open var updatedAt: Date?
+    open var descriptionText: String? // "description" as a property name is not allowed by compiler
+    open var avatar: Avatar?
     
-    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
-        var newKeys: [NSObject : AnyObject] = [
+    open override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any]! {
+        let baseKeys: [AnyHashable: Any] = super.jsonKeyPathsByPropertyKey()
+        let newKeys: [AnyHashable: Any] = [
             "id"              : "id",
             "name"            : "name",
             "path"            : "path",
@@ -50,22 +50,22 @@ public class Namespace: GitLabModel {
         return baseKeys + newKeys
     }
     
-    class func createdAtJSONTransformer() -> NSValueTransformer {
+    class func createdAtJSONTransformer() -> ValueTransformer {
         return dateTimeTransformer
     }
-    class func updatedAtJSONTransformer() -> NSValueTransformer {
+    class func updatedAtJSONTransformer() -> ValueTransformer {
         return dateTimeTransformer
     }
-    class func avatarJSONTransformer() -> NSValueTransformer {
+    class func avatarJSONTransformer() -> ValueTransformer {
         return ModelUtil<Avatar>.transformer()
     }
 }
 
-public class Avatar: GitLabModel {
-    public var url: String?
-    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
-        var newKeys: [NSObject : AnyObject] = [
+open class Avatar: GitLabModel {
+    open var url: String?
+    open override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any]! {
+        let baseKeys: [AnyHashable: Any] = super.jsonKeyPathsByPropertyKey()
+        let newKeys: [AnyHashable: Any] = [
             "url" : "url",
         ]
         return baseKeys + newKeys

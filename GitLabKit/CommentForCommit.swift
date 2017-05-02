@@ -24,20 +24,20 @@
 
 import Foundation
 
-public class CommentForCommit: GitLabModel, Fetchable {
-    public var note: String?
-    public var author: User?
+open class CommentForCommit: GitLabModel, Fetchable {
+    open var note: String?
+    open var author: User?
     
-    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
-        var newKeys: [NSObject : AnyObject] = [
+    open override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any]! {
+        let baseKeys: [AnyHashable: Any] = super.jsonKeyPathsByPropertyKey()
+        let newKeys: [AnyHashable: Any] = [
             "note"   : "note",
             "author" : "author",
         ]
         return baseKeys + newKeys
     }
     
-    class func authorJSONTransformer() -> NSValueTransformer {
+    class func authorJSONTransformer() -> ValueTransformer {
         return ModelUtil<User>.transformer()
     }
 }

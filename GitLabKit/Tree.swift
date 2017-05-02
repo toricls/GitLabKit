@@ -24,15 +24,15 @@
 
 import Foundation
 
-public class Tree: GitLabModel, Fetchable {
-    public var name: String?
-    public var type: String?
-    public var mode: String?
-    public var id: String?
+open class Tree: GitLabModel, Fetchable {
+    open var name: String?
+    open var type: String?
+    open var mode: String?
+    open var id: String?
     
-    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
-        var newKeys: [NSObject : AnyObject] = [
+    open override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any]! {
+        let baseKeys: [AnyHashable: Any] = super.jsonKeyPathsByPropertyKey()
+        let newKeys: [AnyHashable: Any] = [
             "name" : "name",
             "type" : "type",
             "mode" : "mode",

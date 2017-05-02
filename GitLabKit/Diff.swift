@@ -24,31 +24,31 @@
 
 import Foundation
 
-public class Diff: GitLabModel, Fetchable {
-    public var diff: String?
-    public var newPath: String?
-    public var oldPath: String?
-    public var aMode: String?
-    public var bMode: String?
-    public var _newFile: NSNumber?
-    public var newFile: Bool {
-        get { return _newFile? != nil ? _newFile!.boolValue : false }
-        set { _newFile = NSNumber(bool: newValue)}
+open class Diff: GitLabModel, Fetchable {
+    open var diff: String?
+    open var newPath: String?
+    open var oldPath: String?
+    open var aMode: String?
+    open var bMode: String?
+    open var _newFile: NSNumber?
+    open var newFile: Bool {
+        get { return _newFile != nil ? _newFile!.boolValue : false }
+        set { _newFile = NSNumber(value: newValue as Bool)}
     }
-    public var _renamedFile: NSNumber?
-    public var renamedFile: Bool {
-        get { return _renamedFile? != nil ? _renamedFile!.boolValue : false }
-        set { _renamedFile = NSNumber(bool: newValue)}
+    open var _renamedFile: NSNumber?
+    open var renamedFile: Bool {
+        get { return _renamedFile != nil ? _renamedFile!.boolValue : false }
+        set { _renamedFile = NSNumber(value: newValue as Bool)}
     }
-    public var _deletedFile: NSNumber?
-    public var deletedFile: Bool {
-        get { return _deletedFile? != nil ? _deletedFile!.boolValue : false }
-        set { _deletedFile = NSNumber(bool: newValue)}
+    open var _deletedFile: NSNumber?
+    open var deletedFile: Bool {
+        get { return _deletedFile != nil ? _deletedFile!.boolValue : false }
+        set { _deletedFile = NSNumber(value: newValue as Bool)}
     }
     
-    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
-        var newKeys: [NSObject : AnyObject] = [
+    open override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any]! {
+        let baseKeys: [AnyHashable: Any] = super.jsonKeyPathsByPropertyKey()
+        let newKeys: [AnyHashable: Any] = [
             "diff"         : "diff",
             "newPath"      : "new_path",
             "oldPath"      : "old_path",

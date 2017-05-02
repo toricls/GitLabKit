@@ -25,14 +25,14 @@
 import Foundation
 
 class Logger{
-    class func log(message: AnyObject?,
-        function: String = __FUNCTION__,
-        file: String = __FILE__,
-        line: Int = __LINE__) {
+    class func log(_ message: AnyObject?,
+        function: String = #function,
+        file: String = #file,
+        line: Int = #line) {
             var filename = file
-            if let match = filename.rangeOfString("[^/]*$", options: .RegularExpressionSearch) {
-                filename = filename.substringWithRange(match)
+            if let match = filename.range(of: "[^/]*$", options: .regularExpression) {
+                filename = filename.substring(with: match)
             }
-            println("Log:\(filename):L\(line):\(function) \"\(message)\"")
+            print("Log:\(filename):L\(line):\(function) \"\(message)\"")
     }
 }

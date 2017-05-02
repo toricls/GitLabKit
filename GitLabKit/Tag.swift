@@ -24,5 +24,5 @@
 
 import Foundation
 
-public class Tag: Branch {
+open class Tag: Branch {
 }

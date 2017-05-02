@@ -30,9 +30,9 @@ class UserTests: GitLabKitTests {
     override func setUp() {
         super.setUp()
         
-        OHHTTPStubs.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
+        OHHTTPStubs.stubRequestsPassingTest({ (request: URLRequest!) -> Bool in
             return request.URL.path?.hasPrefix("/api/v3/user") == true
-            }, withStubResponse: ( { (request: NSURLRequest!) -> OHHTTPStubsResponse in
+            }, withStubResponse: ( { (request: URLRequest!) -> OHHTTPStubsResponse in
                 var filename: String = "test-error.json"
                 var statusCode: Int32 = 200
                 if let path = request.URL.path {
@@ -56,7 +56,7 @@ class UserTests: GitLabKitTests {
     https://gitlab.com/help/api/users.md#for-normal-users
     */
     func testFetchingUsers() {
-        let expectation = self.expectationWithDescription("testFetchingUsers")
+        let expectation = self.expectation(description: "testFetchingUsers")
         let params = UserQueryParamBuilder()
         client.get(params, { (response: GitLabResponse<User>?, error: NSError?) -> Void in
             XCTAssertEqual(response!.result!.count, 3, "3 records")
@@ -69,7 +69,7 @@ class UserTests: GitLabKitTests {
      https://gitlab.com/help/api/users.md#for-user
      */
     func testFetchingUser() {
-        let expectation = self.expectationWithDescription("testFetchingUser")
+        let expectation = self.expectation(description: "testFetchingUser")
         let params = UserQueryParamBuilder().id(2)
         client.get(params, { (response: GitLabResponse<User>?, error: NSError?) -> Void in
             XCTAssertEqual(response!.result!.count, 1, "1 record")
@@ -84,7 +84,7 @@ class UserTests: GitLabKitTests {
     https://gitlab.com/help/api/users.md#current-user
     */
     func testFetchingCurrentUser() {
-        let expectation = self.expectationWithDescription("testFetchingCurrentUser")
+        let expectation = self.expectation(description: "testFetchingCurrentUser")
         let params = UserQueryParamBuilder().mine(true)
         client.get(params, { (response: GitLabResponse<UserFull>?, error: NSError?) -> Void in
             XCTAssertEqual(response!.result!.count, 1, "1 record")

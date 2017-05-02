@@ -30,9 +30,9 @@ class ProjectSnippetTests: GitLabKitTests {
     override func setUp() {
         super.setUp()
         
-        OHHTTPStubs.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
+        OHHTTPStubs.stubRequestsPassingTest({ (request: URLRequest!) -> Bool in
             return request.URL.path?.hasPrefix("/api/v3/projects/") == true
-            }, withStubResponse: ( { (request: NSURLRequest!) -> OHHTTPStubsResponse in
+            }, withStubResponse: ( { (request: URLRequest!) -> OHHTTPStubsResponse in
                 var filename: String = "test-error.json"
                 var statusCode: Int32 = 200
                 if let path = request.URL.path {
@@ -57,7 +57,7 @@ class ProjectSnippetTests: GitLabKitTests {
     https://gitlab.com/help/api/project_snippets.md#list-snippets
     */
     func testFetchingProjectSnippets() {
-        let expectation = self.expectationWithDescription("testFetchingProjectSnippets")
+        let expectation = self.expectation(description: "testFetchingProjectSnippets")
         let params = ProjectSnippetQueryParamBuilder(projectId: 1)
         client.get(params, { (response: GitLabResponse<Snippet>?, error: NSError?) -> Void in
             expectation.fulfill()
@@ -69,7 +69,7 @@ class ProjectSnippetTests: GitLabKitTests {
     https://gitlab.com/help/api/project_snippets.md#single-snippet
     */
     func testFetchingProjectSnippet() {
-        let expectation = self.expectationWithDescription("testFetchingProjectSnippet")
+        let expectation = self.expectation(description: "testFetchingProjectSnippet")
         let params = ProjectSnippetQueryParamBuilder(projectId: 1).snippetId(1)
         client.get(params, { (response: GitLabResponse<Snippet>?, error: NSError?) -> Void in
             expectation.fulfill()
@@ -81,7 +81,7 @@ class ProjectSnippetTests: GitLabKitTests {
     https://gitlab.com/help/api/project_snippets.md#snippet-content
     */
     func testFetchingProjectSnippetContent() {
-        let expectation = self.expectationWithDescription("testFetchingProjectSnippetContent")
+        let expectation = self.expectation(description: "testFetchingProjectSnippetContent")
         let params = ProjectSnippetQueryParamBuilder(projectId: 1).snippetId(1)
         client.get(params, { (response: GitLabResponse<SnippetContent>?, error: NSError?) -> Void in
             if let snippet = response?.result![0] {

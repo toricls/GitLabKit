@@ -24,18 +24,18 @@
 
 import Foundation
 
-public class Branch: GitLabModel, Fetchable {
-    public var name: String?
-    public var commit: BranchCommit?
-    public var _protected: NSNumber?
-    public var protected: Bool {
-        get { return _protected? != nil ? _protected!.boolValue : false }
-        set { _protected = NSNumber(bool: newValue)}
+open class Branch: GitLabModel, Fetchable {
+    open var name: String?
+    open var commit: BranchCommit?
+    open var _protected: NSNumber?
+    open var protected: Bool {
+        get { return _protected != nil ? _protected!.boolValue : false }
+        set { _protected = NSNumber(value: newValue as Bool)}
     }
     
-    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
-        var newKeys: [NSObject : AnyObject] = [
+    open override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any]! {
+        let baseKeys: [AnyHashable: Any] = super.jsonKeyPathsByPropertyKey()
+        let newKeys: [AnyHashable: Any] = [
             "name"       : "name",
             "commit"     : "commit",
             "_protected" : "protected",
@@ -43,24 +43,24 @@ public class Branch: GitLabModel, Fetchable {
         return baseKeys + newKeys
     }
     
-    class func commitJSONTransformer() -> NSValueTransformer {
+    class func commitJSONTransformer() -> ValueTransformer {
         return ModelUtil<BranchCommit>.transformer()
     }
 }
 
-public class BranchCommit: GitLabModel {
-    public var id: String?
-    public var parents: [CommitParent]?
-    public var tree: String?
-    public var message: String?
-    public var author: CommitAuthor?
-    public var committer: CommitAuthor?
-    public var authoredDate: NSDate?
-    public var committedDate: NSDate?
+open class BranchCommit: GitLabModel {
+    open var id: String?
+    open var parents: [CommitParent]?
+    open var tree: String?
+    open var message: String?
+    open var author: CommitAuthor?
+    open var committer: CommitAuthor?
+    open var authoredDate: Date?
+    open var committedDate: Date?
     
-    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
-        var newKeys: [NSObject : AnyObject] = [
+    open override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any]! {
+        let baseKeys: [AnyHashable: Any] = super.jsonKeyPathsByPropertyKey()
+        let newKeys: [AnyHashable: Any] = [
             "id"            : "id",
             "parents"       : "parents",
             "tree"          : "tree",
@@ -73,42 +73,42 @@ public class BranchCommit: GitLabModel {
         return baseKeys + newKeys
     }
     
-    class func parentsJSONTransformer() -> NSValueTransformer {
+    class func parentsJSONTransformer() -> ValueTransformer {
         return ModelUtil<CommitParent>.arrayTransformer()
     }
-    class func authorJSONTransformer() -> NSValueTransformer {
+    class func authorJSONTransformer() -> ValueTransformer {
         return ModelUtil<CommitAuthor>.transformer()
     }
-    class func committerJSONTransformer() -> NSValueTransformer {
+    class func committerJSONTransformer() -> ValueTransformer {
         return ModelUtil<CommitAuthor>.transformer()
     }
-    class func authoredDateJSONTransformer() -> NSValueTransformer {
+    class func authoredDateJSONTransformer() -> ValueTransformer {
         return dateTimeTransformer
     }
-    class func committedDateJSONTransformer() -> NSValueTransformer {
+    class func committedDateJSONTransformer() -> ValueTransformer {
         return dateTimeTransformer
     }
 }
 
-public class CommitParent: GitLabModel {
-    public var id: String?
+open class CommitParent: GitLabModel {
+    open var id: String?
     
-    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
-        var newKeys: [NSObject : AnyObject] = [
+    open override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any]! {
+        let baseKeys: [AnyHashable: Any] = super.jsonKeyPathsByPropertyKey()
+        let newKeys: [AnyHashable: Any] = [
             "id" : "id",
         ]
         return baseKeys + newKeys
     }
 }
 
-public class CommitAuthor: GitLabModel {
-    public var name: String?
-    public var email: String?
+open class CommitAuthor: GitLabModel {
+    open var name: String?
+    open var email: String?
     
-    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
-        var newKeys: [NSObject : AnyObject] = [
+    open override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any]! {
+        let baseKeys: [AnyHashable: Any] = super.jsonKeyPathsByPropertyKey()
+        let newKeys: [AnyHashable: Any] = [
             "name"  : "name",
             "email" : "email",
         ]

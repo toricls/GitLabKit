@@ -30,9 +30,9 @@ class ProjectBranchTests: GitLabKitTests {
     override func setUp() {
         super.setUp()
         
-        OHHTTPStubs.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
+        OHHTTPStubs.stubRequestsPassingTest({ (request: URLRequest!) -> Bool in
             return request.URL.path?.hasPrefix("/api/v3/projects/") == true
-            }, withStubResponse: ( { (request: NSURLRequest!) -> OHHTTPStubsResponse in
+            }, withStubResponse: ( { (request: URLRequest!) -> OHHTTPStubsResponse in
                 var filename: String = "test-error.json"
                 var statusCode: Int32 = 200
                 if let path = request.URL.path {
@@ -55,7 +55,7 @@ class ProjectBranchTests: GitLabKitTests {
     https://gitlab.com/help/api/branches.md#list-repository-branches
     */
     func testFetchingProjectBranches() {
-        let expectation = self.expectationWithDescription("testFetchingProjectBranches")
+        let expectation = self.expectation(description: "testFetchingProjectBranches")
         let params = ProjectBranchQueryParamBuilder(projectId: 1)
         client.get(params, { (response: GitLabResponse<Branch>?, error: NSError?) -> Void in
             expectation.fulfill()
@@ -67,7 +67,7 @@ class ProjectBranchTests: GitLabKitTests {
     https://gitlab.com/help/api/branches.md#get-single-repository-branch
     */
     func testFetchingProjectBranch() {
-        let expectation = self.expectationWithDescription("testFetchingProjectBranch")
+        let expectation = self.expectation(description: "testFetchingProjectBranch")
         let params = ProjectBranchQueryParamBuilder(projectId: 1).branchName("master")
         client.get(params, { (response: GitLabResponse<Branch>?, error: NSError?) -> Void in
             expectation.fulfill()

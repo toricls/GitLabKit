@@ -24,41 +24,41 @@
 
 import Foundation
 
-public class UserFull: User {
-    public var createdAt: NSDate?
-    public var _isAdmin: NSNumber?
-    public var bio: String?
-    public var skype: String?
-    public var linkedin: String?
-    public var twitter: String?
-    public var websiteUrl: String?
-    public var email: String?
-    public var themeId: NSNumber?
-    public var colorSchemeId: NSNumber?
-    public var externUid: String?
-    public var provider: String?
-    public var projectsLimit: NSNumber?
-    public var _canCreateGroup: NSNumber?
-    public var _canCreateProject: NSNumber?
-    public var privateToken: String?
+open class UserFull: User {
+    open var createdAt: Date?
+    open var _isAdmin: NSNumber?
+    open var bio: String?
+    open var skype: String?
+    open var linkedin: String?
+    open var twitter: String?
+    open var websiteUrl: String?
+    open var email: String?
+    open var themeId: NSNumber?
+    open var colorSchemeId: NSNumber?
+    open var externUid: String?
+    open var provider: String?
+    open var projectsLimit: NSNumber?
+    open var _canCreateGroup: NSNumber?
+    open var _canCreateProject: NSNumber?
+    open var privateToken: String?
     
-    public var isAdmin: Bool {
-        get { return _isAdmin? != nil ? _isAdmin!.boolValue : false }
-        set { _isAdmin = NSNumber(bool: newValue)}
+    open var isAdmin: Bool {
+        get { return _isAdmin != nil ? _isAdmin!.boolValue : false }
+        set { _isAdmin = NSNumber(value: newValue as Bool)}
     }
-    public var canCreateGroup: Bool {
-        get { return _canCreateGroup? != nil ? _canCreateGroup!.boolValue : false }
-        set { _canCreateGroup = NSNumber(bool: newValue)}
+    open var canCreateGroup: Bool {
+        get { return _canCreateGroup != nil ? _canCreateGroup!.boolValue : false }
+        set { _canCreateGroup = NSNumber(value: newValue as Bool)}
     }
-    public var canCreateProject: Bool {
-        get { return _canCreateProject? != nil ? _canCreateProject!.boolValue : false }
-        set { _canCreateProject = NSNumber(bool: newValue)}
+    open var canCreateProject: Bool {
+        get { return _canCreateProject != nil ? _canCreateProject!.boolValue : false }
+        set { _canCreateProject = NSNumber(value: newValue as Bool)}
     }
     
     
-    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
-        var newKeys: [NSObject : AnyObject] = [
+    open override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any]! {
+        let baseKeys: [AnyHashable: Any] = super.jsonKeyPathsByPropertyKey()
+        let newKeys: [AnyHashable: Any] = [
             "createdAt"         : "created_at",
             "_isAdmin"          : "is_admin",
             "bio"               : "bio",
@@ -79,7 +79,7 @@ public class UserFull: User {
         return baseKeys + newKeys
     }
     
-    class func createdAtJSONTransformer() -> NSValueTransformer {
+    class func createdAtJSONTransformer() -> ValueTransformer {
         return dateTimeTransformer
     }
 }
