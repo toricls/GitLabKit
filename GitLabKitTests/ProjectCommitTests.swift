@@ -30,12 +30,12 @@ class ProjectCommitTests: GitLabKitTests {
     override func setUp() {
         super.setUp()
         
-        OHHTTPStubs.stubRequestsPassingTest({ (request: URLRequest!) -> Bool in
-            return request.URL.path?.hasPrefix("/api/v3/projects/") == true
+        OHHTTPStubs.stubRequests(passingTest: { (request: URLRequest!) -> Bool in
+            return request.url?.path.hasPrefix("/api/v3/projects/") == true
             }, withStubResponse: ( { (request: URLRequest!) -> OHHTTPStubsResponse in
                 var filename: String = "test-error.json"
                 var statusCode: Int32 = 200
-                if let path = request.URL.path {
+                if let path = request.url?.path {
                     switch path {
                     case let "/api/v3/projects/1/repository/commits":
                         filename = "project-repository-commits.json"
@@ -46,7 +46,7 @@ class ProjectCommitTests: GitLabKitTests {
                     //case let "/projects/1/repository/commits/17a738cf8c41af9c01ce28b1e859a7416be6a5f1/comments":
                         // TODO: create a test data
                     default:
-                        Logger.log("Unknown path: \(path)")
+                        Logger.log("Unknown path: \(path)" as AnyObject)
                         statusCode = 500
                         break
                     }
@@ -61,10 +61,10 @@ class ProjectCommitTests: GitLabKitTests {
     func testFetchingProjectCommits() {
         let expectation = self.expectation(description: "testFetchingProjectCommits")
         let params = ProjectCommitQueryParamBuilder(projectId: 1)
-        client.get(params, { (response: GitLabResponse<Commit>?, error: NSError?) -> Void in
+        client.get(params, handler: { (response: GitLabResponse<Commit>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
-        self.waitForExpectationsWithTimeout(5, nil)
+        self.waitForExpectations(timeout: 5, handler: nil)
     }
     
     /**
@@ -73,10 +73,10 @@ class ProjectCommitTests: GitLabKitTests {
     func testFetchingProjectCommit() {
         let expectation = self.expectation(description: "testFetchingProjectCommit")
         let params = ProjectCommitQueryParamBuilder(projectId: 1).sha("17a738cf8c41af9c01ce28b1e859a7416be6a5f1")
-        client.get(params, { (response: GitLabResponse<Commit>?, error: NSError?) -> Void in
+        client.get(params, handler: { (response: GitLabResponse<Commit>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
-        self.waitForExpectationsWithTimeout(5, nil)
+        self.waitForExpectations(timeout: 5, handler: nil)
     }
     
     // TODO: create test data

@@ -30,19 +30,19 @@ class ProjectMemberTests: GitLabKitTests {
     override func setUp() {
         super.setUp()
         
-        OHHTTPStubs.stubRequestsPassingTest({ (request: URLRequest!) -> Bool in
-            return request.URL.path?.hasPrefix("/api/v3/projects/") == true
+        OHHTTPStubs.stubRequests(passingTest: { (request: URLRequest!) -> Bool in
+            return request.url?.path.hasPrefix("/api/v3/projects/") == true
             }, withStubResponse: ( { (request: URLRequest!) -> OHHTTPStubsResponse in
                 var filename: String = "test-error.json"
                 var statusCode: Int32 = 200
-                if let path = request.URL.path {
+                if let path = request.url?.path {
                     switch path {
                     case let "/api/v3/projects/31/members":
                         filename = "project-members.json"
                     case let "/api/v3/projects/31/members/16":
                         filename = "project-member.json"
                     default:
-                        Logger.log("Unknown path: \(path)")
+                        Logger.log("Unknown path: \(path)" as AnyObject)
                         statusCode = 500
                         break
                     }
@@ -57,10 +57,10 @@ class ProjectMemberTests: GitLabKitTests {
     func testFetchingProjectMembers() {
         let expectation = self.expectation(description: "testFetchingProjectMembers")
         let params = ProjectMemberQueryParamBuilder(projectId: 31)
-        client.get(params, { (response: GitLabResponse<Member>?, error: NSError?) -> Void in
+        client.get(params, handler: { (response: GitLabResponse<Member>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
-        self.waitForExpectationsWithTimeout(5, nil)
+        self.waitForExpectations(timeout: 5, handler: nil)
     }
 
     /**
@@ -69,10 +69,10 @@ class ProjectMemberTests: GitLabKitTests {
     func testFetchingProjectMember() {
         let expectation = self.expectation(description: "testFetchingProjectMember")
         let params = ProjectMemberQueryParamBuilder(projectId: 31).userId(16)
-        client.get(params, { (response: GitLabResponse<Member>?, error: NSError?) -> Void in
+        client.get(params, handler: { (response: GitLabResponse<Member>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
-        self.waitForExpectationsWithTimeout(5, nil)
+        self.waitForExpectations(timeout: 5, handler: nil)
     }
     
     // TODO: https://gitlab.com/help/api/projects.md#add-project-team-member

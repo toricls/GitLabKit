@@ -30,19 +30,19 @@ class ProjectRepositoryTests: GitLabKitTests {
     override func setUp() {
         super.setUp()
         
-        OHHTTPStubs.stubRequestsPassingTest({ (request: URLRequest!) -> Bool in
-            return request.URL.path?.hasPrefix("/api/v3/projects/") == true
+        OHHTTPStubs.stubRequests(passingTest: { (request: URLRequest!) -> Bool in
+            return request.url?.path.hasPrefix("/api/v3/projects/") == true
             }, withStubResponse: ( { (request: URLRequest!) -> OHHTTPStubsResponse in
                 var filename: String = "test-error.json"
                 var statusCode: Int32 = 200
-                if let path = request.URL.path {
+                if let path = request.url?.path {
                     switch path {
                     case let "/api/v3/projects/1/repository/tags":
                         filename = "project-repository-tags.json"
                     case let "/api/v3/projects/1/repository/tree":
                         filename = "project-repository-tree.json"
                     default:
-                        Logger.log("Unknown path: \(path)")
+                        Logger.log("Unknown path: \(path)" as AnyObject)
                         statusCode = 500
                         break
                     }
@@ -57,10 +57,10 @@ class ProjectRepositoryTests: GitLabKitTests {
     func testFetchingProjectRepositoryTags() {
         let expectation = self.expectation(description: "testFetchingProjectRepositoryTags")
         let params = ProjectTagQueryParamBuilder(projectId: 1)
-        client.get(params, { (response: GitLabResponse<Tag>?, error: NSError?) -> Void in
+        client.get(params, handler: { (response: GitLabResponse<Tag>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
-        self.waitForExpectationsWithTimeout(5, nil)
+        self.waitForExpectations(timeout: 5, handler: nil)
     }
     
     // TODO: https://gitlab.com/help/api/repositories.md#create-a-new-tag
@@ -71,10 +71,10 @@ class ProjectRepositoryTests: GitLabKitTests {
     func testFetchingProjectRepositoryTree() {
         let expectation = self.expectation(description: "testFetchingProjectRepositoryTree")
         let params = ProjectTreeQueryParamBuilder(projectId: 1)
-        client.get(params, { (response: GitLabResponse<Tree>?, error: NSError?) -> Void in
+        client.get(params, handler: { (response: GitLabResponse<Tree>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
-        self.waitForExpectationsWithTimeout(5, nil)
+        self.waitForExpectations(timeout: 5, handler: nil)
     }
     
     // TODO: https://gitlab.com/help/api/repositories.md#raw-file-content

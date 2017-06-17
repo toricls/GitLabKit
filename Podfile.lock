@@ -1,0 +1,35 @@
+PODS:
+  - Alamofire (4.5.0)
+  - Mantle (1.5.8):
+    - Mantle/extobjc (= 1.5.8)
+  - Mantle/extobjc (1.5.8)
+  - OHHTTPStubs (6.0.0):
+    - OHHTTPStubs/Default (= 6.0.0)
+  - OHHTTPStubs/Core (6.0.0)
+  - OHHTTPStubs/Default (6.0.0):
+    - OHHTTPStubs/Core
+    - OHHTTPStubs/JSON
+    - OHHTTPStubs/NSURLSession
+    - OHHTTPStubs/OHPathHelpers
+  - OHHTTPStubs/JSON (6.0.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/NSURLSession (6.0.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/OHPathHelpers (6.0.0)
+  - OHHTTPStubs/Swift (6.0.0):
+    - OHHTTPStubs/Default
+
+DEPENDENCIES:
+  - Alamofire (~> 4.4)
+  - Mantle (~> 1.5)
+  - OHHTTPStubs (~> 6.0.0)
+  - OHHTTPStubs/Swift (~> 6.0.0)
+
+SPEC CHECKSUMS:
+  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
+  Mantle: f03b2b606c3f0cabd80214ad8a2fed6b464a7359
+  OHHTTPStubs: 752f9b11fd810a15162d50f11c06ff94f8e012eb
+
+PODFILE CHECKSUM: 8aeed483cceee5fb068429443c90c1709cc772aa
+
+COCOAPODS: 1.2.0

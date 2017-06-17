@@ -37,7 +37,7 @@ open class GitLabApiClient {
         assert(!privateToken.isEmpty, "GitLabApiClient does not accept an empty privateToken value.")
         
         // remove last '/' from the host string
-        self.host = host.characters.last == "/" ? host.substring(to: host.index(host.startIndex, offsetBy: -1)) : host
+        self.host = host.characters.last == "/" ? host.substring(to: host.index(before: host.endIndex)) : host
         
         self.privateToken = privateToken
     }

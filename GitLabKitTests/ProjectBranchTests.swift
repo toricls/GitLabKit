@@ -30,19 +30,19 @@ class ProjectBranchTests: GitLabKitTests {
     override func setUp() {
         super.setUp()
         
-        OHHTTPStubs.stubRequestsPassingTest({ (request: URLRequest!) -> Bool in
-            return request.URL.path?.hasPrefix("/api/v3/projects/") == true
+        OHHTTPStubs.stubRequests(passingTest: { (request: URLRequest!) -> Bool in
+            return request.url?.path.hasPrefix("/api/v3/projects/") == true
             }, withStubResponse: ( { (request: URLRequest!) -> OHHTTPStubsResponse in
                 var filename: String = "test-error.json"
                 var statusCode: Int32 = 200
-                if let path = request.URL.path {
+                if let path = request.url?.path {
                     switch path {
                     case let "/api/v3/projects/1/repository/branches":
                         filename = "project-repository-branches.json"
                     case let "/api/v3/projects/1/repository/branches/master":
                         filename = "project-repository-branch.json"
                     default:
-                        Logger.log("Unknown path: \(path)")
+                        Logger.log("Unknown path: \(path)" as AnyObject)
                         statusCode = 500
                         break
                     }
@@ -57,10 +57,10 @@ class ProjectBranchTests: GitLabKitTests {
     func testFetchingProjectBranches() {
         let expectation = self.expectation(description: "testFetchingProjectBranches")
         let params = ProjectBranchQueryParamBuilder(projectId: 1)
-        client.get(params, { (response: GitLabResponse<Branch>?, error: NSError?) -> Void in
+        client.get(params, handler: { (response: GitLabResponse<Branch>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
-        self.waitForExpectationsWithTimeout(5, nil)
+        self.waitForExpectations(timeout: 5, handler: nil)
     }
     
     /**
@@ -69,10 +69,10 @@ class ProjectBranchTests: GitLabKitTests {
     func testFetchingProjectBranch() {
         let expectation = self.expectation(description: "testFetchingProjectBranch")
         let params = ProjectBranchQueryParamBuilder(projectId: 1).branchName("master")
-        client.get(params, { (response: GitLabResponse<Branch>?, error: NSError?) -> Void in
+        client.get(params, handler: { (response: GitLabResponse<Branch>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
-        self.waitForExpectationsWithTimeout(5, nil)
+        self.waitForExpectations(timeout: 5, handler: nil)
     }
     
     // TODO: https://gitlab.com/help/api/branches.md#protect-repository-branch

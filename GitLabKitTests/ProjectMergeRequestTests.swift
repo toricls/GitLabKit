@@ -30,21 +30,21 @@ class ProjectMergeRequestTests: GitLabKitTests {
     override func setUp() {
         super.setUp()
         
-        OHHTTPStubs.stubRequestsPassingTest({ (request: URLRequest!) -> Bool in
-            return request.URL.path?.hasPrefix("/api/v3/projects/") == true
+        OHHTTPStubs.stubRequests(passingTest: { (request: URLRequest!) -> Bool in
+            return request.url?.path.hasPrefix("/api/v3/projects/") == true
             }, withStubResponse: ( { (request: URLRequest!) -> OHHTTPStubsResponse in
                 var filename: String = "test-error.json"
                 var statusCode: Int32 = 200
-                if let path = request.URL.path {
+                if let path = request.url?.path {
                     switch path {
                     case let "/api/v3/projects/1/merge_requests":
                         filename = "project-mrs.json"
                     case let "/api/v3/projects/1/merge_requests?state=closed":
                         filename = "project-mrs-by-status.json"
-                    case let "/api/v3/projects/1/merge_requests?state=mereged":
-                        filename = "project-mrs-by-status-mereged.json"
+                    case let "/api/v3/projects/1/merge_requests?state=merged":
+                        filename = "project-mrs-by-status-merged.json"
                     default:
-                        Logger.log("Unknown path: \(path)")
+                        Logger.log("Unknown path: \(path)" as AnyObject)
                         statusCode = 500
                         break
                     }
@@ -59,10 +59,10 @@ class ProjectMergeRequestTests: GitLabKitTests {
     func testFetchingProjectMergeRequests() {
         let expectation = self.expectation(description: "testFetchingProjectMergeRequests")
         let params = ProjectMergeRequestQueryParamBuilder(projectId: 1)
-        client.get(params, { (response: GitLabResponse<MergeRequest>?, error: NSError?) -> Void in
+        client.get(params, handler: { (response: GitLabResponse<MergeRequest>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
-        self.waitForExpectationsWithTimeout(5, nil)
+        self.waitForExpectations(timeout: 5, handler: nil)
     }
     
     /**
@@ -71,10 +71,10 @@ class ProjectMergeRequestTests: GitLabKitTests {
     func testFetchingProjectClosedMergeRequests() {
         let expectation = self.expectation(description: "testFetchingProjectClosedMergeRequests")
         let params = ProjectMergeRequestQueryParamBuilder(projectId: 1).state(.Closed)
-        client.get(params, { (response: GitLabResponse<MergeRequest>?, error: NSError?) -> Void in
+        client.get(params, handler: { (response: GitLabResponse<MergeRequest>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
-        self.waitForExpectationsWithTimeout(5, nil)
+        self.waitForExpectations(timeout: 5, handler: nil)
     }
     
     /**
@@ -83,10 +83,10 @@ class ProjectMergeRequestTests: GitLabKitTests {
     func testFetchingProjectMergedMergeRequests() {
         let expectation = self.expectation(description: "testFetchingProjectMergedMergeRequests")
         let params = ProjectMergeRequestQueryParamBuilder(projectId: 1).state(.Merged)
-        client.get(params, { (response: GitLabResponse<MergeRequest>?, error: NSError?) -> Void in
+        client.get(params, handler: { (response: GitLabResponse<MergeRequest>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
-        self.waitForExpectationsWithTimeout(5, nil)
+        self.waitForExpectations(timeout: 5, handler: nil)
     }
     
     // TODO: https://gitlab.com/help/api/merge_requests.md#get-single-mr

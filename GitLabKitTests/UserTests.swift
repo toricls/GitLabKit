@@ -30,12 +30,12 @@ class UserTests: GitLabKitTests {
     override func setUp() {
         super.setUp()
         
-        OHHTTPStubs.stubRequestsPassingTest({ (request: URLRequest!) -> Bool in
-            return request.URL.path?.hasPrefix("/api/v3/user") == true
+        OHHTTPStubs.stubRequests(passingTest: { (request: URLRequest!) -> Bool in
+            return request.url?.path.hasPrefix("/api/v3/user") == true
             }, withStubResponse: ( { (request: URLRequest!) -> OHHTTPStubsResponse in
                 var filename: String = "test-error.json"
                 var statusCode: Int32 = 200
-                if let path = request.URL.path {
+                if let path = request.url?.path {
                     switch path {
                     case let "/api/v3/users":
                         filename = "users.json"
@@ -58,11 +58,11 @@ class UserTests: GitLabKitTests {
     func testFetchingUsers() {
         let expectation = self.expectation(description: "testFetchingUsers")
         let params = UserQueryParamBuilder()
-        client.get(params, { (response: GitLabResponse<User>?, error: NSError?) -> Void in
+        client.get(params, handler: { (response: GitLabResponse<User>?, error: NSError?) -> Void in
             XCTAssertEqual(response!.result!.count, 3, "3 records")
             expectation.fulfill()
         })
-        self.waitForExpectationsWithTimeout(5, nil)
+        self.waitForExpectations(timeout: 5, handler: nil)
     }
     
     /**
@@ -71,13 +71,13 @@ class UserTests: GitLabKitTests {
     func testFetchingUser() {
         let expectation = self.expectation(description: "testFetchingUser")
         let params = UserQueryParamBuilder().id(2)
-        client.get(params, { (response: GitLabResponse<User>?, error: NSError?) -> Void in
+        client.get(params, handler: { (response: GitLabResponse<User>?, error: NSError?) -> Void in
             XCTAssertEqual(response!.result!.count, 1, "1 record")
             let user: User = response!.result![0]
-            XCTAssertEqual(user.id!.longValue, 2, "UserId is 2")
+            XCTAssertEqual(user.id!.int64Value, 2, "UserId is 2")
             expectation.fulfill()
         })
-        self.waitForExpectationsWithTimeout(5, nil)
+        self.waitForExpectations(timeout: 5, handler: nil)
     }
     
     /**
@@ -86,15 +86,15 @@ class UserTests: GitLabKitTests {
     func testFetchingCurrentUser() {
         let expectation = self.expectation(description: "testFetchingCurrentUser")
         let params = UserQueryParamBuilder().mine(true)
-        client.get(params, { (response: GitLabResponse<UserFull>?, error: NSError?) -> Void in
+        client.get(params, handler: { (response: GitLabResponse<UserFull>?, error: NSError?) -> Void in
             XCTAssertEqual(response!.result!.count, 1, "1 record")
             let user: UserFull = response!.result![0]
-            XCTAssertEqual(user.id!.longValue, 2, "UserId is 2")
+            XCTAssertEqual(user.id!.int64Value, 2, "UserId is 2")
             XCTAssertNotNil(user.privateToken, "includes privateToken")
-            XCTAssert(user.isKindOfClass(UserFull), "Returns UserFull, not User")
+            XCTAssert(user.isKind(of: UserFull.self), "Returns UserFull, not User")
             expectation.fulfill()
         })
-        self.waitForExpectationsWithTimeout(5, nil)
+        self.waitForExpectations(timeout: 5, handler: nil)
     }
     
     // TODO: https://gitlab.com/help/api/users.md#list-ssh-keys
