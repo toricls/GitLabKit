@@ -30,9 +30,9 @@ class ProjectEventTests: GitLabKitTests {
     override func setUp() {
         super.setUp()
         
-        OHHTTPStubs.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
+        OHHTTPStubs.stubRequestsPassingTest({ (request: URLRequest!) -> Bool in
             return request.URL.path?.hasPrefix("/api/v3/projects/") == true
-            }, withStubResponse: ( { (request: NSURLRequest!) -> OHHTTPStubsResponse in
+            }, withStubResponse: ( { (request: URLRequest!) -> OHHTTPStubsResponse in
                 var filename: String = "test-error.json"
                 var statusCode: Int32 = 200
                 if let path = request.URL.path {
@@ -53,7 +53,7 @@ class ProjectEventTests: GitLabKitTests {
     https://gitlab.com/help/api/projects.md#get-project-events
      */
     func testFetchingProjectEvents() {
-        let expectation = self.expectationWithDescription("testFetchingProjectEvents")
+        let expectation = self.expectation(description: "testFetchingProjectEvents")
         let params = ProjectEventQueryParamBuilder(projectId: 31)
         client.get(params, { (response: GitLabResponse<Event>?, error: NSError?) -> Void in
             expectation.fulfill()

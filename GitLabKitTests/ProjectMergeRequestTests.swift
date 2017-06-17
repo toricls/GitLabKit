@@ -30,9 +30,9 @@ class ProjectMergeRequestTests: GitLabKitTests {
     override func setUp() {
         super.setUp()
         
-        OHHTTPStubs.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
+        OHHTTPStubs.stubRequestsPassingTest({ (request: URLRequest!) -> Bool in
             return request.URL.path?.hasPrefix("/api/v3/projects/") == true
-            }, withStubResponse: ( { (request: NSURLRequest!) -> OHHTTPStubsResponse in
+            }, withStubResponse: ( { (request: URLRequest!) -> OHHTTPStubsResponse in
                 var filename: String = "test-error.json"
                 var statusCode: Int32 = 200
                 if let path = request.URL.path {
@@ -57,7 +57,7 @@ class ProjectMergeRequestTests: GitLabKitTests {
     https://gitlab.com/help/api/merge_requests.md#list-merge-requests
     */
     func testFetchingProjectMergeRequests() {
-        let expectation = self.expectationWithDescription("testFetchingProjectMergeRequests")
+        let expectation = self.expectation(description: "testFetchingProjectMergeRequests")
         let params = ProjectMergeRequestQueryParamBuilder(projectId: 1)
         client.get(params, { (response: GitLabResponse<MergeRequest>?, error: NSError?) -> Void in
             expectation.fulfill()
@@ -69,7 +69,7 @@ class ProjectMergeRequestTests: GitLabKitTests {
     https://gitlab.com/help/api/merge_requests.md#list-merge-requests
     */
     func testFetchingProjectClosedMergeRequests() {
-        let expectation = self.expectationWithDescription("testFetchingProjectClosedMergeRequests")
+        let expectation = self.expectation(description: "testFetchingProjectClosedMergeRequests")
         let params = ProjectMergeRequestQueryParamBuilder(projectId: 1).state(.Closed)
         client.get(params, { (response: GitLabResponse<MergeRequest>?, error: NSError?) -> Void in
             expectation.fulfill()
@@ -81,7 +81,7 @@ class ProjectMergeRequestTests: GitLabKitTests {
     https://gitlab.com/help/api/merge_requests.md#list-merge-requests
     */
     func testFetchingProjectMergedMergeRequests() {
-        let expectation = self.expectationWithDescription("testFetchingProjectMergedMergeRequests")
+        let expectation = self.expectation(description: "testFetchingProjectMergedMergeRequests")
         let params = ProjectMergeRequestQueryParamBuilder(projectId: 1).state(.Merged)
         client.get(params, { (response: GitLabResponse<MergeRequest>?, error: NSError?) -> Void in
             expectation.fulfill()

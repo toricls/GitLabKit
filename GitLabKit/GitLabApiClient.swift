@@ -25,7 +25,7 @@
 import Foundation
 import Mantle
 
-public class GitLabApiClient {
+open class GitLabApiClient {
     
     let host: String
     let privateToken: String
@@ -37,8 +37,7 @@ public class GitLabApiClient {
         assert(!privateToken.isEmpty, "GitLabApiClient does not accept an empty privateToken value.")
         
         // remove last '/' from the host string
-        let length = countElements(host)
-        self.host = (host[length-1] == "/" && length > 1) ? host[0...length-2] : host
+        self.host = host.characters.last == "/" ? host.substring(to: host.index(host.startIndex, offsetBy: -1)) : host
         
         self.privateToken = privateToken
     }
@@ -49,12 +48,12 @@ public class GitLabApiClient {
     :param: builder a parameter builder for the data model
     :param: handler callback handler for fetched data or error while requesting to your API server
     */
-    public func get<T: GitLabModel where T: Fetchable>(builder: GitLabParamBuildable?, handler: ( GitLabResponse<T>?, NSError?) -> Void) {
+    open func get<T: GitLabModel>(_ builder: GitLabParamBuildable?, handler: @escaping ( GitLabResponse<T>?, NSError?) -> Void) where T: Fetchable {
         var params: [String:AnyObject]? = builder?.build()
-        if params? == nil {
+        if params == nil {
             params = [:]
         }
-        params![self.privateTokenKey] = self.privateToken
+        params![self.privateTokenKey] = self.privateToken as AnyObject
 
         GitLabApiEndPoint().request(self.host, params: params!, handler: { (response: GitLabInternalResponse<T>, linkObject: GitLabLinkObject?) -> Void in
             var error: NSError?
@@ -69,32 +68,32 @@ public class GitLabApiClient {
     // public func deletable //Deletable
     
     
-    private func handleRawResponse<T: GitLabModel>(response: GitLabInternalResponse<T>, inout _ error: NSError?) -> [T]? {
+    fileprivate func handleRawResponse<T: GitLabModel>(_ response: GitLabInternalResponse<T>, _ error: inout NSError?) -> [T]? {
         switch (response) {
-        case .One(let result):
+        case .one(let result):
             return [result]
-        case .Many(let results):
+        case .many(let results):
             return results
-        case .Error(let err):
+        case .error(let err):
             if err!.code == 404 {
                 error = nil
                 return []
             }
-            Logger.log(err!.localizedDescription)
+            Logger.log(err!.localizedDescription as AnyObject)
             error = err
             return nil
-        default:
-            let userInfo: NSMutableDictionary = [NSLocalizedDescriptionKey:"Unimplemented Exception"]
-            let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -1, userInfo: userInfo)
-            NSException.raise("Exception", format:"Error: %@", arguments:getVaList([apiError]))
+//        default:
+//            let userInfo: NSMutableDictionary = [NSLocalizedDescriptionKey:"Unimplemented Exception"]
+//            let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -1, userInfo: userInfo as? [AnyHashable : Any])
+//            NSException.raise(NSExceptionName(rawValue: "Exception"), format:"Error: %@", arguments:getVaList([apiError]))
         }
     }
 }
 
 // MARK: GitLabModel
 
-public class GitLabModel: MTLModel, MTLJSONSerializing {
-    public class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
+open class GitLabModel: MTLModel, MTLJSONSerializing {
+    open class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any]! {
         return [:]
     }
 }
@@ -113,78 +112,99 @@ public protocol Deletable {
 
 // MARK: GitLabApiEndPoint
 
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+import Cocoa
 import Alamofire
+
 let GitLabKitErrorDomain = "io.orih.GitLabKit.error"
 
 class GitLabApiEndPoint {
     
-    func request<T: GitLabModel>(host: String, params: [String : AnyObject], handler:(response: GitLabInternalResponse<T>, linkObject: GitLabLinkObject?) -> Void) -> Void {
+    func request<T: GitLabModel>(_ host: String, params: [String : AnyObject], handler:@escaping (_ response: GitLabInternalResponse<T>, _ linkObject: GitLabLinkObject?) -> Void) -> Void {
         
-        let success: ((NSURLRequest, NSHTTPURLResponse?, AnyObject!) -> Void) = {
+        let success: ((URLRequest, HTTPURLResponse?, AnyObject?) -> Void) = {
             // Extract and parse "Link" HTTP header
             var linkObj: GitLabLinkObject?
-            if let link:AnyObject = $1?.allHeaderFields["Link"] {
-                linkObj = GitLabLinkObject(link as? String)
+            if let link = $1?.allHeaderFields["Link"] as? String {
+                linkObj = GitLabLinkObject(link)
             }
-            handler(response: GitLabInternalResponse<T>.parse($2), linkObject: linkObj)
+            handler(GitLabInternalResponse<T>.parse($2!), linkObj)
         }
-        let failure: ((NSURLRequest, NSHTTPURLResponse?, NSError!) -> Void) = {
-            handler(response: GitLabInternalResponse.Error($2), linkObject: nil)
+        let failure: ((URLRequest, HTTPURLResponse?, NSError?) -> Void) = {
+            handler(GitLabInternalResponse.error($2), nil)
         }
         
         
         let requestType: (path: String, fetchAsString: Bool) = self.buildPath(params, type: T.self)
-        let request: Request = Alamofire.request(.GET, host + "/api/v3" + requestType.path, parameters: params)
+        guard var url = URL(string: host) else {
+            return
+        }
+        
+        url = url.appendingPathComponent("api").appendingPathComponent("v3").appendingPathComponent(requestType.path)
+        
+        let request = Alamofire.request(url, method: .get, parameters: params)
         
         /**
         *  Handle the response and the error from API server.
         */
         if requestType.fetchAsString {
-            request.responseString(completionHandler: { (request, response, string, error) -> Void in
+            request.responseString(completionHandler: { (response) in
                 // Error in Alamofire
-                if let resError = error {
-                    failure(request, response, error)
+                if let resError = response.error {
+                    failure(response.request!, response.response, resError as NSError)
                 }
                 
                 // Error in GitLab API server
-                var resultData: AnyObject? = string
-                if let res: NSHTTPURLResponse = response {
+//                let resultData = response.value
+                if let res = response.response {
                     switch(res.statusCode) {
                     case 200, 201: // OK, Created
                         break
                     default: // something went wrong...
-                        Logger.log("Server returned error code: \(res.statusCode)")
-                        var errorMsg: String = string? != nil ? string! : "failed to fetch raw content."
-                        let userInfo: NSMutableDictionary = [NSLocalizedDescriptionKey:errorMsg]
-                        let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: res.statusCode, userInfo: userInfo)
-                        failure(request, response, apiError)
+                        Logger.log("Server returned error code: \(res.statusCode)" as AnyObject)
+                        let errorMsg : String = response.value ?? "failed to fetch raw content."
+                        let userInfo : [AnyHashable : Any] = [NSLocalizedDescriptionKey:errorMsg]
+                        let apiError : NSError = NSError(domain: GitLabKitErrorDomain, code: res.statusCode, userInfo: userInfo)
+                        failure(response.request!, response.response, apiError)
                         return
                     }
                 }
                 
                 // Succeed, resultData is not null.
-                let data: AnyObject! = resultData
-                success(request, response, data)
+                guard let data = response.value else { return }
+                success(response.request!, response.response, data as AnyObject)
             })
         } else {
-            request.responseJSON(options: NSJSONReadingOptions.MutableLeaves,
-                completionHandler: { (request, response, json, error) -> Void in
+            request.responseJSON(options: JSONSerialization.ReadingOptions.mutableLeaves,
+                completionHandler: { (response) in
                     // Error in Alamofire
-                    if let resError = error {
-                        failure(request, response, error)
+                    if let resError = response.error {
+                        failure(response.request!, response.response!, resError as NSError)
                     }
                     
                     // Error in GitLab API server
-                    var resultData: AnyObject? = json
-                    if let res: NSHTTPURLResponse = response {
+                    let resultData = response.value
+                    if let res = response.response {
                         switch(res.statusCode) {
                         case 200, 201: // OK, Created
                             break
                         default: // something went wrong...
-                            Logger.log("Server returned error code: \(res.statusCode)")
+                            Logger.log("Server returned error code: \(res.statusCode)" as AnyObject)
                             // Extract an error message
                             var errorMsg: String = ""
-                            if let errorObj = json as? [NSObject: AnyObject] {
+                            if let errorObj = resultData as? [AnyHashable: Any] {
                                 if let message = errorObj["message"] as? String {
                                     errorMsg = message
                                 } else {
@@ -192,31 +212,32 @@ class GitLabApiEndPoint {
                                 }
                             } else {
                                 errorMsg = "We cannot handle error because of nothing understandable returned from API server."
-                                Logger.log("\(errorMsg) See logs to solve this problem.")
-                                Logger.log("Here is the response and recieved data:")
+                                Logger.log("\(errorMsg) See logs to solve this problem." as AnyObject)
+                                Logger.log("Here is the response and recieved data:" as AnyObject)
                                 Logger.log(res)
-                                Logger.log(json)
+                                Logger.log(response.value as AnyObject)
                             }
                             let userInfo: NSMutableDictionary = [NSLocalizedDescriptionKey:errorMsg]
-                            let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: res.statusCode, userInfo: userInfo)
-                            failure(request, response, apiError)
+                            let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: res.statusCode, userInfo: userInfo as? [AnyHashable : Any])
+                            failure(response.request!, response.response, apiError)
                             return
                         }
                     }
                     
                     // Succeed, resultData is not null.
-                    let data: AnyObject! = resultData
-                    success(request, response, data)
+                    guard let data = resultData else { return }
+                    success(response.request!, response.response, data as AnyObject)
             })
         }
     }
     
-    private func buildPath<T: GitLabModel>(params: [String : AnyObject], type: T.Type) -> (path: String, fetchAsString: Bool) {
+    fileprivate func buildPath<T: GitLabModel>(_ params: [String : AnyObject], type: T.Type) -> (path: String, fetchAsString: Bool) {
         var path: String = ""
         var fetchAsString: Bool = false
-        switch(type.className().pathExtension) { // TODO: it's a bit hacky...
+        
+        switch((type.className() as NSString).pathExtension) { // TODO: it's a bit hacky...
         case "User":
-            if let myself = params["myself"] as? Bool {
+            if let myself = params["myself"] as? Bool, myself {
                 // To fetch information about myself
                 path = "/user"
             } else {
@@ -226,31 +247,31 @@ class GitLabApiEndPoint {
                 }
             }
         case "UserFull":
-            if let mine = params["mine"] as? Bool {
+            if let mine = params["mine"] as? Bool, mine {
                 // To fetch information about myself
                 path = "/user"
             } else {
                 // UserFull needs myself parameter
                 let userInfo: NSMutableDictionary = [NSLocalizedDescriptionKey:"UserFull instance is available only for admin or private tokened user-self."]
-                let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -1, userInfo: userInfo)
-                NSException.raise("Exception", format:"Error: %@", arguments:getVaList([apiError]))
+                let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -1, userInfo: userInfo as? [AnyHashable : Any])
+                NSException.raise(NSExceptionName(rawValue: "Exception"), format:"Error: %@", arguments:getVaList([apiError]))
             }
         case "Project":
             path = "/projects"
-            if let owned = params["owned"] as? Bool {
+            if let owned = params["owned"] as? Bool, owned {
                 path = "\(path)/owned"
-            } else if let all = params["all"] as? Bool {
+            } else if let all = params["all"] as? Bool, all {
                 path = "\(path)/all"
             } else if let projectId = params["id"] as? UInt {
                 path = "\(path)/\(projectId)"
             } else if let namespace = params["namespaceAndName"] as? String {
-                var encodedNamespace = self.getUriEncodedString(namespace)
+                let encodedNamespace = self.getUriEncodedString(namespace)
                 path = "\(path)/\(encodedNamespace)"
             }
             
             // TODO: orderBy, sort
         case "Member":
-            var format = "/projects/%@/members"
+            let format = "/projects/%@/members"
             if let projectId = params["projectId"] as? UInt {
                 path = String(format: format, String(projectId))
             } else if let namespace = params["namespaceAndName"] as? String {
@@ -259,8 +280,8 @@ class GitLabApiEndPoint {
             } else {
                 // we need projectId or project name+namespace for fetching project members.
                 let userInfo: NSMutableDictionary = [NSLocalizedDescriptionKey:"GitLab API needs a projectId or a project name+namespace to fetch project members."]
-                let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -1, userInfo: userInfo)
-                NSException.raise("Exception", format:"Error: %@", arguments:getVaList([apiError]))
+                let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -1, userInfo: userInfo as? [AnyHashable : Any])
+                NSException.raise(NSExceptionName(rawValue: "Exception"), format:"Error: %@", arguments:getVaList([apiError]))
             }
             
             if let userId = params["userId"] as? UInt {
@@ -274,8 +295,8 @@ class GitLabApiEndPoint {
             } else {
                 // we need projectId or project name+namespace for fetching milestones.
                 let userInfo: NSMutableDictionary = [NSLocalizedDescriptionKey:"GitLab API needs a projectId or a project name+namespace to fetch milestones."]
-                let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -1, userInfo: userInfo)
-                NSException.raise("Exception", format:"Error: %@", arguments:getVaList([apiError]))
+                let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -1, userInfo: userInfo as? [AnyHashable : Any])
+                NSException.raise(NSExceptionName(rawValue: "Exception"), format:"Error: %@", arguments:getVaList([apiError]))
             }
             
             if let milestoneId = params["id"] as? UInt {
@@ -283,38 +304,38 @@ class GitLabApiEndPoint {
                 path = "\(path)/\(milestoneId)"
             }
         case "Event":
-            var format = "/projects/%@/events"
+            let format = "/projects/%@/events"
             if let projectId = params["projectId"] as? UInt {
                 path = String(format: format, String(projectId))
             } else {
                 // we need projectId or project name+namespace for fetching milestones.
                 let userInfo: NSMutableDictionary = [NSLocalizedDescriptionKey:"GitLab API needs a projectId to fetch milestones."]
-                let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -1, userInfo: userInfo)
-                NSException.raise("Exception", format:"Error: %@", arguments:getVaList([apiError]))
+                let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -1, userInfo: userInfo as? [AnyHashable : Any])
+                NSException.raise(NSExceptionName(rawValue: "Exception"), format:"Error: %@", arguments:getVaList([apiError]))
             }
         case "Snippet":
-            var format = "/projects/%@/snippets"
+            let format = "/projects/%@/snippets"
             if let projectId = params["projectId"] as? UInt {
                 path = String(format: format, String(projectId))
             } else {
                 // we need projectId or project name+namespace for fetching project snippets.
                 let userInfo: NSMutableDictionary = [NSLocalizedDescriptionKey:"GitLab API needs a projectId or a project name+namespace to fetch project snippets."]
-                let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -1, userInfo: userInfo)
-                NSException.raise("Exception", format:"Error: %@", arguments:getVaList([apiError]))
+                let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -1, userInfo: userInfo as? [AnyHashable : Any])
+                NSException.raise(NSExceptionName(rawValue: "Exception"), format:"Error: %@", arguments:getVaList([apiError]))
             }
             
             if let snippetId = params["snippetId"] as? UInt {
                 // single snippet
                 path = "\(path)/\(snippetId)"
-                if let raw = params["rawData"] as? Bool {
+                if let raw = params["rawData"] as? Bool, raw {
                     path = "\(path)/raw"
                     fetchAsString = true
                 }
             }
         case "SnippetContent":
-            var format = "/projects/%@/snippets/%@/raw"
-            var projectId: Any? = params["projectId"] as? UInt
-            var snippetId: Any? = params["snippetId"] as? UInt
+            let format = "/projects/%@/snippets/%@/raw"
+            let projectId: Any? = params["projectId"] as? UInt
+            let snippetId: Any? = params["snippetId"] as? UInt
             
             switch (projectId, snippetId) {
             case let (pId as UInt, sId as UInt):
@@ -322,12 +343,12 @@ class GitLabApiEndPoint {
             default:
                 // we need projectId or project name+namespace for fetching project snippet content.
                 let userInfo: NSMutableDictionary = [NSLocalizedDescriptionKey:"GitLab API needs a projectId / a project name+namespace and snippetId to fetch project snippet content."]
-                let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -1, userInfo: userInfo)
-                NSException.raise("Exception", format:"Error: %@", arguments:getVaList([apiError]))
+                let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -1, userInfo: userInfo as? [AnyHashable : Any])
+                NSException.raise(NSExceptionName(rawValue: "Exception"), format:"Error: %@", arguments:getVaList([apiError]))
             }
             fetchAsString = true
         case "Hook":
-            var format = "/projects/%@/hooks"
+            let format = "/projects/%@/hooks"
             if let projectId = params["projectId"] as? UInt {
                 path = String(format: format, String(projectId))
             } else if let namespace = params["namespaceAndName"] as? String {
@@ -336,8 +357,8 @@ class GitLabApiEndPoint {
             } else {
                 // we need projectId or project name+namespace for fetching project members.
                 let userInfo: NSMutableDictionary = [NSLocalizedDescriptionKey:"GitLab API needs a projectId or a project name+namespace to fetch project hooks."]
-                let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -1, userInfo: userInfo)
-                NSException.raise("Exception", format:"Error: %@", arguments:getVaList([apiError]))
+                let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -1, userInfo: userInfo as? [AnyHashable : Any])
+                NSException.raise(NSExceptionName(rawValue: "Exception"), format:"Error: %@", arguments:getVaList([apiError]))
             }
             
             if let hookId = params["hookId"] as? UInt {
@@ -345,7 +366,7 @@ class GitLabApiEndPoint {
                 path = "\(path)/\(hookId)"
             }
         case "Branch":
-            var format = "/projects/%@/repository/branches"
+            let format = "/projects/%@/repository/branches"
             if let projectId = params["projectId"] as? UInt {
                 path = String(format: format, String(projectId))
             } else if let namespace = params["namespaceAndName"] as? String {
@@ -354,8 +375,8 @@ class GitLabApiEndPoint {
             } else {
                 // we need projectId or project name+namespace for fetching project members.
                 let userInfo: NSMutableDictionary = [NSLocalizedDescriptionKey:"GitLab API needs a projectId or a project name+namespace to fetch project branches."]
-                let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -1, userInfo: userInfo)
-                NSException.raise("Exception", format:"Error: %@", arguments:getVaList([apiError]))
+                let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -1, userInfo: userInfo as? [AnyHashable : Any])
+                NSException.raise(NSExceptionName(rawValue: "Exception"), format:"Error: %@", arguments:getVaList([apiError]))
             }
             
             if let name = params["name"] as? UInt {
@@ -364,52 +385,52 @@ class GitLabApiEndPoint {
             
             // TODO: Protect/Unprotect single branch
         case "Tag":
-            var format = "/projects/%@/repository/tags"
+            let format = "/projects/%@/repository/tags"
             if let projectId = params["projectId"] as? UInt {
                 path = String(format: format, String(projectId))
             } else {
                 // we need projectId or project name+namespace for fetching tags.
                 let userInfo: NSMutableDictionary = [NSLocalizedDescriptionKey:"GitLab API needs a projectId to fetch tags."]
-                let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -1, userInfo: userInfo)
-                NSException.raise("Exception", format:"Error: %@", arguments:getVaList([apiError]))
+                let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -1, userInfo: userInfo as? [AnyHashable : Any])
+                NSException.raise(NSExceptionName(rawValue: "Exception"), format:"Error: %@", arguments:getVaList([apiError]))
             }
         case "Tree":
-            var format = "/projects/%@/repository/tags"
+            let format = "/projects/%@/repository/tags"
             if let projectId = params["projectId"] as? UInt {
                 path = String(format: format, String(projectId))
             } else {
                 // we need projectId or project name+namespace for fetching tree.
                 let userInfo: NSMutableDictionary = [NSLocalizedDescriptionKey:"GitLab API needs a projectId to fetch trees."]
-                let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -1, userInfo: userInfo)
-                NSException.raise("Exception", format:"Error: %@", arguments:getVaList([apiError]))
+                let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -1, userInfo: userInfo as? [AnyHashable : Any])
+                NSException.raise(NSExceptionName(rawValue: "Exception"), format:"Error: %@", arguments:getVaList([apiError]))
             }
         case "File":
-            var format = "/projects/%@/repository/files"
-            let projectId = params["projectId"] as UInt
+            let format = "/projects/%@/repository/files"
+            let projectId = params["projectId"] as! UInt
             path = String(format: format, String(projectId))
         case "Commit":
-            var format = "/projects/%@/repository/commits"
+            let format = "/projects/%@/repository/commits"
             if let projectId = params["projectId"] as? UInt {
                 path = String(format: format, String(projectId))
             } else {
                 // we need projectId or project name+namespace for fetching commits.
                 let userInfo: NSMutableDictionary = [NSLocalizedDescriptionKey:"GitLab API needs a projectId to fetch commits."]
-                let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -1, userInfo: userInfo)
-                NSException.raise("Exception", format:"Error: %@", arguments:getVaList([apiError]))
+                let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -1, userInfo: userInfo as? [AnyHashable : Any])
+                NSException.raise(NSExceptionName(rawValue: "Exception"), format:"Error: %@", arguments:getVaList([apiError]))
             }
             
             if let sha = params["sha"] as? UInt {
                 path = "\(path)/\(sha)"
             }
         case "MergeRequest":
-            var format = "/projects/%@/merge_requests"
+            let format = "/projects/%@/merge_requests"
             if let projectId = params["projectId"] as? UInt {
                 path = String(format: format, String(projectId))
             } else {
                 // we need projectId or project name+namespace for fetching merge requests.
                 let userInfo: NSMutableDictionary = [NSLocalizedDescriptionKey:"GitLab API needs a projectId to fetch merge requests."]
-                let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -1, userInfo: userInfo)
-                NSException.raise("Exception", format:"Error: %@", arguments:getVaList([apiError]))
+                let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -1, userInfo: userInfo as? [AnyHashable : Any])
+                NSException.raise(NSExceptionName(rawValue: "Exception"), format:"Error: %@", arguments:getVaList([apiError]))
             }
             
             if let state = params["state"] as? String {
@@ -419,28 +440,28 @@ class GitLabApiEndPoint {
             // TODO: orderBy, sort
             // TODO: single MR
         case "CommentForCommit":
-            var format = "/projects/%@/repository/commits/%@/comments"
-            let projectId = params["projectId"] as UInt
-            let sha = params["sha"] as String
+            let format = "/projects/%@/repository/commits/%@/comments"
+            let projectId = params["projectId"] as! UInt
+            let sha = params["sha"] as! String
             path = String(format: format, String(projectId), sha)
         case "Diff":
-            var format = "/projects/%@/repository/commits/%@/diff"
-            let projectId = params["projectId"] as UInt
-            let sha = params["sha"] as String
+            let format = "/projects/%@/repository/commits/%@/diff"
+            let projectId = params["projectId"] as! UInt
+            let sha = params["sha"] as! String
             path = String(format: format, String(projectId), sha)
         case "CommentForIssue":
-            var format = "/projects/%@/issues/%@/notes"
-            let projectId = params["projectId"] as UInt
-            let issueId = params["issueId"] as UInt
+            let format = "/projects/%@/issues/%@/notes"
+            let projectId = params["projectId"] as! UInt
+            let issueId = params["issueId"] as! UInt
             path = String(format: format, String(projectId), issueId)
             
             if let noteId = params["noteId"] as? UInt {
                 path = "\(path)/\(noteId)"
             }
         case "CommentForSnippet":
-            var format = "/projects/%@/snippets/%@/notes"
-            let projectId = params["projectId"] as UInt
-            let snippetId = params["snippetId"] as UInt
+            let format = "/projects/%@/snippets/%@/notes"
+            let projectId = params["projectId"] as! UInt
+            let snippetId = params["snippetId"] as! UInt
             path = String(format: format, String(projectId), snippetId)
             
             if let noteId = params["noteId"] as? UInt {
@@ -455,73 +476,78 @@ class GitLabApiEndPoint {
                     path = "\(path)/\(issueId)"
                 }
             } else {
-                if let issueId = params["issueId"] as? UInt {
+                if let _ = params["issueId"] as? UInt {
                     // we need projectId or project name+namespace for fetching issues with its id.
                     let userInfo: NSMutableDictionary = [NSLocalizedDescriptionKey:"GitLab API needs a project id to fetch a single issue."]
-                    let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -1, userInfo: userInfo)
-                    NSException.raise("Exception", format:"Error: %@", arguments:getVaList([apiError]))
+                    let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -1, userInfo: userInfo as? [AnyHashable : Any])
+                    NSException.raise(NSExceptionName(rawValue: "Exception"), format:"Error: %@", arguments:getVaList([apiError]))
                 }
             }
         default:
             let userInfo: NSMutableDictionary = [NSLocalizedDescriptionKey:"Unknown model class. It's a library bug or unimplemented."]
-            let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -99, userInfo: userInfo)
-            NSException.raise("Exception", format:"Error: %@", arguments:getVaList([apiError]))
+            let apiError: NSError = NSError(domain: GitLabKitErrorDomain, code: -99, userInfo: userInfo as? [AnyHashable : Any])
+            NSException.raise(NSExceptionName(rawValue: "Exception"), format:"Error: %@", arguments:getVaList([apiError]))
             break
         }
         return (path, fetchAsString)
     }
     
-    private func getUriEncodedString(str: String) -> String {
-        return str.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())!
+    fileprivate func getUriEncodedString(_ str: String) -> String {
+        return str.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlHostAllowed)!
     }
 }
 
 // MARK: GitLabInternalResponse
 
 enum GitLabInternalResponse<T: GitLabModel> {
-    case One(T)
-    case Many([T])
-    case Error(NSError?)
+    case one(T)
+    case many([T])
+    case error(NSError?)
     
-    static func parse<T: GitLabModel>(JSON: AnyObject) -> GitLabInternalResponse<T> {
+    static func parse<T: GitLabModel>(_ JSON: AnyObject) -> GitLabInternalResponse<T> {
         var error: NSError?
-        
-        if let object = JSON as? [NSObject: AnyObject] {
-            if let x = MTLJSONAdapter.modelOfClass(T.self, fromJSONDictionary: object, error: &error) as? T {
-                return .One(x)
+
+        if let object = JSON as? [AnyHashable: Any] {
+            if let x =  MTLJSONAdapter.model(of: T.self, fromJSONDictionary: object) as? T {
+                return .one(x)
             }
         } else if let array = JSON as? [AnyObject] {
-            if let xs = MTLJSONAdapter.modelsOfClass(T.self, fromJSONArray: array, error: &error) as? [T] {
-                return .Many(xs)
+            do {
+                if let xs = try MTLJSONAdapter.models(of: T.self, fromJSONArray: array) as? [T] {
+                    return .many(xs)
+                }
+            } catch let e as NSError {
+                error = e
             }
         } else if let rawContent = JSON as? String {
-            let jsonObject: [NSObject: AnyObject] = ["content": rawContent]
-            if let x = MTLJSONAdapter.modelOfClass(T.self, fromJSONDictionary: jsonObject, error: &error) as? T {
-                return .One(x)
+            let jsonObject: [AnyHashable: Any] = ["content": rawContent]
+            
+            if let x =  MTLJSONAdapter.model(of: T.self, fromJSONDictionary: jsonObject) as? T {
+                return .one(x)
             }
         }
-        return .Error(error)
+        return .error(error)
     }
 }
 
 // MARK: GeneralQueryParamBuilder, GitLabParamBuildable
 
-public class GeneralQueryParamBuilder: GitLabParamBuildable {
+open class GeneralQueryParamBuilder: GitLabParamBuildable {
     
-    var params: [String:AnyObject] = ["page":"1", "per_page":"20"]
+    var params: [String:AnyObject] = ["page":"1" as AnyObject, "per_page":"20" as AnyObject]
     
     func page(_ page: UInt = 1) -> Self {
         assert(page > 0, "GitLab API accepts a number greater than 0 as a page number.")
-        params["page"] = page
+        params["page"] = page as AnyObject
         return self
     }
     func perPage(_ perPage: UInt = 20) -> Self {
         assert(perPage >= 0 && perPage <= 100, "GitLab API accepts a number 1 to 100 as a per_page value.") // 0 will be assumed as default value (20) on the API server side.
-        params["per_page"] = perPage
+        params["per_page"] = perPage as AnyObject
         return self
     }
     
-    public func build() -> [String:AnyObject]? {
+    open func build() -> [String:AnyObject]? {
         return params
     }
 }
@@ -533,20 +559,20 @@ public protocol GitLabParamBuildable {
     func build() -> [String:AnyObject]?
 }
 
-public class GitLabLinkObject {
+open class GitLabLinkObject {
     
-    private var pageForType: [LinkType:UInt] = [:]
+    fileprivate var pageForType: [LinkType:UInt] = [:]
     
     
-    func has(type: LinkType) -> Bool {
+    func has(_ type: LinkType) -> Bool {
         return self.pageForType[type] != nil
     }
     
-    func getLink<T: GeneralQueryParamBuilder>(type: LinkType, prevParam: T) -> T? {
+    func getLink<T: GeneralQueryParamBuilder>(_ type: LinkType, prevParam: T) -> T? {
         if !self.has(type) {
             return nil
         }
-        prevParam.page(self.pageForType[type]!)
+        _ = prevParam.page(self.pageForType[type]!)
         return prevParam
     }
     
@@ -561,25 +587,24 @@ public class GitLabLinkObject {
         case Last = "last"
     }
     
-    func parse(linkHeader: String!) -> [LinkType:UInt] {
+    func parse(_ linkHeader: String!) -> [LinkType:UInt] {
         var result: [LinkType:UInt] = [:]
         // <https://git.supinf.co/api/v3/projects/owned?page=1&per_page=0>; rel="prev", <https://git.supinf.co/api/v3/projects/owned?page=3&per_page=0>; rel="next", <https://git.supinf.co/api/v3/projects/owned?page=1&per_page=0>; rel="first", <https://git.supinf.co/api/v3/projects/owned?page=3&per_page=0>; rel="last"
-        let links: [String] = linkHeader.trim().componentsSeparatedByString(",")
+        let links: [String] = linkHeader.trim().components(separatedBy: ",")
         for link in links {
             // <https://git.supinf.co/api/v3/projects/owned?page=1&per_page=0>; rel="prev"
-            var section: [String] = link.trim().componentsSeparatedByString(";")
+            var section: [String] = link.trim().components(separatedBy: ";")
             if (section.count != 2) {
-                Logger.log("invalid link string. \(section)")
+                Logger.log("invalid link string. \(section)" as AnyObject)
             }
-            let url: String = section[0].trim().stringByReplacingOccurrencesOfString("^<|>$", withString:"", options:NSStringCompareOptions.RegularExpressionSearch, range: nil)
-            let type: LinkType = LinkType(rawValue: section[1].trim().stringByReplacingOccurrencesOfString("^rel=\"|\"$", withString:"", options:NSStringCompareOptions.RegularExpressionSearch, range: nil))!
+            let url: String = section[0].trim().replacingOccurrences(of: "^<|>$", with:"", options:NSString.CompareOptions.regularExpression, range: nil)
+            let type: LinkType = LinkType(rawValue: section[1].trim().replacingOccurrences(of: "^rel=\"|\"$", with:"", options:NSString.CompareOptions.regularExpression, range: nil))!
             
-            if let urlObj = NSURLComponents(string: url) {
-                for (var i=0; i < urlObj.queryItems?.count; i++) {
-                    let item = urlObj.queryItems?[i] as NSURLQueryItem
-                    if let value = item.value() {
+            if let items = URLComponents(string: url)?.queryItems {
+                for item in items {
+                    if let value = item.value {
                         if item.name == "page" {
-                            result[type] = UInt(value.toInt()!)
+                            result[type] = UInt(value)
                             break
                         }
                     }

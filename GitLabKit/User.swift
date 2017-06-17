@@ -25,16 +25,16 @@
 import Foundation
 import Mantle
 
-public class User: GitLabModel, Fetchable {
-    public var id: NSNumber?
-    public var avatarUrl: String?
-    public var username: String?
-    public var name: String?
-    public var state: String?
+open class User: GitLabModel, Fetchable {
+    open var id: NSNumber?
+    open var avatarUrl: String?
+    open var username: String?
+    open var name: String?
+    open var state: String?
     
-    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
-        var newKeys: [NSObject : AnyObject] = [
+    open override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any]! {
+        let baseKeys: [AnyHashable: Any] = super.jsonKeyPathsByPropertyKey()
+        let newKeys: [AnyHashable: Any] = [
             "id"        : "id",
             "avatarUrl" : "avatar_url",
             "username"  : "username",

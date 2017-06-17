@@ -24,21 +24,21 @@
 
 import Foundation
 
-public class UserQueryParamBuilder : GeneralQueryParamBuilder, GitLabParamBuildable {
+open class UserQueryParamBuilder : GeneralQueryParamBuilder {
     
-    public func id(userId: UInt) -> Self {
-        if params["id"]? != nil {
+    open func id(_ userId: UInt) -> Self {
+        if params["id"] != nil {
             return self
         }
-        params["id"] = userId
+        params["id"] = userId as AnyObject
         return self
     }
     
     /**
     Other parameters in UserQueryParamBuilder will be ignored if this parameter is true.
     */
-    public func mine(mine: Bool) -> Self {
-        params["mine"] = mine ? true : nil
+    open func mine(_ mine: Bool) -> Self {
+        params["mine"] = (mine ? true : nil) as AnyObject
         return self
     }    
 }

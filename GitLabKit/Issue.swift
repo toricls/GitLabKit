@@ -25,24 +25,24 @@
 import Foundation
 import Mantle
 
-public class Issue: GitLabModel, Fetchable, Creatable, Editable {
-    public var id: NSNumber?
-    public var issueId: NSNumber?
-    public var projectId: NSNumber?
-    public var title: String?
-    public var descriptionText: String?
+open class Issue: GitLabModel, Fetchable, Creatable, Editable {
+    open var id: NSNumber?
+    open var issueId: NSNumber?
+    open var projectId: NSNumber?
+    open var title: String?
+    open var descriptionText: String?
     //public var state: IssueState?
-    public var state: String? // TODO: Use enum instead of String
-    public var createdAt: NSDate?
-    public var updatedAt: NSDate?
-    public var labels: [String]?
-    public var milestone: Milestone?
-    public var assignee: User?
-    public var author: User?
+    open var state: String? // TODO: Use enum instead of String
+    open var createdAt: Date?
+    open var updatedAt: Date?
+    open var labels: [String]?
+    open var milestone: Milestone?
+    open var assignee: User?
+    open var author: User?
     
-    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
-        var newKeys: [NSObject : AnyObject] = [
+    open override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any]! {
+        let baseKeys: [AnyHashable: Any] = super.jsonKeyPathsByPropertyKey()
+        let newKeys: [AnyHashable: Any] = [
             "id"              : "id",
             "issueId"         : "iid",
             "projectId"       : "project_id",
@@ -59,19 +59,19 @@ public class Issue: GitLabModel, Fetchable, Creatable, Editable {
         return baseKeys + newKeys
     }
     
-    class func milestoneJSONTransformer() -> NSValueTransformer {
+    class func milestoneJSONTransformer() -> ValueTransformer {
         return ModelUtil<Milestone>.transformer()
     }
-    class func assigneeJSONTransformer() -> NSValueTransformer {
+    class func assigneeJSONTransformer() -> ValueTransformer {
         return ModelUtil<User>.transformer()
     }
-    class func authorJSONTransformer() -> NSValueTransformer {
+    class func authorJSONTransformer() -> ValueTransformer {
         return ModelUtil<User>.transformer()
     }
-    class func createdAtJSONTransformer() -> NSValueTransformer {
+    class func createdAtJSONTransformer() -> ValueTransformer {
         return dateTimeTransformer
     }
-    class func updatedAtJSONTransformer() -> NSValueTransformer {
+    class func updatedAtJSONTransformer() -> ValueTransformer {
         return dateTimeTransformer
     }
 }

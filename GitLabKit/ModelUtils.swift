@@ -25,47 +25,47 @@
 import Foundation
 import Mantle
 
-var dateTimeTransformer: NSValueTransformer {
-    let dateFormatter = NSDateFormatter()
-    dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+var dateTimeTransformer: ValueTransformer {
+    let dateFormatter = DateFormatter()
+    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-
-    return MTLValueTransformer.reversibleTransformerWithForwardBlock({(value: AnyObject!) -> AnyObject! in
-            if let val = value as? NSString {
-                return dateFormatter.dateFromString(val)
-            }
-            return nil
-        }, reverseBlock: {(value: AnyObject!) -> AnyObject! in
-            if let val = value as? NSDate {
-                return dateFormatter.stringFromDate(val)
+    
+    return MTLValueTransformer.reversibleTransformer(forwardBlock: {(value: Any!) -> Any! in
+        if let val = value as? String {
+            return dateFormatter.date(from: val)
+        }
+        return nil
+    }, reverse: {(value: Any!) -> Any! in
+            if let val = value as? Date {
+                return dateFormatter.string(from: val)
             }
             return nil
     })
 }
 
-var dateTransformer: NSValueTransformer {
-    let dateFormatter = NSDateFormatter()
-    dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+var dateTransformer: ValueTransformer {
+    let dateFormatter = DateFormatter()
+    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
     dateFormatter.dateFormat = "yyyy-MM-dd"
     
-    return MTLValueTransformer.reversibleTransformerWithForwardBlock({(value: AnyObject!) -> AnyObject! in
-            if let val = value as? NSString {
-                return dateFormatter.dateFromString(val)
-            }
-            return nil
-        }, reverseBlock: {(value: AnyObject!) -> AnyObject! in
-            if let val = value as? NSDate {
-                return dateFormatter.stringFromDate(val)
+    return MTLValueTransformer.reversibleTransformer(forwardBlock: {(value: Any!) -> Any! in
+        if let val = value as? String {
+            return dateFormatter.date(from: val)
+        }
+        return nil
+    }, reverse: {(value: Any!) -> Any! in
+            if let val = value as? Date {
+                return dateFormatter.string(from: val)
             }
             return nil
     })
 }
 
 class ModelUtil<T: GitLabModel> {
-    class func transformer() -> NSValueTransformer {
-        return NSValueTransformer.mtl_JSONDictionaryTransformerWithModelClass(T.self)
+    class func transformer() -> ValueTransformer {
+        return ValueTransformer.mtl_JSONDictionaryTransformer(withModelClass: T.self)
     }
-    class func arrayTransformer() -> NSValueTransformer {
-        return NSValueTransformer.mtl_JSONArrayTransformerWithModelClass(T.self)
+    class func arrayTransformer() -> ValueTransformer {
+        return ValueTransformer.mtl_JSONArrayTransformer(withModelClass: T.self)
     }
 }

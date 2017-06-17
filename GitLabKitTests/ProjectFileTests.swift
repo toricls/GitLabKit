@@ -30,9 +30,9 @@ class ProjectFileTests: GitLabKitTests {
     override func setUp() {
         super.setUp()
         
-        OHHTTPStubs.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
+        OHHTTPStubs.stubRequestsPassingTest({ (request: URLRequest!) -> Bool in
             return request.URL.path?.hasPrefix("/api/v3/projects/") == true
-            }, withStubResponse: ( { (request: NSURLRequest!) -> OHHTTPStubsResponse in
+            }, withStubResponse: ( { (request: URLRequest!) -> OHHTTPStubsResponse in
                 var filename: String = "test-error.json"
                 var statusCode: Int32 = 200
                 if let path = request.URL.path {
@@ -53,7 +53,7 @@ class ProjectFileTests: GitLabKitTests {
     https://gitlab.com/help/api/repository_files.md#get-file-from-repository
     */
     func testFetchingProjectFile() {
-        let expectation = self.expectationWithDescription("testFetchingProjectFile")
+        let expectation = self.expectation(description: "testFetchingProjectFile")
         let params = ProjectFileQueryParamBuilder(projectId: 1, filePath: "app/models/key.rb", ref: "master")
         client.get(params, { (response: GitLabResponse<File>?, error: NSError?) -> Void in
             expectation.fulfill()

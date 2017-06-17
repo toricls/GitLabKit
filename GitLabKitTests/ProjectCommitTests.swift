@@ -30,9 +30,9 @@ class ProjectCommitTests: GitLabKitTests {
     override func setUp() {
         super.setUp()
         
-        OHHTTPStubs.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
+        OHHTTPStubs.stubRequestsPassingTest({ (request: URLRequest!) -> Bool in
             return request.URL.path?.hasPrefix("/api/v3/projects/") == true
-            }, withStubResponse: ( { (request: NSURLRequest!) -> OHHTTPStubsResponse in
+            }, withStubResponse: ( { (request: URLRequest!) -> OHHTTPStubsResponse in
                 var filename: String = "test-error.json"
                 var statusCode: Int32 = 200
                 if let path = request.URL.path {
@@ -59,7 +59,7 @@ class ProjectCommitTests: GitLabKitTests {
     https://gitlab.com/help/api/commits.md#list-repository-commits
     */
     func testFetchingProjectCommits() {
-        let expectation = self.expectationWithDescription("testFetchingProjectCommits")
+        let expectation = self.expectation(description: "testFetchingProjectCommits")
         let params = ProjectCommitQueryParamBuilder(projectId: 1)
         client.get(params, { (response: GitLabResponse<Commit>?, error: NSError?) -> Void in
             expectation.fulfill()
@@ -71,7 +71,7 @@ class ProjectCommitTests: GitLabKitTests {
     https://gitlab.com/help/api/commits.md#get-a-single-commit
     */
     func testFetchingProjectCommit() {
-        let expectation = self.expectationWithDescription("testFetchingProjectCommit")
+        let expectation = self.expectation(description: "testFetchingProjectCommit")
         let params = ProjectCommitQueryParamBuilder(projectId: 1).sha("17a738cf8c41af9c01ce28b1e859a7416be6a5f1")
         client.get(params, { (response: GitLabResponse<Commit>?, error: NSError?) -> Void in
             expectation.fulfill()

@@ -24,12 +24,12 @@
 
 import Foundation
 
-public class Member: User {
-    public var accessLevel: NSNumber?
+open class Member: User {
+    open var accessLevel: NSNumber?
     
-    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
-        var newKeys: [NSObject : AnyObject] = [
+    open override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any]! {
+        let baseKeys: [AnyHashable: Any] = super.jsonKeyPathsByPropertyKey()
+        let newKeys: [AnyHashable: Any] = [
             "accessLevel" : "access_level"
         ]
         return baseKeys + newKeys

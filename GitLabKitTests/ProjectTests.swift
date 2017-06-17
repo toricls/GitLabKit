@@ -30,9 +30,9 @@ class ProjectTests: GitLabKitTests {
     override func setUp() {
         super.setUp()
         
-        OHHTTPStubs.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
+        OHHTTPStubs.stubRequestsPassingTest({ (request: URLRequest!) -> Bool in
             return request.URL.path?.hasPrefix("/api/v3/project") == true
-            }, withStubResponse: ( { (request: NSURLRequest!) -> OHHTTPStubsResponse in
+            }, withStubResponse: ( { (request: URLRequest!) -> OHHTTPStubsResponse in
                 var filename: String = "test-error.json"
                 var statusCode: Int32 = 200
                 if let path = request.URL.path {
@@ -60,7 +60,7 @@ class ProjectTests: GitLabKitTests {
     https://gitlab.com/help/api/projects.md#list-projects
     */
     func testFetchingProjects() {
-        let expectation = self.expectationWithDescription("testFetchingProjects")
+        let expectation = self.expectation(description: "testFetchingProjects")
         let params = ProjectQueryParamBuilder()
         client.get(params, { (response: GitLabResponse<Project>?, error: NSError?) -> Void in
             expectation.fulfill()
@@ -72,7 +72,7 @@ class ProjectTests: GitLabKitTests {
      https://gitlab.com/help/api/projects.md#list-owned-projects
      */
     func testFetchingProjectsOwned() {
-        let expectation = self.expectationWithDescription("testFetchingProjectsOwned")
+        let expectation = self.expectation(description: "testFetchingProjectsOwned")
         let params = ProjectQueryParamBuilder().owned(true)
         client.get(params, { (response: GitLabResponse<Project>?, error: NSError?) -> Void in
             expectation.fulfill()
@@ -84,7 +84,7 @@ class ProjectTests: GitLabKitTests {
     https://gitlab.com/help/api/projects.md#get-single-project
     */
     func testFetchingProjectById() {
-        let expectation = self.expectationWithDescription("testFetchingProjectById")
+        let expectation = self.expectation(description: "testFetchingProjectById")
         let params = ProjectQueryParamBuilder().id(10)
         client.get(params, { (response: GitLabResponse<Project>?, error: NSError?) -> Void in
             expectation.fulfill()
@@ -96,7 +96,7 @@ class ProjectTests: GitLabKitTests {
     https://gitlab.com/help/api/projects.md#get-single-project
     */
     func testFetchingProjectByName() {
-        let expectation = self.expectationWithDescription("testFetchingProjectByName")
+        let expectation = self.expectation(description: "testFetchingProjectByName")
         let params = ProjectQueryParamBuilder().nameAndNamespace("project", namespace: "single")
         client.get(params, { (response: GitLabResponse<Project>?, error: NSError?) -> Void in
             expectation.fulfill()

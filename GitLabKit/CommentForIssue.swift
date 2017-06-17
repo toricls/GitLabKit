@@ -24,16 +24,16 @@
 
 import Foundation
 
-public class CommentForIssue: GitLabModel, Fetchable {
-    public var id: NSNumber?
-    public var body: String?
-    public var attachment: String?
-    public var author: User?
-    public var createdAt: NSDate?
+open class CommentForIssue: GitLabModel, Fetchable {
+    open var id: NSNumber?
+    open var body: String?
+    open var attachment: String?
+    open var author: User?
+    open var createdAt: Date?
     
-    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
-        var newKeys: [NSObject : AnyObject] = [
+    open override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any]! {
+        let baseKeys: [AnyHashable: Any] = super.jsonKeyPathsByPropertyKey()
+        let newKeys: [AnyHashable: Any] = [
             "id"         : "id",
             "body"       : "body",
             "attachment" : "attachment",
@@ -43,7 +43,7 @@ public class CommentForIssue: GitLabModel, Fetchable {
         return baseKeys + newKeys
     }
     
-    class func authorJSONTransformer() -> NSValueTransformer {
+    class func authorJSONTransformer() -> ValueTransformer {
         return ModelUtil<User>.transformer()
     }
 }

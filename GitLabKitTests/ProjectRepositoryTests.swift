@@ -30,9 +30,9 @@ class ProjectRepositoryTests: GitLabKitTests {
     override func setUp() {
         super.setUp()
         
-        OHHTTPStubs.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
+        OHHTTPStubs.stubRequestsPassingTest({ (request: URLRequest!) -> Bool in
             return request.URL.path?.hasPrefix("/api/v3/projects/") == true
-            }, withStubResponse: ( { (request: NSURLRequest!) -> OHHTTPStubsResponse in
+            }, withStubResponse: ( { (request: URLRequest!) -> OHHTTPStubsResponse in
                 var filename: String = "test-error.json"
                 var statusCode: Int32 = 200
                 if let path = request.URL.path {
@@ -55,7 +55,7 @@ class ProjectRepositoryTests: GitLabKitTests {
     https://gitlab.com/help/api/repositories.md#list-project-repository-tags
     */
     func testFetchingProjectRepositoryTags() {
-        let expectation = self.expectationWithDescription("testFetchingProjectRepositoryTags")
+        let expectation = self.expectation(description: "testFetchingProjectRepositoryTags")
         let params = ProjectTagQueryParamBuilder(projectId: 1)
         client.get(params, { (response: GitLabResponse<Tag>?, error: NSError?) -> Void in
             expectation.fulfill()
@@ -69,7 +69,7 @@ class ProjectRepositoryTests: GitLabKitTests {
     https://gitlab.com/help/api/repositories.md#list-repository-tree
     */
     func testFetchingProjectRepositoryTree() {
-        let expectation = self.expectationWithDescription("testFetchingProjectRepositoryTree")
+        let expectation = self.expectation(description: "testFetchingProjectRepositoryTree")
         let params = ProjectTreeQueryParamBuilder(projectId: 1)
         client.get(params, { (response: GitLabResponse<Tree>?, error: NSError?) -> Void in
             expectation.fulfill()

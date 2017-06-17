@@ -24,22 +24,22 @@
 
 import Foundation
 
-public class GitLabResponse<T: GitLabModel> {
+open class GitLabResponse<T: GitLabModel> {
     
     init(resultArray: [T]?, linkObject: GitLabLinkObject?) {
         self.result = resultArray
         self.linkObject = linkObject
     }
     
-    private(set) var result: [T]?
-    private(set) var linkObject: GitLabLinkObject?
+    fileprivate(set) var result: [T]?
+    fileprivate(set) var linkObject: GitLabLinkObject?
     
 }
 
-public class GitLabCreateResponse<T: GitLabModel> {
+open class GitLabCreateResponse<T: GitLabModel> {
     var result: T?
 }
 
-public class GitLabUpdateResponse<T: GitLabModel> {
+open class GitLabUpdateResponse<T: GitLabModel> {
     var result: T?
 }
