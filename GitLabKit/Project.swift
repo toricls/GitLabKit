@@ -25,57 +25,57 @@
 import Foundation
 import Mantle
 
-public class Project: GitLabModel, Fetchable, Creatable, Editable, Deletable {
+open class Project: GitLabModel, Fetchable, Creatable, Editable, Deletable {
     
-    public var id: NSNumber?
-    public var descriptionText: String? // "description" as a property name is not allowed by compiler
-    public var defaultBranch: String?
-    public var _isPublic: NSNumber?
-    public var isPublic: Bool {
-        get { return _isPublic? != nil ? _isPublic!.boolValue : false }
-        set { _isPublic = NSNumber(bool: newValue)}
+    open var id: NSNumber?
+    open var descriptionText: String? // "description" as a property name is not allowed by compiler
+    open var defaultBranch: String?
+    open var _isPublic: NSNumber?
+    open var isPublic: Bool {
+        get { return _isPublic != nil ? _isPublic!.boolValue : false }
+        set { _isPublic = NSNumber(value: newValue as Bool)}
     }
-    public var visibilityLevel: NSNumber?
-    public var sshUrlToRepo: String?
-    public var httpUrlToRepo: String?
-    public var webUrl: String?
-    public var owner: User?
-    public var name: String?
-    public var nameWithNamespace: String?
-    public var path: String?
-    public var pathWithNamespace: String?
-    public var _issuesEnabled: NSNumber?
-    public var issuesEnabled: Bool {
-        get { return _issuesEnabled? != nil ? _issuesEnabled!.boolValue : false }
-        set { _issuesEnabled = NSNumber(bool: newValue)}
+    open var visibilityLevel: NSNumber?
+    open var sshUrlToRepo: String?
+    open var httpUrlToRepo: String?
+    open var webUrl: String?
+    open var owner: User?
+    open var name: String?
+    open var nameWithNamespace: String?
+    open var path: String?
+    open var pathWithNamespace: String?
+    open var _issuesEnabled: NSNumber?
+    open var issuesEnabled: Bool {
+        get { return _issuesEnabled != nil ? _issuesEnabled!.boolValue : false }
+        set { _issuesEnabled = NSNumber(value: newValue as Bool)}
     }
-    public var _mergeRequestsEnabled: NSNumber?
-    public var mergeRequestsEnabled: Bool {
-        get { return _mergeRequestsEnabled? != nil ? _mergeRequestsEnabled!.boolValue : false }
-        set { _mergeRequestsEnabled = NSNumber(bool: newValue)}
+    open var _mergeRequestsEnabled: NSNumber?
+    open var mergeRequestsEnabled: Bool {
+        get { return _mergeRequestsEnabled != nil ? _mergeRequestsEnabled!.boolValue : false }
+        set { _mergeRequestsEnabled = NSNumber(value: newValue as Bool)}
     }
-    public var _wikiEnabled: NSNumber?
-    public var wikiEnabled: Bool {
-        get { return _wikiEnabled? != nil ? _wikiEnabled!.boolValue : false }
-        set { _wikiEnabled = NSNumber(bool: newValue)}
+    open var _wikiEnabled: NSNumber?
+    open var wikiEnabled: Bool {
+        get { return _wikiEnabled != nil ? _wikiEnabled!.boolValue : false }
+        set { _wikiEnabled = NSNumber(value: newValue as Bool)}
     }
-    public var _snippetsEnabled: NSNumber?
-    public var snippetsEnabled: Bool {
-        get { return _snippetsEnabled? != nil ? _snippetsEnabled!.boolValue : false }
-        set { _snippetsEnabled = NSNumber(bool: newValue)}
+    open var _snippetsEnabled: NSNumber?
+    open var snippetsEnabled: Bool {
+        get { return _snippetsEnabled != nil ? _snippetsEnabled!.boolValue : false }
+        set { _snippetsEnabled = NSNumber(value: newValue as Bool)}
     }
-    public var createdAt: NSDate?
-    public var lastActivityAt: NSDate?
-    public var namespace: Namespace?
-    public var _archived: NSNumber?
-    public var archived: Bool {
-        get { return _archived? != nil ? _archived!.boolValue : false }
-        set { _archived = NSNumber(bool: newValue)}
+    open var createdAt: Date?
+    open var lastActivityAt: Date?
+    open var namespace: Namespace?
+    open var _archived: NSNumber?
+    open var archived: Bool {
+        get { return _archived != nil ? _archived!.boolValue : false }
+        set { _archived = NSNumber(value: newValue as Bool)}
     }
     
-    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
-        var newKeys: [NSObject : AnyObject] = [
+    open override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any]! {
+        let baseKeys: [AnyHashable: Any] = super.jsonKeyPathsByPropertyKey()
+        let newKeys: [AnyHashable: Any] = [
             "id"                    : "id",
             "descriptionText"       : "description",
             "defaultBranch"         : "default_branch",
@@ -101,16 +101,16 @@ public class Project: GitLabModel, Fetchable, Creatable, Editable, Deletable {
         return baseKeys + newKeys
     }
     
-    class func ownerJSONTransformer() -> NSValueTransformer {
+    class func ownerJSONTransformer() -> ValueTransformer {
         return ModelUtil<User>.transformer()
     }
-    class func namespaceJSONTransformer() -> NSValueTransformer {
+    class func namespaceJSONTransformer() -> ValueTransformer {
         return ModelUtil<Namespace>.transformer()
     }
-    class func createdAtJSONTransformer() -> NSValueTransformer {
+    class func createdAtJSONTransformer() -> ValueTransformer {
         return dateTimeTransformer
     }
-    class func lastActivityAtJSONTransformer() -> NSValueTransformer {
+    class func lastActivityAtJSONTransformer() -> ValueTransformer {
         return dateTimeTransformer
     }
 }

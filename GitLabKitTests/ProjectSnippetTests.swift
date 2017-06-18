@@ -30,12 +30,12 @@ class ProjectSnippetTests: GitLabKitTests {
     override func setUp() {
         super.setUp()
         
-        OHHTTPStubs.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
-            return request.URL.path?.hasPrefix("/api/v3/projects/") == true
-            }, withStubResponse: ( { (request: NSURLRequest!) -> OHHTTPStubsResponse in
+        OHHTTPStubs.stubRequests(passingTest: { (request: URLRequest!) -> Bool in
+            return request.url?.path.hasPrefix("/api/v3/projects/") == true
+            }, withStubResponse: ( { (request: URLRequest!) -> OHHTTPStubsResponse in
                 var filename: String = "test-error.json"
                 var statusCode: Int32 = 200
-                if let path = request.URL.path {
+                if let path = request.url?.path {
                     switch path {
                     case let "/api/v3/projects/1/snippets":
                         filename = "project-snippets.json"
@@ -44,7 +44,7 @@ class ProjectSnippetTests: GitLabKitTests {
                     case let "/api/v3/projects/1/snippets/1/raw":
                         filename = "project-snippet-raw.json"
                     default:
-                        Logger.log("Unknown path: \(path)")
+                        Logger.log("Unknown path: \(path)" as AnyObject)
                         statusCode = 500
                         break
                     }
@@ -57,39 +57,39 @@ class ProjectSnippetTests: GitLabKitTests {
     https://gitlab.com/help/api/project_snippets.md#list-snippets
     */
     func testFetchingProjectSnippets() {
-        let expectation = self.expectationWithDescription("testFetchingProjectSnippets")
+        let expectation = self.expectation(description: "testFetchingProjectSnippets")
         let params = ProjectSnippetQueryParamBuilder(projectId: 1)
-        client.get(params, { (response: GitLabResponse<Snippet>?, error: NSError?) -> Void in
+        client.get(params, handler: { (response: GitLabResponse<Snippet>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
-        self.waitForExpectationsWithTimeout(5, nil)
+        self.waitForExpectations(timeout: 5, handler: nil)
     }
     
     /**
     https://gitlab.com/help/api/project_snippets.md#single-snippet
     */
     func testFetchingProjectSnippet() {
-        let expectation = self.expectationWithDescription("testFetchingProjectSnippet")
+        let expectation = self.expectation(description: "testFetchingProjectSnippet")
         let params = ProjectSnippetQueryParamBuilder(projectId: 1).snippetId(1)
-        client.get(params, { (response: GitLabResponse<Snippet>?, error: NSError?) -> Void in
+        client.get(params, handler: { (response: GitLabResponse<Snippet>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
-        self.waitForExpectationsWithTimeout(5, nil)
+        self.waitForExpectations(timeout: 5, handler: nil)
     }
     
     /**
     https://gitlab.com/help/api/project_snippets.md#snippet-content
     */
     func testFetchingProjectSnippetContent() {
-        let expectation = self.expectationWithDescription("testFetchingProjectSnippetContent")
+        let expectation = self.expectation(description: "testFetchingProjectSnippetContent")
         let params = ProjectSnippetQueryParamBuilder(projectId: 1).snippetId(1)
-        client.get(params, { (response: GitLabResponse<SnippetContent>?, error: NSError?) -> Void in
+        client.get(params, handler: { (response: GitLabResponse<SnippetContent>?, error: NSError?) -> Void in
             if let snippet = response?.result![0] {
-                println(snippet.content)
+                print(snippet.content)
             }
             expectation.fulfill()
         })
-        self.waitForExpectationsWithTimeout(5, nil)
+        self.waitForExpectations(timeout: 5, handler: nil)
     }
     
     // TODO: https://gitlab.com/help/api/projects.md#protect-single-branch

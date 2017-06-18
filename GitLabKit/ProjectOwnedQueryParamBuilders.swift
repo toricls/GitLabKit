@@ -24,42 +24,42 @@
 
 import Foundation
 
-public class ProjectOwnedQueryParamBuilder: GeneralQueryParamBuilder, GitLabParamBuildable {
+open class ProjectOwnedQueryParamBuilder: GeneralQueryParamBuilder {
     
     init(projectId: UInt) {
         super.init()
-        params["projectId"] = projectId
+        params["projectId"] = projectId as AnyObject
     }
     init(projectName: String, namespace: String) {
         super.init()
-        params["namespaceAndName"] = "\(namespace)/\(projectName)"
+        params["namespaceAndName"] = "\(namespace)/\(projectName)" as AnyObject
     }
     
 }
 
 // MARK: ProjectIssues
 
-public class ProjectIssueQueryParamBuilder : IssueQueryParamBuilder {
+open class ProjectIssueQueryParamBuilder : IssueQueryParamBuilder {
     init(projectId: UInt) {
         super.init()
-        params["projectId"] = projectId
+        params["projectId"] = projectId as AnyObject
     }
     init(projectName: String, namespace: String) {
         super.init()
-        params["namespaceAndName"] = "\(namespace)/\(projectName)"
+        params["namespaceAndName"] = "\(namespace)/\(projectName)" as AnyObject
     }
     
-    public func issueId(issueId: UInt) -> Self {
-        if params["issueId"]? != nil {
+    open func issueId(_ issueId: UInt) -> Self {
+        if params["issueId"] != nil {
             return self
         }
-        params["issueId"] = issueId
+        params["issueId"] = issueId as AnyObject
         return self
     }
     
-    public func milestone(milestone: String) -> Self {
+    open func milestone(_ milestone: String) -> Self {
         if !milestone.isEmpty {
-            params["milestone"] = milestone.trim()
+            params["milestone"] = milestone.trim() as AnyObject
         }
         return self
     }
@@ -67,36 +67,36 @@ public class ProjectIssueQueryParamBuilder : IssueQueryParamBuilder {
 
 // MARK: ProjectMembers
 
-public class ProjectMemberQueryParamBuilder : ProjectOwnedQueryParamBuilder {
-    public func userId(userId: UInt) -> Self {
-        if params["userId"]? != nil {
+open class ProjectMemberQueryParamBuilder : ProjectOwnedQueryParamBuilder {
+    open func userId(_ userId: UInt) -> Self {
+        if params["userId"] != nil {
             return self
         }
-        params["userId"] = userId
+        params["userId"] = userId as AnyObject
         return self
     }
 }
 
 // MARK: ProjectEvents
 
-public class ProjectEventQueryParamBuilder: ProjectOwnedQueryParamBuilder {}
+open class ProjectEventQueryParamBuilder: ProjectOwnedQueryParamBuilder {}
 
 // MARK: ProjectMergeRequests
 
-public class ProjectMergeRequestQueryParamBuilder: ProjectOwnedQueryParamBuilder {
+open class ProjectMergeRequestQueryParamBuilder: ProjectOwnedQueryParamBuilder {
     
-    public func state(state: MergeRequestState) -> Self {
-        params["state"] = state.rawValue
+    open func state(_ state: MergeRequestState) -> Self {
+        params["state"] = state.rawValue as AnyObject
         return self
     }
     
-    public func orderBy(order: MergeRequestOrderBy?) -> Self {
-        params["order_by"] = order? == nil ? nil : order!.rawValue
+    open func orderBy(_ order: MergeRequestOrderBy?) -> Self {
+        params["order_by"] = order?.rawValue as AnyObject
         return self
     }
     
-    public func sort(sort: MergeRequestSort?) -> Self {
-        params["sort"] = sort? == nil ? nil : sort!.rawValue
+    open func sort(_ sort: MergeRequestSort?) -> Self {
+        params["sort"] = sort?.rawValue as AnyObject
         return self
     }
     
@@ -104,43 +104,44 @@ public class ProjectMergeRequestQueryParamBuilder: ProjectOwnedQueryParamBuilder
 
 // MARK: ProjectBranches
 
-public class ProjectBranchQueryParamBuilder : ProjectOwnedQueryParamBuilder {
-    public func branchName(name: String) -> Self {
-        if params["name"]? != nil {
+open class ProjectBranchQueryParamBuilder : ProjectOwnedQueryParamBuilder {
+    open func branchName(_ name: String) -> Self {
+        if params["name"] != nil {
             return self
         }
-        params["name"] = name
+        
+        params["name"] = name as AnyObject
         return self
     }
 }
 
 // MARK: ProjectHooks
 
-public class ProjectHookQueryParamBuilder: ProjectOwnedQueryParamBuilder {
-    public func hookId(hookId: UInt) -> Self {
-        if params["hookId"]? != nil {
+open class ProjectHookQueryParamBuilder: ProjectOwnedQueryParamBuilder {
+    open func hookId(_ hookId: UInt) -> Self {
+        if params["hookId"] != nil {
             return self
         }
-        params["hookId"] = hookId
+        params["hookId"] = hookId as AnyObject
         return self
     }
 }
 
 // MARK: ProjectSnippets
 
-public class ProjectSnippetQueryParamBuilder: ProjectOwnedQueryParamBuilder {
-    public func snippetId(snippetId: UInt) -> Self {
-        if params["snippetId"]? != nil {
+open class ProjectSnippetQueryParamBuilder: ProjectOwnedQueryParamBuilder {
+    open func snippetId(_ snippetId: UInt) -> Self {
+        if params["snippetId"] != nil {
             return self
         }
-        params["snippetId"] = snippetId
+        params["snippetId"] = snippetId as AnyObject
         return self
     }
 }
 
 // MARK: ProjectFiles
 
-public class ProjectFileQueryParamBuilder: GeneralQueryParamBuilder, GitLabParamBuildable {
+open class ProjectFileQueryParamBuilder: GeneralQueryParamBuilder {
     /**
     initializer
     
@@ -152,32 +153,32 @@ public class ProjectFileQueryParamBuilder: GeneralQueryParamBuilder, GitLabParam
     */
     init(projectId: UInt, filePath: String, ref: String) {
         super.init()
-        params["projectId"] = projectId
-        params["file_path"] = filePath
-        params["ref"] = ref
+        params["projectId"] = projectId as AnyObject
+        params["file_path"] = filePath as AnyObject
+        params["ref"] = ref as AnyObject
     }
     init(projectName: String, namespace: String, filePath: String, ref: String) {
         super.init()
-        params["namespaceAndName"] = "\(namespace)/\(projectName)"
-        params["file_path"] = filePath
-        params["ref"] = ref
+        params["namespaceAndName"] = "\(namespace)/\(projectName)" as AnyObject
+        params["file_path"] = filePath as AnyObject
+        params["ref"] = ref as AnyObject
     }
 }
 
 // MARK: ProjectTags
 
-public class ProjectTagQueryParamBuilder: ProjectOwnedQueryParamBuilder {}
+open class ProjectTagQueryParamBuilder: ProjectOwnedQueryParamBuilder {}
 
 // MARK: ProjectTrees
 
-public class ProjectTreeQueryParamBuilder: ProjectOwnedQueryParamBuilder {
+open class ProjectTreeQueryParamBuilder: ProjectOwnedQueryParamBuilder {
     /**
     Specify the path inside repository
     
     :param: path The path inside repository. Used to get contend of subdirectories
     */
-    public func path(path: String) -> Self {
-        params["path"] = path
+    open func path(_ path: String) -> Self {
+        params["path"] = path as AnyObject
         return self
     }
     
@@ -186,95 +187,95 @@ public class ProjectTreeQueryParamBuilder: ProjectOwnedQueryParamBuilder {
     
     :param: refName The name of a repository branch or tag or if not given the default branch
     */
-    public func refName(refName: String) -> Self {
-        params["refName"] = refName
+    open func refName(_ refName: String) -> Self {
+        params["refName"] = refName as AnyObject
         return self
     }
 }
 
 // MARK: ProjectCommits
 
-public class ProjectCommitQueryParamBuilder: ProjectOwnedQueryParamBuilder {
+open class ProjectCommitQueryParamBuilder: ProjectOwnedQueryParamBuilder {
     /**
     Specify the name of a repository branch or tag
     
     :param: refName The name of a repository branch or tag or if not given the default branch
     */
-    public func refName(refName: String) -> Self {
-        params["refName"] = refName
+    open func refName(_ refName: String) -> Self {
+        params["refName"] = refName as AnyObject
         return self
     }
     
-    public func sha(sha: String) -> Self {
-        params["sha"] = sha
+    open func sha(_ sha: String) -> Self {
+        params["sha"] = sha as AnyObject
         return self
     }
 }
 
 // MARK: Comment For ProjectCommits
 
-public class ProjectCommentForCommitQueryParamBuilder: GeneralQueryParamBuilder, GitLabParamBuildable {
+open class ProjectCommentForCommitQueryParamBuilder: GeneralQueryParamBuilder {
     init(projectId: UInt, commitSha: String) {
         super.init()
-        params["projectId"] = projectId
-        params["sha"] = commitSha
+        params["projectId"] = projectId as AnyObject
+        params["sha"] = commitSha as AnyObject
     }
     init(projectName: String, namespace: String, commitSha: String) {
         super.init()
-        params["namespaceAndName"] = "\(namespace)/\(projectName)"
-        params["sha"] = commitSha
+        params["namespaceAndName"] = "\(namespace)/\(projectName)" as AnyObject
+        params["sha"] = commitSha as AnyObject
     }
 }
 
 // MARK: Comment For ProjectIssues
 
-public class ProjectCommentForIssueQueryParamBuilder : IssueQueryParamBuilder {
+open class ProjectCommentForIssueQueryParamBuilder : IssueQueryParamBuilder {
     init(projectId: UInt, issueId: UInt) {
         super.init()
-        params["projectId"] = projectId
-        params["issueId"] = issueId
+        params["projectId"] = projectId as AnyObject
+        params["issueId"] = issueId as AnyObject
     }
     init(projectName: String, namespace: String, issueId: UInt) {
         super.init()
-        params["namespaceAndName"] = "\(namespace)/\(projectName)"
-        params["issueId"] = issueId
+        params["namespaceAndName"] = "\(namespace)/\(projectName)" as AnyObject
+        params["issueId"] = issueId as AnyObject
     }
     
-    public func noteId(noteId: String) -> Self {
-        if params["noteId"]? != nil {
+    open func noteId(_ noteId: String) -> Self {
+        if params["noteId"] != nil {
             return self
         }
-        params["noteId"] = noteId
+        params["noteId"] = noteId as AnyObject
         return self
     }
 }
 
 // MARK: Comment For ProjectSnippets
 
-public class ProjectCommentForSnippetQueryParamBuilder : IssueQueryParamBuilder {
+open class ProjectCommentForSnippetQueryParamBuilder : IssueQueryParamBuilder {
     init(projectId: UInt, snippetId: UInt) {
         super.init()
-        params["projectId"] = projectId
-        params["snippetId"] = snippetId
+        params["projectId"] = projectId as AnyObject
+        params["snippetId"] = snippetId as AnyObject
     }
     init(projectName: String, namespace: String, snippetId: UInt) {
         super.init()
-        params["namespaceAndName"] = "\(namespace)/\(projectName)"
-        params["snippetId"] = snippetId
+        params["namespaceAndName"] = "\(namespace)/\(projectName)" as AnyObject
+        params["snippetId"] = snippetId as AnyObject
     }
     
-    public func noteId(noteId: String) -> Self {
-        if params["noteId"]? != nil {
+    open func noteId(_ noteId: String) -> Self {
+        if params["noteId"] != nil {
             return self
         }
-        params["noteId"] = noteId
+        params["noteId"] = noteId as AnyObject
         return self
     }
 }
 
 // MARK: ProjectDiff
 
-public class ProjectDiffQueryParamBuilder: ProjectCommentForCommitQueryParamBuilder {}
+open class ProjectDiffQueryParamBuilder: ProjectCommentForCommitQueryParamBuilder {}
 
 // MARK: ProjectRawfile
 // TODO: Handle Project Rawfile

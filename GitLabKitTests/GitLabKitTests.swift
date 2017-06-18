@@ -30,9 +30,13 @@ let GitLabKitTestsErrorDomain = "io.orih.GitLabKitTests.error"
 class GitLabKitTests: XCTestCase {
   
     // To get a fixture from filename.
-    func resolvePath(fileName: String) -> String {
-        let bundle: NSBundle = NSBundle(forClass: GitLabKitTests.self)
-        let path: String = bundle.pathForResource(fileName.stringByDeletingPathExtension, ofType: fileName.pathExtension)!
+    func resolvePath(_ fileName: String) -> String {
+        let bundle: Bundle = Bundle(for: GitLabKitTests.self)
+        let nsFileName: NSString = fileName as NSString
+        // url.deletingLastPathComponent().path, url.deletingPathExtension().lastPathComponent, url.pathExtension
+        let path: String = bundle.path(
+            forResource: nsFileName.deletingPathExtension,
+            ofType: nsFileName.pathExtension)!
         return path
     }
     

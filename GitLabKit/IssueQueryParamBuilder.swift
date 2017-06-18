@@ -24,16 +24,16 @@
 
 import Foundation
 
-public class IssueQueryParamBuilder : GeneralQueryParamBuilder, GitLabParamBuildable {
+open class IssueQueryParamBuilder : GeneralQueryParamBuilder {
     
-    public func state(state: IssueState) -> Self {
-        params["state"] = state.rawValue
+    open func state(_ state: IssueState) -> Self {
+        params["state"] = state.rawValue as AnyObject
         return self
     }
     
-    public func label(labels: [String]) -> Self {
+    open func label(_ labels: [String]) -> Self {
         if labels.count > 0 {
-            params["labels"] = ",".join(labels)
+            params["labels"] = labels.joined(separator: ",") as AnyObject
         }
         return self
     }

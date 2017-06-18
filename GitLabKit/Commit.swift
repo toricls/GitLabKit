@@ -24,23 +24,23 @@
 
 import Foundation
 
-public class Commit: GitLabModel, Fetchable {
-    public var id: String?
-    public var shortId: String?
-    public var title: String?
-    public var authorName: String?
-    public var authorEmail: String?
-    public var message: String?
-    public var createdAt: NSDate?
+open class Commit: GitLabModel, Fetchable {
+    open var id: String?
+    open var shortId: String?
+    open var title: String?
+    open var authorName: String?
+    open var authorEmail: String?
+    open var message: String?
+    open var createdAt: Date?
     
     // for single commit only
-    public var committedDate: NSDate?
-    public var authoredDate: NSDate?
-    public var parentIds: [String]?
+    open var committedDate: Date?
+    open var authoredDate: Date?
+    open var parentIds: [String]?
     
-    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
-        var newKeys: [NSObject : AnyObject] = [
+    open override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any]! {
+        let baseKeys: [AnyHashable: Any] = super.jsonKeyPathsByPropertyKey()
+        let newKeys: [AnyHashable: Any] = [
             "id"            : "id",
             "shortId"       : "short_id",
             "title"         : "title",
@@ -55,13 +55,13 @@ public class Commit: GitLabModel, Fetchable {
         ]
         return baseKeys + newKeys
     }
-    class func createdAtJSONTransformer() -> NSValueTransformer {
+    class func createdAtJSONTransformer() -> ValueTransformer {
         return dateTimeTransformer
     }
-    class func committedDateJSONTransformer() -> NSValueTransformer {
+    class func committedDateJSONTransformer() -> ValueTransformer {
         return dateTimeTransformer
     }
-    class func authoredDateJSONTransformer() -> NSValueTransformer {
+    class func authoredDateJSONTransformer() -> ValueTransformer {
         return dateTimeTransformer
     }
 }

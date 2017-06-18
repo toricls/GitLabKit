@@ -1,11 +1,16 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :osx, '10.9'
+platform :osx, '10.12'
 
-pod 'Alamofire', :git => "https://github.com/mrackwitz/Alamofire.git", :branch => "podspec"
-pod 'Mantle', '~> 1.5'
+use_frameworks!
 
-# comment out targetting, it could be https://github.com/CocoaPods/swift/issues/3#issuecomment-66896489
-#target :GitLabKitTests, :exclusive => true do
-  pod 'OHHTTPStubs', '~> 3.1.10'
-#end
+target 'GitLabKit' do
+  pod 'Alamofire', '~> 4.4'
+  pod 'Mantle', '~> 1.5'
+  pod 'OHHTTPStubs', '~> 6.0.0'
+  pod 'OHHTTPStubs/Swift', '~> 6.0.0'
+
+  target 'GitLabKitTests' do
+    inherit! :search_paths    
+  end
+end

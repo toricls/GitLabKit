@@ -30,17 +30,17 @@ class ProjectEventTests: GitLabKitTests {
     override func setUp() {
         super.setUp()
         
-        OHHTTPStubs.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
-            return request.URL.path?.hasPrefix("/api/v3/projects/") == true
-            }, withStubResponse: ( { (request: NSURLRequest!) -> OHHTTPStubsResponse in
+        OHHTTPStubs.stubRequests(passingTest: { (request: URLRequest!) -> Bool in
+            return request.url?.path.hasPrefix("/api/v3/projects/") == true
+            }, withStubResponse: ( { (request: URLRequest!) -> OHHTTPStubsResponse in
                 var filename: String = "test-error.json"
                 var statusCode: Int32 = 200
-                if let path = request.URL.path {
+                if let path = request.url?.path {
                     switch path {
                     case let "/api/v3/projects/31/events":
                         filename = "project-events.json"
                     default:
-                        Logger.log("Unknown path: \(path)")
+                        Logger.log("Unknown path: \(path)" as AnyObject)
                         statusCode = 500
                         break
                     }
@@ -53,12 +53,12 @@ class ProjectEventTests: GitLabKitTests {
     https://gitlab.com/help/api/projects.md#get-project-events
      */
     func testFetchingProjectEvents() {
-        let expectation = self.expectationWithDescription("testFetchingProjectEvents")
+        let expectation = self.expectation(description: "testFetchingProjectEvents")
         let params = ProjectEventQueryParamBuilder(projectId: 31)
-        client.get(params, { (response: GitLabResponse<Event>?, error: NSError?) -> Void in
+        client.get(params, handler: { (response: GitLabResponse<Event>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
-        self.waitForExpectationsWithTimeout(5, nil)
+        self.waitForExpectations(timeout: 5, handler: nil)
     }
 
     override func tearDown() {

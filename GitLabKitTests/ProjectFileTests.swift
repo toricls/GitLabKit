@@ -30,17 +30,17 @@ class ProjectFileTests: GitLabKitTests {
     override func setUp() {
         super.setUp()
         
-        OHHTTPStubs.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
-            return request.URL.path?.hasPrefix("/api/v3/projects/") == true
-            }, withStubResponse: ( { (request: NSURLRequest!) -> OHHTTPStubsResponse in
+        OHHTTPStubs.stubRequests(passingTest: { (request: URLRequest!) -> Bool in
+            return request.url?.path.hasPrefix("/api/v3/projects/") == true
+            }, withStubResponse: ( { (request: URLRequest!) -> OHHTTPStubsResponse in
                 var filename: String = "test-error.json"
                 var statusCode: Int32 = 200
-                if let path = request.URL.path {
+                if let path = request.url?.path {
                     switch path {
                     case let "/api/v3/projects/1/repository/files":
                         filename = "project-file.json"
                     default:
-                        Logger.log("Unknown path: \(path)")
+                        Logger.log("Unknown path: \(path)" as AnyObject)
                         statusCode = 500
                         break
                     }
@@ -53,12 +53,12 @@ class ProjectFileTests: GitLabKitTests {
     https://gitlab.com/help/api/repository_files.md#get-file-from-repository
     */
     func testFetchingProjectFile() {
-        let expectation = self.expectationWithDescription("testFetchingProjectFile")
+        let expectation = self.expectation(description: "testFetchingProjectFile")
         let params = ProjectFileQueryParamBuilder(projectId: 1, filePath: "app/models/key.rb", ref: "master")
-        client.get(params, { (response: GitLabResponse<File>?, error: NSError?) -> Void in
+        client.get(params, handler: { (response: GitLabResponse<File>?, error: NSError?) -> Void in
             expectation.fulfill()
         })
-        self.waitForExpectationsWithTimeout(5, nil)
+        self.waitForExpectations(timeout: 5, handler: nil)
     }
     
     // TODO: https://gitlab.com/help/api/repository_files.md#create-new-file-in-repository

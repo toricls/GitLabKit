@@ -24,20 +24,20 @@
 
 import Foundation
 
-public class Milestone: GitLabModel, Fetchable {
-    public var id: NSNumber?
-    public var milestoneId: NSNumber?
-    public var projectId: NSNumber?
-    public var title: String?
-    public var descriptionText: String?
-    public var state: String?
-    public var createdAt: NSDate?
-    public var updatedAt: NSDate?
-    public var dueDate: NSDate?
+open class Milestone: GitLabModel, Fetchable {
+    open var id: NSNumber?
+    open var milestoneId: NSNumber?
+    open var projectId: NSNumber?
+    open var title: String?
+    open var descriptionText: String?
+    open var state: String?
+    open var createdAt: Date?
+    open var updatedAt: Date?
+    open var dueDate: Date?
     
-    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
-        var newKeys: [NSObject : AnyObject] = [
+    open override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any]! {
+        let baseKeys: [AnyHashable: Any] = super.jsonKeyPathsByPropertyKey()
+        let newKeys: [AnyHashable: Any] = [
             "id"              : "id",
             "milestoneId"     : "iid",
             "projectId"       : "project_id",
@@ -51,13 +51,13 @@ public class Milestone: GitLabModel, Fetchable {
         return baseKeys + newKeys
     }
     
-    class func createdAtJSONTransformer() -> NSValueTransformer {
+    class func createdAtJSONTransformer() -> ValueTransformer {
         return dateTimeTransformer
     }
-    class func updatedAtJSONTransformer() -> NSValueTransformer {
+    class func updatedAtJSONTransformer() -> ValueTransformer {
         return dateTimeTransformer
     }
-    class func dueDateJSONTransformer() -> NSValueTransformer {
+    class func dueDateJSONTransformer() -> ValueTransformer {
         return dateTransformer
     }
 }

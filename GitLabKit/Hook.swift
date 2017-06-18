@@ -24,30 +24,30 @@
 
 import Foundation
 
-public class Hook: GitLabModel, Fetchable {
-    public var id: NSNumber?
-    public var url: String?
-    public var projectId: NSNumber?
-    public var _pushEvents: NSNumber?
-    public var pushEvents: Bool {
-        get { return _pushEvents? != nil ? _pushEvents!.boolValue : false }
-        set { _pushEvents = NSNumber(bool: newValue)}
+open class Hook: GitLabModel, Fetchable {
+    open var id: NSNumber?
+    open var url: String?
+    open var projectId: NSNumber?
+    open var _pushEvents: NSNumber?
+    open var pushEvents: Bool {
+        get { return _pushEvents != nil ? _pushEvents!.boolValue : false }
+        set { _pushEvents = NSNumber(value: newValue as Bool)}
     }
-    public var _issueEvents: NSNumber?
-    public var issueEvents: Bool {
-        get { return _issueEvents? != nil ? _issueEvents!.boolValue : false }
-        set { _issueEvents = NSNumber(bool: newValue)}
+    open var _issueEvents: NSNumber?
+    open var issueEvents: Bool {
+        get { return _issueEvents != nil ? _issueEvents!.boolValue : false }
+        set { _issueEvents = NSNumber(value: newValue as Bool)}
     }
-    public var _mergeRequestsEvents: NSNumber?
-    public var mergeRequestsEvents: Bool {
-        get { return _mergeRequestsEvents? != nil ? _mergeRequestsEvents!.boolValue : false }
-        set { _mergeRequestsEvents = NSNumber(bool: newValue)}
+    open var _mergeRequestsEvents: NSNumber?
+    open var mergeRequestsEvents: Bool {
+        get { return _mergeRequestsEvents != nil ? _mergeRequestsEvents!.boolValue : false }
+        set { _mergeRequestsEvents = NSNumber(value: newValue as Bool)}
     }
-    public var createdAt: NSDate?
+    open var createdAt: Date?
     
-    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
-        var newKeys: [NSObject : AnyObject] = [
+    open override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any]! {
+        let baseKeys: [AnyHashable: Any] = super.jsonKeyPathsByPropertyKey()
+        let newKeys: [AnyHashable: Any] = [
             "id"                   : "id",
             "url"                  : "url",
             "projectId"            : "project_id",
@@ -59,7 +59,7 @@ public class Hook: GitLabModel, Fetchable {
         return baseKeys + newKeys
     }
     
-    class func createdAtJSONTransformer() -> NSValueTransformer {
+    class func createdAtJSONTransformer() -> ValueTransformer {
         return dateTimeTransformer
     }
 }

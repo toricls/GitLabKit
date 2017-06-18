@@ -25,20 +25,20 @@
 import Foundation
 import Mantle
 
-public class Event: GitLabModel, Fetchable {
-    public var id: NSNumber?
-    public var projectId: NSNumber?
-    public var actionName: String?
-    public var targetId: NSNumber?
-    public var targetType: String?
-    public var authorId: NSNumber?
-    public var authorUsername: String?
-    public var data: EventData?
-    public var targetTitle: String?
+open class Event: GitLabModel, Fetchable {
+    open var id: NSNumber?
+    open var projectId: NSNumber?
+    open var actionName: String?
+    open var targetId: NSNumber?
+    open var targetType: String?
+    open var authorId: NSNumber?
+    open var authorUsername: String?
+    open var data: EventData?
+    open var targetTitle: String?
     
-    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
-        var newKeys: [NSObject : AnyObject] = [
+    open override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any]! {
+        let baseKeys: [AnyHashable: Any] = super.jsonKeyPathsByPropertyKey()
+        let newKeys: [AnyHashable: Any] = [
             "id"             : "id",
             "projectId"      : "project_id",
             "actionName"     : "action_name",
@@ -52,25 +52,25 @@ public class Event: GitLabModel, Fetchable {
         return baseKeys + newKeys
     }
     
-    class func dataJSONTransformer() -> NSValueTransformer {
+    class func dataJSONTransformer() -> ValueTransformer {
         return ModelUtil<EventData>.transformer()
     }
 }
 
-public class EventData: GitLabModel {
+open class EventData: GitLabModel {
     
-    public var before: String?
-    public var after: String?
-    public var ref: String?
-    public var userId: NSNumber?
-    public var userName: String?
-    public var repository: Repository?
-    public var commits: [EventCommit]?
-    public var totalCommitsCount: NSNumber?
+    open var before: String?
+    open var after: String?
+    open var ref: String?
+    open var userId: NSNumber?
+    open var userName: String?
+    open var repository: Repository?
+    open var commits: [EventCommit]?
+    open var totalCommitsCount: NSNumber?
     
-    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
-        var newKeys: [NSObject : AnyObject] = [
+    open override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any]! {
+        let baseKeys: [AnyHashable: Any] = super.jsonKeyPathsByPropertyKey()
+        let newKeys: [AnyHashable: Any] = [
             "before"            : "before",
             "after"             : "after",
             "ref"               : "ref",
@@ -83,24 +83,24 @@ public class EventData: GitLabModel {
         return baseKeys + newKeys
     }
     
-    class func repositoryJSONTransformer() -> NSValueTransformer {
+    class func repositoryJSONTransformer() -> ValueTransformer {
         return ModelUtil<Repository>.transformer()
     }
-    class func commitsJSONTransformer() -> NSValueTransformer {
+    class func commitsJSONTransformer() -> ValueTransformer {
         return ModelUtil<EventCommit>.arrayTransformer()
     }
 }
 
-public class Repository: GitLabModel {
+open class Repository: GitLabModel {
     
-    public var name: String?
-    public var url: String?
-    public var descriptionText: String?
-    public var homepage: String?
+    open var name: String?
+    open var url: String?
+    open var descriptionText: String?
+    open var homepage: String?
     
-    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
-        var newKeys: [NSObject : AnyObject] = [
+    open override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any]! {
+        let baseKeys: [AnyHashable: Any] = super.jsonKeyPathsByPropertyKey()
+        let newKeys: [AnyHashable: Any] = [
             "name"            : "name",
             "url"             : "url",
             "descriptionText" : "description",
@@ -110,17 +110,17 @@ public class Repository: GitLabModel {
     }
 }
 
-public class EventCommit: GitLabModel {
+open class EventCommit: GitLabModel {
     
-    public var id: NSNumber?
-    public var message: String?
-    public var timestamp: NSDate?
-    public var url: String?
-    public var author: CommitAuthor?
+    open var id: NSNumber?
+    open var message: String?
+    open var timestamp: Date?
+    open var url: String?
+    open var author: CommitAuthor?
     
-    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
-        var newKeys: [NSObject : AnyObject] = [
+    open override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any]! {
+        let baseKeys: [AnyHashable: Any] = super.jsonKeyPathsByPropertyKey()
+        let newKeys: [AnyHashable: Any] = [
             "id"        : "id",
             "message"   : "message",
             "timestamp" : "timestamp",
@@ -130,10 +130,10 @@ public class EventCommit: GitLabModel {
         return baseKeys + newKeys
     }
     
-    class func timestampJSONTransformer() -> NSValueTransformer {
+    class func timestampJSONTransformer() -> ValueTransformer {
         return dateTimeTransformer
     }
-    class func authorJSONTransformer() -> NSValueTransformer {
+    class func authorJSONTransformer() -> ValueTransformer {
         return ModelUtil<CommitAuthor>.transformer()
     }
 }

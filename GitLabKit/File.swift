@@ -24,19 +24,19 @@
 
 import Foundation
 
-public class File: GitLabModel, Fetchable {
-    public var fileName: String?
-    public var filePath: String?
-    public var size: NSNumber?
-    public var encoding: String?
-    public var content: String?
-    public var ref: String?
-    public var blobId: NSDate?
-    public var commitId: String?
+open class File: GitLabModel, Fetchable {
+    open var fileName: String?
+    open var filePath: String?
+    open var size: NSNumber?
+    open var encoding: String?
+    open var content: String?
+    open var ref: String?
+    open var blobId: Date?
+    open var commitId: String?
     
-    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
-        var newKeys: [NSObject : AnyObject] = [
+    open override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any]! {
+        let baseKeys: [AnyHashable: Any] = super.jsonKeyPathsByPropertyKey()
+        let newKeys: [AnyHashable: Any] = [
             "fileName" : "file_name",
             "filePath" : "file_path",
             "size"     : "size",

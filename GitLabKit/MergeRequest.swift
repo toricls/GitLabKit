@@ -25,23 +25,23 @@
 import Foundation
 import Mantle
 
-public class MergeRequest: GitLabModel, Fetchable {
-    public var id: NSNumber?
-    public var mergeRequestId: NSNumber?
-    public var targetBranch: NSNumber?
-    public var sourceBranch: NSNumber?
-    public var title: String?
+open class MergeRequest: GitLabModel, Fetchable {
+    open var id: NSNumber?
+    open var mergeRequestId: NSNumber?
+    open var targetBranch: NSNumber?
+    open var sourceBranch: NSNumber?
+    open var title: String?
     //public var state: MergeRequestState?
-    public var state: String? // TODO: Use enum instead of String
-    public var upvotes: NSNumber?
-    public var downvotes: NSNumber?
-    public var author: User?
-    public var assignee: User?
-    public var descriptionText: String?
+    open var state: String? // TODO: Use enum instead of String
+    open var upvotes: NSNumber?
+    open var downvotes: NSNumber?
+    open var author: User?
+    open var assignee: User?
+    open var descriptionText: String?
     
-    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
-        var newKeys: [NSObject : AnyObject] = [
+    open override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any]! {
+        let baseKeys: [AnyHashable: Any] = super.jsonKeyPathsByPropertyKey()
+        let newKeys: [AnyHashable: Any] = [
             "id"              : "id",
             "mergeRequestId"  : "iid",
             "targetBranch"    : "target_branch",
@@ -57,10 +57,10 @@ public class MergeRequest: GitLabModel, Fetchable {
         return baseKeys + newKeys
     }
     
-    class func authorJSONTransformer() -> NSValueTransformer {
+    class func authorJSONTransformer() -> ValueTransformer {
         return ModelUtil<User>.transformer()
     }
-    class func assigneeJSONTransformer() -> NSValueTransformer {
+    class func assigneeJSONTransformer() -> ValueTransformer {
         return ModelUtil<User>.transformer()
     }
 }

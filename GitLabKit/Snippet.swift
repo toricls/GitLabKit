@@ -25,19 +25,19 @@
 import Foundation
 import Mantle
 
-public class Snippet: GitLabModel, Fetchable {
-    public var id: NSNumber?
-    public var title: String?
-    public var fileName: String?
-    public var author: User?
-    public var projectId: NSNumber?
-    public var expiresAt: NSDate?
-    public var updatedAt: NSDate?
-    public var createdAt: NSDate?
+open class Snippet: GitLabModel, Fetchable {
+    open var id: NSNumber?
+    open var title: String?
+    open var fileName: String?
+    open var author: User?
+    open var projectId: NSNumber?
+    open var expiresAt: Date?
+    open var updatedAt: Date?
+    open var createdAt: Date?
     
-    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
-        var newKeys: [NSObject : AnyObject] = [
+    open override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any]! {
+        let baseKeys: [AnyHashable: Any] = super.jsonKeyPathsByPropertyKey()
+        let newKeys: [AnyHashable: Any] = [
             "id"        : "id",
             "title"     : "title",
             "fileName"  : "file_name",
@@ -49,27 +49,27 @@ public class Snippet: GitLabModel, Fetchable {
         return baseKeys + newKeys
     }
     
-    class func authorJSONTransformer() -> NSValueTransformer {
+    class func authorJSONTransformer() -> ValueTransformer {
         return ModelUtil<User>.transformer()
     }
     
-    class func expiresAtJSONTransformer() -> NSValueTransformer {
+    class func expiresAtJSONTransformer() -> ValueTransformer {
         return dateTimeTransformer
     }
-    class func updatedAtJSONTransformer() -> NSValueTransformer {
+    class func updatedAtJSONTransformer() -> ValueTransformer {
         return dateTimeTransformer
     }
-    class func createdAtJSONTransformer() -> NSValueTransformer {
+    class func createdAtJSONTransformer() -> ValueTransformer {
         return dateTimeTransformer
     }
 }
 
-public class SnippetContent: GitLabModel, Fetchable, RawDataFetchable {
-    public var content: String?
+open class SnippetContent: GitLabModel, Fetchable, RawDataFetchable {
+    open var content: String?
     
-    public override class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
-        var baseKeys: [NSObject : AnyObject] = super.JSONKeyPathsByPropertyKey()
-        var newKeys: [NSObject : AnyObject] = [
+    open override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any]! {
+        let baseKeys: [AnyHashable: Any] = super.jsonKeyPathsByPropertyKey()
+        let newKeys: [AnyHashable: Any] = [
             "content" : "content",
         ]
         return baseKeys + newKeys

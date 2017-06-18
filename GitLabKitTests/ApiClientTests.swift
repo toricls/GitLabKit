@@ -28,7 +28,7 @@ import XCTest
 class ApiClientTests: GitLabKitTests {
     
     func testHostUriShouldBeNormalized() {
-        var testClient = GitLabApiClient(host: "https://hostvalue.endswith.slash/", privateToken: "TOKEN")
+        let testClient = GitLabApiClient(host: "https://hostvalue.endswith.slash/", privateToken: "TOKEN")
         XCTAssertEqual(testClient.host, "https://hostvalue.endswith.slash", "Slash character should be eliminated from end of the host uri value.")
     }
     
