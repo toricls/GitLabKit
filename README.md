@@ -27,27 +27,13 @@ Nothing yet.
 ## Requirement
 
 GitLabKit is written as a Cocoa Framework (for OS X) for now.
-Tested on OS X 10.10.1 (14B25) with Xcode 6.1.1 (6A2008a), self hosted GitLab CE 7.5.3 b656b85.
-
+Tested on OS X 10.12.5 with Xcode 8.3.3 (8E3004b), self hosted GitLab CE 7.5.3 b656b85.
 
 - [Alamofire](https://github.com/Alamofire/Alamofire)
 - [Mantle](https://github.com/Mantle/Mantle)
 
 GitLabKit is using libraries listed above.
-All dependencies are resolved by [CocoaPods](http://cocoapods.org/).
-
-**CocoaPods is supporting Swift project from its version [0.36](https://github.com/CocoaPods/CocoaPods/milestones/0.36.0).**
-
-Make sure your cocoapods installation is qualified that
-```bash
-$ pod --version
-0.36.0.beta.2
-```
-
-and if not, install pre version.
-```bash
-$ (sudo) gem install cocoapods --pre
-```
+All dependencies are resolved by [CocoaPods](http://cocoapods.org/) with its version 1.2.0 or newer.
 
 ## Usage
 
@@ -69,17 +55,17 @@ client.get(params, { (response: GitLabResponse<User>?, error: NSError?) -> Void 
 })
 ```
 
-see [test sources](https://github.com/orih/GitLabKit/tree/master/GitLabKitTests) to get more usage.
+see [test sources](https://github.com/toricls/GitLabKit/tree/master/GitLabKitTests) to get more usage.
 
 ## TODO
 
 - Implement more apis
-- Decide on how to deal with 404 responses. I'm just treating them as normal responses and returning an empty array for [now](https://github.com/orih/GitLabKit/blob/master/GitLabKit/GitLabApiClient.swift#L79).
+- Decide on how to deal with 404 responses. I'm just treating them as normal responses and returning an empty array for [now](https://github.com/toricls/GitLabKit/blob/master/GitLabKit/GitLabApiClient.swift#L79).
 - More effective and efficient testing with stub or something like that
 
 ## Contribution
 
-1. Fork ([https://github.com/orih/GitLabKit/fork](https://github.com/orih/GitLabKit/fork))
+1. Fork ([https://github.com/toricls/GitLabKit/fork](https://github.com/toricls/GitLabKit/fork))
 2. Create a feature branch
 3. Commit your changes
 4. Rebase your local changes against the master branch
@@ -87,8 +73,8 @@ see [test sources](https://github.com/orih/GitLabKit/tree/master/GitLabKitTests)
 
 ## Licence
 
-[MIT](https://github.com/orih/GitLabKit/blob/master/LICENCE)
+[MIT](https://github.com/toricls/GitLabKit/blob/master/LICENCE)
 
 ## Author
 
-[orih](https://github.com/orih)
+[toricls](https://github.com/toricls)
