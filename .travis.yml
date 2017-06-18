@@ -1,6 +1,6 @@
 language: objective-c
-before_script:
-    - brew update && brew upgrade xctool
-xcode_project: GitLabKit.xcodeproj
-xcode_scheme: GitLabKitTests
-xcode_sdk: iphonesimulator
+osx_image: xcode8.3
+before_install:
+    - pod install --repo-update
+script:
+  - xcodebuild clean build test -workspace GitLabKit.xcworkspace -scheme GitLabKit CODE_SIGNING_REQUIRED=NO
