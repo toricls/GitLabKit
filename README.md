@@ -43,13 +43,13 @@ let client: GitLabApiClient = GitLabApiClient(host: "https://git.example.com", p
 
 // Get users
 let params = UserQueryParamBuilder()
-client.get(params, { (response: GitLabResponse<User>?, error: NSError?) -> Void in
+client.get(params, handler: { (response: GitLabResponse<User>?, error: NSError?) -> Void in
 	println(response!.result!.count)
 })
 
 // Get user by Id
 let params = UserQueryParamBuilder().id(1)
-client.get(params, { (response: GitLabResponse<User>?, error: NSError?) -> Void in
+client.get(params, handler: { (response: GitLabResponse<User>?, error: NSError?) -> Void in
     let user: User = response!.result![0]
 	println(user.name!)
 })
